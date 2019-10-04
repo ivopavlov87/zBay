@@ -10,6 +10,7 @@ import AuthRoute from '../util/route_util'
 import Nav from "./Nav";
 import HouseDetail from './houses/HouseDetail';
 import CreateHouse from './houses/CreateHouse';
+import Search from './search/Search';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/" component={HouseIndex} />
           <Redirect to="/" />
         </Switch>
+        <Search />
       </div>
     </HashRouter>
   );

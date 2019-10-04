@@ -16,14 +16,14 @@ class Login extends Component {
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
-  
-  updateCache(client, {data}) {
+
+  updateCache(client, { data }) {
     console.log(data);
     client.writeData({
       data: { isLoggedIn: data.login.loggedIn }
     });
-  }  
-  
+  }
+
   render() {
     return (
       <Mutation
