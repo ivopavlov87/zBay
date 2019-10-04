@@ -1,98 +1,63 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { SEARCH_HOMES } from '../../graphql/queries';
-import { graphql, Query } from 'react-apollo';
+import Queries from '../../graphql/queries';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { Query } from 'react-apollo';
 import * as compose from 'lodash.flowright';
 import debounce from 'lodash/debounce'
-
-
+const { SEARCH_HOMES } = Queries;
 
 class Search extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            searchQuery: ''
+            searchQuery: "",
+            results: []
+        }
+        this.handleSearch = this.handleSearch.bind(this);
+    }
+
+    update(field){
+        return (e) => {
+            this.setState({ searchQuery: e.target.value })
         }
     }
 
-    onChange = (e) => {
-        const value = e.target.value
-        this.handleFilter(value)
+    handleSearch(e){
+        this.setState(this.state)
     }
 
-    handleFilter = debounce((val) => {
-        this.props.onSearch(val)
-    }, 250)
-
-    // render() {
-
-    //     const { loading } = this.props.data;
-    //     const { items } = this.props.data.listHomes;
-    //     return (
-    //         <div>
-    //             <input
-    //                 onChange={this.onChange.bind(this)}
-    //                 placeholder="Search zBay"
-    //             />
-    //             {
-    //                 !!loading && (
-    //                     <p>Searching...</p>
-    //                 )
-    //             }
-    //             {
-    //                 !loading && !items.length && (
-    //                     <p>No Results Found</p>
-    //                 )
-    //             }
-    //             {
-    //                 !loading && items.map((item, index) => (
-    //                     <div key={index}>
-    //                         {/* Whatever we want to render for search results */}
-    //                     </div>
-    //                 ))
-    //             }
-    //         </div>
-    //     )
-    // }
-
     render(){
-        return (
-            <Query query={SEARCH_HOMES} variables={ {searchQuery: this.state.searchQuery} }>
-                {({ loading, error, data }) => {
-                    if (loading) return "Loading...";
-                    if (error) return `Error! ${error.message}`;
-
-                    if (this)
-                }}
-            </Query>
-        )
+        if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
+            return (
+                <div>
+                    <input type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <button onClick={(e) => this.handleSearch(e)}>Search</button>
+                </div>
+            )
+        } else {
+            let that = this;
+           
+            return (
+                <div>
+                    <input type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <button onClick={(e) => this.handleSearch(e)}>Search</button>
+                    <ul>
+                        <Query query={SEARCH_HOMES} variables={{ searchQuery: this.state.searchQuery }}>
+                            {({ loading, error, data }) => {
+                                if (loading) return <p>Loading...</p>;
+                                if (error) return <p>Error</p>;
+                                return data.searchHomes.map(home => {
+                                    return <li key={home._id}>{home.name}</li>
+                                })
+                            }}
+                        </Query>
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 
 export default Search;
 
-// export default compose(
-//     graphql(LIST_HOMES, {
-//         options: data => ({
-//             fetchPolicy: 'cache-and-network'
-//         }),
-//         props: props => ({
-//             onSearch: searchQuery => {
-//                 return props.data.fetchMore({
-//                     query: searchQuery === "" ? LIST_HOMES : SEARCH_HOMES,
-//                     variables: {
-//                         searchQuery
-//                     },
-//                     updateQuery: (previousResult, { fetchMoreResult }) => ({
-//                         ...previousResult,
-//                         listHomes: {
-//                             ...previousResult.listHomes,
-//                             items: fetchMoreResult.listHomes.items
-//                         }
-//                     })
-//                 })
-//             },
-//             data: props.data
-//         })
-//     })
-// )(Search);

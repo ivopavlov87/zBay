@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString } = graphql;
 
 const UserType = require("./user_type");
 const User = mongoose.model("user");
@@ -53,6 +53,23 @@ const RootQueryType = new GraphQLObjectType({
         return Home.find({});
       }
     },
+    searchHomes: {
+      type: new GraphQLList(HomeType),
+      args: { searchQuery: { type: GraphQLString }},
+      resolve(_, { searchQuery }) {
+        if (searchQuery === ""){
+          return Home.find({})
+        }
+        return Home.find({}).then(homes => {
+          return homes.filter(home => {
+            return home.name.includes(searchQuery)
+    
+         
+            // replace with searchField
+          })
+        }).then(homes => homes)
+      }
+    }
   })
 });
 

@@ -10,7 +10,7 @@ import AuthRoute from '../util/route_util'
 import Nav from "./Nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
-
+import Search from './search/Search'
 
 const App = () => {
   return (
@@ -23,10 +23,10 @@ const App = () => {
           <Route exact path="/homes/:id" component={HomeDetail} />
           <AuthRoute exact path="/register" component={Register} routeType="auth" />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />
-          <Route path="/" component={HomeIndex} />
+          {/* <Route path="/" component={HomeIndex} /> */}
           <Redirect to="/" />
         </Switch>
-       
+       <Search />
       </div>
     </HashRouter>
   );

@@ -36,22 +36,15 @@ export default {
   `,
   SEARCH_HOMES: gql`
     query SearchHomes($searchQuery: String) {
-      homes(filter: {
-        searchField: {
-          contains: $searchQuery
-        }}) {
-          _id
-          streetAddress
-          zipcode
-          sqft
-          stories
-          bedrooms
-          bathrooms
-          description
-          yearBuilt
-          basement
-          garage
-        }
+      searchHomes(searchQuery: $searchQuery) {
+        _id
+        name
+        description
+        bedrooms
+        bathrooms
+        sqft
+        stories
       }
+    }
   `
 }
