@@ -24,9 +24,9 @@ export default {
       }
     }
   `,
-  CREATE_HOUSE: gql`
-    mutation CreateHouse($name: String!, $description: String!, $sqft: Int!, $bathrooms: Float!) {
-      newHouse(name: $name, description: $description, sqft: $sqft, bathrooms: $bathrooms) { 
+  CREATE_HOME: gql`
+    mutation CreateHome($name: String!, $description: String!, $sqft: Int!, $bathrooms: Float!) {
+      newHome(name: $name, description: $description, sqft: $sqft, bathrooms: $bathrooms) { 
         _id
         name
         description
