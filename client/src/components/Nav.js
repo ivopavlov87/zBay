@@ -15,10 +15,10 @@ const Nav = props => {
             if (data.isLoggedIn) {
               return (
                 <div>
-                  <Link to="/">Houses Index</Link>
+                  <Link to="/">Homes Index</Link>
                   &nbsp;
                   &nbsp;
-                  <Link to="/houses/new">Create a House</Link>
+                  <Link to="/homes/new">Create a Home</Link>
                   &nbsp;
                   &nbsp;
                   <button
@@ -42,7 +42,7 @@ const Nav = props => {
                   <Link to="/register">Register</Link>
                   &nbsp;
                   &nbsp;
-                  <Link to="/">Houses Index</Link>
+                  <Link to="/">Homes Index</Link>
                 </div>
               );
             }

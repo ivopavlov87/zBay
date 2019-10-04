@@ -3,13 +3,13 @@ import React from "react";
 // import gql from "graphql-tag";
 // import { Query } from "react-apollo";
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import HouseIndex from "./houses/HouseIndex";
+import HomeIndex from "./homes/HomeIndex";
 import Login from "./Login";
 import Register from "./Register";
 import AuthRoute from '../util/route_util'
 import Nav from "./Nav";
-import HouseDetail from './houses/HouseDetail';
-import CreateHouse from './houses/CreateHouse';
+import HomeDetail from './homes/HomeDetail';
+import CreateHome from './homes/CreateHome';
 
 const App = () => {
   return (
@@ -18,11 +18,11 @@ const App = () => {
         <Nav />
         <h1>zBay Store</h1>
         <Switch>
-          <Route exact path="/houses/new" component={CreateHouse} />
-          <Route exact path="/houses/:id" component={HouseDetail} />
+          <Route exact path="/homes/new" component={CreateHome} />
+          <Route exact path="/homes/:id" component={HomeDetail} />
           <AuthRoute exact path="/register" component={Register} routeType="auth" />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />
-          <Route path="/" component={HouseIndex} />
+          <Route path="/" component={HomeIndex} />
           <Redirect to="/" />
         </Switch>
       </div>

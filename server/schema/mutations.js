@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 
 const CategoryType = require('../schema/types/category_type')
 const Category = mongoose.model("category");
-const HouseType = require("../schema/types/house_type");
-const House = mongoose.model("house");
+const HomeType = require("../schema/types/home_type");
+const Home = mongoose.model("home");
 const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
 
@@ -30,8 +30,8 @@ const mutation = new GraphQLObjectType({
         return Category.remove({ _id: id });
       }
     },
-    newHouse: {
-      type: HouseType,
+    newHome: {
+      type: HomeType,
       args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
@@ -41,30 +41,30 @@ const mutation = new GraphQLObjectType({
       async resolve(_, { name, description, sqft, bathrooms }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
-        // if our service returns true then our house is good to save!
+        // if our service returns true then our home is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
-          return new House({ name, description, sqft, bathrooms }).save();
+          return new Home({ name, description, sqft, bathrooms }).save();
         } else {
-          throw new Error('Sorry, you need to be logged in to create a house.');
+          throw new Error('Sorry, you need to be logged in to create a home.');
         }
       }
     }, 
-    deleteHouse: {
-      type: HouseType,
+    deleteHome: {
+      type: HomeType,
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
-        return House.remove({ _id: id });
+        return Home.remove({ _id: id });
       }
     },
-    updateHouseCategory: {
-      type: HouseType,
+    updateHomeCategory: {
+      type: HomeType,
       args: {
-        houseId: { type: GraphQLID },
+        homeId: { type: GraphQLID },
         categoryId: { type: GraphQLID },
       },
-      resolve(parentValue, { houseId, categoryId }) {
-        return House.updateHouseCategory(houseId, categoryId)
+      resolve(parentValue, { homeId, categoryId }) {
+        return Home.updateHomeCategory(homeId, categoryId)
       }
     },
     register: {
