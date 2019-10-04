@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID } = graphql;
 const mongoose = require("mongoose");
 
 const CategoryType = require('../schema/types/category_type')
@@ -36,14 +36,15 @@ const mutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         sqft: { type: GraphQLInt },
+        bathrooms: { type: GraphQLFloat }
       },
-      async resolve(_, { name, description, sqft }, ctx) {
+      async resolve(_, { name, description, sqft, bathrooms }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our house is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
-          return new House({ name, description, sqft }).save();
+          return new House({ name, description, sqft, bathrooms }).save();
         } else {
           throw new Error('Sorry, you need to be logged in to create a house.');
         }

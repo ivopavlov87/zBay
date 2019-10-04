@@ -10,6 +10,7 @@ export default {
       name
       description
       sqft
+      bathrooms
     }
   }
   `,
@@ -20,6 +21,7 @@ export default {
         name
         description
         sqft
+        bathrooms
     }
   }
   `,

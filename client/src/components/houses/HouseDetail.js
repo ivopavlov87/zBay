@@ -21,7 +21,14 @@ class HouseDetail extends React.Component {
             <div>
               <Link to="/">Houses Index</Link>
               <div>
-                <p key={data.house._id}>{data.house.name}&nbsp;-&nbsp;{data.house.description}&nbsp;-&nbsp;{data.house.sqft} lbs.</p>
+                <p key={data.house._id}>
+                {data.house.name}
+                &nbsp;-&nbsp;
+                {data.house.description}
+                &nbsp;-&nbsp;
+                {data.house.sqft} sqft.
+                &nbsp;-&nbsp;
+                {data.house.bathrooms} bathrooms</p>
               </div>
             </div>
           );

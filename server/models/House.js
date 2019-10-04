@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const graphql = require("graphql");
+
+
 
 const HouseSchema = new Schema({
   user: {
@@ -20,8 +23,16 @@ const HouseSchema = new Schema({
   },
   sqft: {
     type: Number,
+    required: true
+  },
+  bedrooms: {
+    type: Number,
     required: false
-  }
+  },
+  bathrooms: {
+    type: Number,
+    required: true
+  },
 });
 
 HouseSchema.statics.updateHouseCategory = (houseId, categoryId) => {
