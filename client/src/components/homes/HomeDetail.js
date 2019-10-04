@@ -26,6 +26,16 @@ class HomeDetail extends React.Component {
                 &nbsp;-&nbsp;
                 {data.home.description}
                 &nbsp;-&nbsp;
+                Year Built: {data.home.yearBuilt}
+                &nbsp;-&nbsp;
+                {data.home.streetAddress}
+                &nbsp;-&nbsp;
+                {data.home.city}
+                &nbsp;-&nbsp;
+                {data.home.state}
+                &nbsp;-&nbsp;
+                {data.home.zipcode}
+                &nbsp;-&nbsp;
                 {data.home.sqft} sqft.
                 &nbsp;-&nbsp;
                 {data.home.stories} stories

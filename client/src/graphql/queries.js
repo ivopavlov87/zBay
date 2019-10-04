@@ -9,10 +9,17 @@ export default {
       _id
 
       description
+      yearBuilt
+      streetAddress
+      city
+      state
+      zipcode
       sqft
       stories
       bedrooms
       bathrooms
+      garage
+      basement
     }
   }
   `,
@@ -22,10 +29,17 @@ export default {
         _id
 
         description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
         sqft
         stories
         bedrooms
         bathrooms
+        garage
+        basement
     }
   }
   `,
