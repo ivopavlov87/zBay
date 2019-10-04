@@ -10,6 +10,8 @@ export default {
       name
       description
       sqft
+      stories
+      bedrooms
       bathrooms
     }
   }
@@ -21,6 +23,8 @@ export default {
         name
         description
         sqft
+        stories
+        bedrooms
         bathrooms
     }
   }
