@@ -27,7 +27,9 @@ const HomeType = new GraphQLObjectType({
      },
     description: { type: GraphQLString},
     sqft: { type: GraphQLInt },
-    bathrooms: { type: GraphQLFloat },
+    stories: { type: GraphQLInt },
+    bedrooms: { type: GraphQLInt },
+    bathrooms: { type: GraphQLFloat }
   })
 });
 

@@ -14,8 +14,10 @@ class CreateHome extends Component {
       message: "",
       name: "",
       sqft: "",
+      stories: "",
       description: "",
-      bathrooms: ""
+      bathrooms: "",
+      bedrooms: ""
     };
   }
 
@@ -51,6 +53,8 @@ class CreateHome extends Component {
         name: this.state.name,
         description: this.state.description,
         sqft: parseInt(this.state.sqft),
+        stories: parseInt(this.state.stories),
+        bedrooms: parseInt(this.state.bedrooms),
         bathrooms: parseFloat(this.state.bathrooms)
       }
     });
@@ -94,6 +98,16 @@ class CreateHome extends Component {
                 onChange={this.update("bathrooms")}
                 value={this.state.bathrooms}
                 placeholder="Number of bathrooms"
+              />
+              <input
+                onChange={this.update("stories")}
+                value={this.state.stories}
+                placeholder="Number of stories"
+              />
+              <input
+                onChange={this.update("bedrooms")}
+                value={this.state.bedrooms}
+                placeholder="Number of bedrooms"
               />
               <button type="submit">Create Home</button>
             </form>
