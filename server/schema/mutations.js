@@ -35,18 +35,43 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
+        streetAddress: { type: GraphQLString },
+        city: { type: GraphQLString },
+        state: { type: GraphQLString },
+        yearBuilt: { type: GraphQLInt },
         sqft: { type: GraphQLInt },
+        zipcode: { type: GraphQLInt },
         stories: { type: GraphQLInt },
         bedrooms: { type: GraphQLInt },
         bathrooms: { type: GraphQLFloat }
       },
-      async resolve(_, { name, description, sqft, bathrooms, bedrooms, stories }, ctx) {
+      async resolve(_, { name, 
+        description,
+        yearBuilt,
+        sqft, 
+        bathrooms, 
+        bedrooms, 
+        stories, 
+        streetAddress, 
+        city, 
+        state, 
+        zipcode }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
-          return new Home({ name, description, sqft, bathrooms, bedrooms, stories }).save();
+          return new Home({ name, 
+            description,
+            yearBuilt,
+            sqft, 
+            bathrooms, 
+            bedrooms, 
+            stories, 
+            streetAddress, 
+            city, 
+            state, 
+            zipcode }).save();
         } else {
           throw new Error('Sorry, you need to be logged in to create a home.');
         }

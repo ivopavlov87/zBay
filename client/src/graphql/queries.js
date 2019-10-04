@@ -9,6 +9,11 @@ export default {
       _id
       name
       description
+      yearBuilt
+      streetAddress
+      city
+      state
+      zipcode
       sqft
       stories
       bedrooms
@@ -22,6 +27,11 @@ export default {
         _id
         name
         description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
         sqft
         stories
         bedrooms

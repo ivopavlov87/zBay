@@ -26,7 +26,12 @@ const HomeType = new GraphQLObjectType({
       }
      },
     description: { type: GraphQLString},
+    streetAddress: { type: GraphQLString},
+    city: { type: GraphQLString},
+    state: { type: GraphQLString},
+    yearBuilt: { type: GraphQLInt },
     sqft: { type: GraphQLInt },
+    zipcode: { type: GraphQLInt },
     stories: { type: GraphQLInt },
     bedrooms: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat }

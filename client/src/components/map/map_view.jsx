@@ -3,7 +3,7 @@ import MapGL from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Geocoder from "react-map-gl-geocoder";
 // var MapboxClient = require('mapbox');
-// var client = new MapboxClient('sk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJucnFuYzBrYjczaW9iZjF1c2Jxcm4ifQ.J_C-UOflCxxlqp0HuWI9mg');
+
 const TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJtcGQ2eTAwNGMza212dzVwb2UyZmwifQ.CfNGkydDCpLC5hPoddptfA';
 
 

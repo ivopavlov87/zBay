@@ -17,6 +17,22 @@ const HomeSchema = new Schema({
     type: String,
     required: true
   },
+  streetAddress: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  zipcode: {
+    type: Number,
+    required: true
+  },
   description: {
     type: String,
     required: true
@@ -34,6 +50,10 @@ const HomeSchema = new Schema({
     required: true
   },
   stories: {
+    type: Number,
+    required: true
+  },
+  yearBuilt: {
     type: Number,
     required: true
   },
