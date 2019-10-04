@@ -27,9 +27,13 @@ const HomeSchema = new Schema({
   },
   bedrooms: {
     type: Number,
-    required: false
+    required: true
   },
   bathrooms: {
+    type: Number,
+    required: true
+  },
+  stories: {
     type: Number,
     required: true
   },

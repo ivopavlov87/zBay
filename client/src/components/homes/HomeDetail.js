@@ -28,7 +28,11 @@ class HomeDetail extends React.Component {
                 &nbsp;-&nbsp;
                 {data.home.sqft} sqft.
                 &nbsp;-&nbsp;
-                {data.home.bathrooms} bathrooms</p>
+                {data.home.stories} stories
+                &nbsp;-&nbsp;
+                {data.home.bathrooms} bathrooms
+                &nbsp;-&nbsp;
+                {data.home.bedrooms} bedrooms</p>
               </div>
             </div>
           );
