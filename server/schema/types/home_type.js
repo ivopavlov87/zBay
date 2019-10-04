@@ -1,16 +1,16 @@
-// Write the house type schema on your own. Recall that
-// houses have an _id, name, category, description,
+// Write the home type schema on your own. Recall that
+// homes have an _id, name, category, description,
 // and sqft.Again, don't worry about the cost field
 // for now - we will add that later.
 
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID } = graphql;
 
-const House = mongoose.model("house")
+const Home = mongoose.model("home")
 
-const HouseType = new GraphQLObjectType({
-  name: "HouseType",
+const HomeType = new GraphQLObjectType({
+  name: "HomeType",
   // remember we wrap the fields in a thunk to avoid circular dependency issues
   fields: () => ({
     _id: { type: GraphQLID },
@@ -18,19 +18,20 @@ const HouseType = new GraphQLObjectType({
     category: { 
       type: require('./category_type'),
       resolve(parentValue) {
-        return House.findById(parentValue._id)
+        return Home.findById(parentValue._id)
           .populate("category")
-          .then(house => {
-            return house.category
+          .then(home => {
+            return home.category
           });
       }
      },
     description: { type: GraphQLString},
-    sqft: { type: GraphQLInt }
+    sqft: { type: GraphQLInt },
+    bathrooms: { type: GraphQLFloat },
   })
 });
 
-module.exports = HouseType;
+module.exports = HomeType;
 
 
 

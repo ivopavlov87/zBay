@@ -3,25 +3,32 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 
 import Queries from "../../graphql/queries";
-const { FETCH_HOUSE } = Queries;
+const { FETCH_HOME } = Queries;
 
-class HouseDetail extends React.Component {
+class HomeDetail extends React.Component {
   // constructor(props){
   //   super(props)
   // }
   
   render() {
     return (
-      <Query query={FETCH_HOUSE} variables={{ id: this.props.match.params.id }}>
+      <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
 
           return (
             <div>
-              <Link to="/">Houses Index</Link>
+              <Link to="/">Homes Index</Link>
               <div>
-                <p key={data.house._id}>{data.house.name}&nbsp;-&nbsp;{data.house.description}&nbsp;-&nbsp;{data.house.sqft} lbs.</p>
+                <p key={data.home._id}>
+                {data.home.name}
+                &nbsp;-&nbsp;
+                {data.home.description}
+                &nbsp;-&nbsp;
+                {data.home.sqft} sqft.
+                &nbsp;-&nbsp;
+                {data.home.bathrooms} bathrooms</p>
               </div>
             </div>
           );
@@ -30,4 +37,4 @@ class HouseDetail extends React.Component {
     );
   };
 }
-export default HouseDetail;
+export default HomeDetail;

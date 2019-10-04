@@ -5,20 +5,20 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom"
 
 import Queries from "../../graphql/queries";
-const { FETCH_HOUSES } = Queries;
+const { FETCH_HOMES } = Queries;
 
-const HouseIndex = () => {
+const HomeIndex = () => {
   return (
-    <Query query={FETCH_HOUSES}>
+    <Query query={FETCH_HOMES}>
       {({ loading, error, data }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
 
         return (
           <ul>
-            {data.houses.map(house => (
-              <Link key={house._id} to={`/houses/${house._id}`}>
-                <li>{house.name}</li>
+            {data.homes.map(home => (
+              <Link key={home._id} to={`/homes/${home._id}`}>
+                <li>{home.name}</li>
               </ Link>
             ))}
           </ul>
@@ -28,4 +28,4 @@ const HouseIndex = () => {
   );
 };
 
-export default HouseIndex;
+export default HomeIndex;

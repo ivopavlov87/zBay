@@ -3,10 +3,10 @@ import { Mutation } from "react-apollo";
 
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
-const { CREATE_HOUSE } = Mutations;
-const { FETCH_HOUSES } = Queries;
+const { CREATE_HOME } = Mutations;
+const { FETCH_HOMES } = Queries;
 
-class CreateHouse extends Component {
+class CreateHome extends Component {
   constructor(props) {
     super(props);
 
@@ -14,7 +14,8 @@ class CreateHouse extends Component {
       message: "",
       name: "",
       sqft: "",
-      description: ""
+      description: "",
+      bathrooms: ""
     };
   }
 
@@ -22,34 +23,35 @@ class CreateHouse extends Component {
     return e => this.setState({ [field]: e.target.value });
   }
 
-  // we need to remember to update our cache directly with our new house
+  // we need to remember to update our cache directly with our new home
   updateCache(cache, { data }) {
-    let houses;
+    let homes;
     try {
-      // if we've already fetched the houses then we can read the
+      // if we've already fetched the homes then we can read the
       // query here
-      houses = cache.readQuery({ query: FETCH_HOUSES });
+      homes = cache.readQuery({ query: FETCH_HOMES });
     } catch (err) {
       return;
     }
-    // if we had previously fetched houses we'll add our new house to our cache
-    if (houses) {
-      let houseArray = houses.houses;
-      let newHouse = data.newHouse;
+    // if we had previously fetched homes we'll add our new home to our cache
+    if (homes) {
+      let homeArray = homes.homes;
+      let newHome = data.newHome;
       cache.writeQuery({
-        query: FETCH_HOUSES,
-        data: { houses: houseArray.concat(newHouse) }
+        query: FETCH_HOMES,
+        data: { homes: homeArray.concat(newHome) }
       });
     }
   }
 
-  handleSubmit(e, newHouse) {
+  handleSubmit(e, newHome) {
     e.preventDefault();
-    newHouse({
+    newHome({
       variables: {
         name: this.state.name,
         description: this.state.description,
-        sqft: parseInt(this.state.sqft)
+        sqft: parseInt(this.state.sqft),
+        bathrooms: parseFloat(this.state.bathrooms)
       }
     });
   }
@@ -57,22 +59,22 @@ class CreateHouse extends Component {
   render() {
     return (
       <Mutation
-        mutation={CREATE_HOUSE}
+        mutation={CREATE_HOME}
         // if we error out we can set the message here
         onError={err => this.setState({ message: err.message })}
-        // we need to make sure we update our cache once our new house is created
+        // we need to make sure we update our cache once our new home is created
         update={(cache, data) => this.updateCache(cache, data)}
         // when our query is complete we'll display a success message
         onCompleted={data => {
-          const { name } = data.newHouse;
+          const { name } = data.newHome;
           this.setState({
-            message: `New house ${name} created successfully`
+            message: `New home ${name} created successfully`
           });
         }}
       >
-        {(newHouse, { data }) => (
+        {(newHome, { data }) => (
           <div>
-            <form onSubmit={e => this.handleSubmit(e, newHouse)}>
+            <form onSubmit={e => this.handleSubmit(e, newHome)}>
               <input
                 onChange={this.update("name")}
                 value={this.state.name}
@@ -88,7 +90,12 @@ class CreateHouse extends Component {
                 value={this.state.sqft}
                 placeholder="Square footage"
               />
-              <button type="submit">Create House</button>
+              <input
+                onChange={this.update("bathrooms")}
+                value={this.state.bathrooms}
+                placeholder="Number of bathrooms"
+              />
+              <button type="submit">Create Home</button>
             </form>
             <p>{this.state.message}</p>
           </div>
@@ -98,4 +105,4 @@ class CreateHouse extends Component {
   }
 }
 
-export default CreateHouse;
+export default CreateHome;

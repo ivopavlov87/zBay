@@ -1,4 +1,4 @@
-//  A category simply contains a name and an array of houses.
+//  A category simply contains a name and an array of homes.
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -8,16 +8,16 @@ const CategorySchema = new Schema({
     type: String,
     required: true
   },
-  houses: [{
+  homes: [{
     type: Schema.Types.ObjectId,
-    ref: 'house'
+    ref: 'home'
   }]
 });
 
-CategorySchema.statics.findHouse = function(categoryId) {
+CategorySchema.statics.findHome = function(categoryId) {
   return this.findById(categoryId)
-  .populate("houses")
-  .then(category => category.houses)
+  .populate("homes")
+  .then(category => category.homes)
 }
 
 module.exports = mongoose.model("category", CategorySchema);
