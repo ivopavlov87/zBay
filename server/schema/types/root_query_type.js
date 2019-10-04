@@ -8,8 +8,8 @@ const User = mongoose.model("user");
 const CategoryType = require("./category_type");
 const Category = mongoose.model("category");
 
-const HouseType = require("./house_type");
-const House = mongoose.model("house");
+const HomeType = require("./home_type");
+const Home = mongoose.model("home");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -40,17 +40,17 @@ const RootQueryType = new GraphQLObjectType({
         return Category.find({});
       }
     },
-    house: {
-      type: HouseType,
+    home: {
+      type: HomeType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_, args) {
-        return House.findById(args._id);
+        return Home.findById(args._id);
       }
     },
-    houses: {
-      type: new GraphQLList(HouseType),
+    homes: {
+      type: new GraphQLList(HomeType),
       resolve() {
-        return House.find({});
+        return Home.find({});
       }
     },
   })
