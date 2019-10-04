@@ -18,6 +18,8 @@ export default {
       stories
       bedrooms
       bathrooms
+      garage
+      basement
     }
   }
   `,
@@ -36,6 +38,8 @@ export default {
         stories
         bedrooms
         bathrooms
+        garage
+        basement
     }
   }
   `,

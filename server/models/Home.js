@@ -57,6 +57,14 @@ const HomeSchema = new Schema({
     type: Number,
     required: true
   },
+  garage: {
+    type: Boolean,
+    required: true
+  },
+  basement: {
+    type: Boolean,
+    required: true
+  },
 });
 
 HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {

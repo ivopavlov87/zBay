@@ -22,11 +22,14 @@ class CreateHome extends Component {
       description: "",
       bathrooms: "",
       bedrooms: "",
-      yearBuilt: ""
+      yearBuilt: "",
+      garage: false,
+      basement: false,
     };
   }
 
   update(field) {
+    // debugger;
     return e => this.setState({ [field]: e.target.value });
   }
 
@@ -65,7 +68,9 @@ class CreateHome extends Component {
         yearBuilt: parseInt(this.state.yearBuilt),
         stories: parseInt(this.state.stories),
         bedrooms: parseInt(this.state.bedrooms),
-        bathrooms: parseFloat(this.state.bathrooms)
+        bathrooms: parseFloat(this.state.bathrooms),
+        garage: this.state.garage,
+        basement: this.state.basement
       }
     });
   }
@@ -200,6 +205,14 @@ class CreateHome extends Component {
                 value={this.state.bedrooms}
                 placeholder="Number of bedrooms"
               />
+              <div>
+                <input type="checkbox" value="garage" onChange={() => this.setState(prevState => ({garage: !prevState.garage}))}/>
+                <label>Garage</label>
+              </div>
+              <div>
+                <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
+                <label>Basement</label>
+              </div>
               <button type="submit">Create Home</button>
             </form>
             <p>{this.state.message}</p>
