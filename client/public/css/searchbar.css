@@ -6,7 +6,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border-top: 1px solid gray;
+    border-top: 1px solid lightgray;
     /* background-color: pink; */
 }
 
