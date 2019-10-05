@@ -7,7 +7,7 @@ export default {
   query FetchHomes {
     homes {
       _id
-      name
+
       description
       yearBuilt
       streetAddress
@@ -27,7 +27,7 @@ export default {
     query FetchHome($id: ID!) {
       home(_id: $id) {
         _id
-        name
+
         description
         yearBuilt
         streetAddress
@@ -46,6 +46,19 @@ export default {
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
       isLoggedIn @client
+    }
+  `,
+  SEARCH_HOMES: gql`
+    query SearchHomes($searchQuery: String) {
+      searchHomes(searchQuery: $searchQuery) {
+        _id
+        name
+        description
+        bedrooms
+        bathrooms
+        sqft
+        stories
+      }
     }
   `
 }

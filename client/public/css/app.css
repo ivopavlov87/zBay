@@ -1,0 +1,14 @@
+@import "nav.css";
+@import "searchbar.css";
+
+*{
+    font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif
+}
+
+button:active{
+    outline: none;
+}
+
+input:active{
+    outline: none;
+}

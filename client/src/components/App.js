@@ -10,6 +10,7 @@ import AuthRoute from '../util/route_util'
 import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
+import SearchBar from './search/SearchBar'
 require('dotenv').config()
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <div className="main">
         <header>
           <Nav />
+          <SearchBar />
         </header>
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
@@ -27,6 +29,7 @@ const App = () => {
           <Route path="/" component={HomeIndex} />
           <Redirect to="/" />
         </Switch>
+      
       </div>
     </HashRouter>
   );
