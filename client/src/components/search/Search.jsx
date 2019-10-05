@@ -1,9 +1,9 @@
 import React from 'react';
-import gql from 'graphql-tag';
+
 import Queries from '../../graphql/queries';
-import { useLazyQuery } from '@apollo/react-hooks';
+
 import { Query } from 'react-apollo';
-import * as compose from 'lodash.flowright';
+// import * as compose from 'lodash.flowright';
 import debounce from 'lodash/debounce'
 const { SEARCH_HOMES } = Queries;
 
@@ -30,18 +30,18 @@ class Search extends React.Component {
     render(){
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
             return (
-                <div>
-                    <input type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
-                    <button onClick={(e) => this.handleSearch(e)}>Search</button>
+                <div className="searchbar-inputs">
+                    <input className="searchbar-input-field" type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <button className="searchbar-input-button" onClick={(e) => this.handleSearch(e)}>Search</button>
                 </div>
             )
         } else {
-            let that = this;
+      
            
             return (
-                <div>
-                    <input type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
-                    <button onClick={(e) => this.handleSearch(e)}>Search</button>
+                <div className="searchbar-inputs">
+                    <input className="searchbar-input-field" type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <button className="searchbar-input-button" onClick={(e) => this.handleSearch(e)}>Search</button>
                     <ul>
                         <Query query={SEARCH_HOMES} variables={{ searchQuery: this.state.searchQuery }}>
                             {({ loading, error, data }) => {
