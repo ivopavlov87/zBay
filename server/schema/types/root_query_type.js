@@ -60,14 +60,7 @@ const RootQueryType = new GraphQLObjectType({
         if (searchQuery === ""){
           return Home.find({})
         }
-        return Home.find({}).then(homes => {
-          return homes.filter(home => {
-            return home.name.includes(searchQuery)
-    
-         
-            // replace with searchField
-          })
-        }).then(homes => homes)
+        return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
       }
     }
   })

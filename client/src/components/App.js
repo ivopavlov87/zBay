@@ -23,7 +23,7 @@ const App = () => {
           <Route exact path="/homes/:id" component={HomeDetail} />
           <AuthRoute exact path="/register" component={Register} routeType="auth" />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />
-          {/* <Route path="/" component={HomeIndex} /> */}
+          <Route path="/" component={HomeIndex} />
           <Redirect to="/" />
         </Switch>
        <Search />
