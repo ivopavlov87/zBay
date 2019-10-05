@@ -6,7 +6,6 @@ import Geocoder from "react-map-gl-geocoder";
 import reactIcon from "./test2.png"
 import zBayIcon from "./test1.ico"
 import "./map_view.css"
-
 const token = process.env.REACT_APP_TOKEN
 
 // const ICON_MAPPING = {

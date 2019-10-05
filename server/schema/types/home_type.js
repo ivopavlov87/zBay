@@ -5,7 +5,7 @@
 
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
 
 const Home = mongoose.model("home")
 
@@ -26,8 +26,17 @@ const HomeType = new GraphQLObjectType({
       }
      },
     description: { type: GraphQLString},
+    streetAddress: { type: GraphQLString},
+    city: { type: GraphQLString},
+    state: { type: GraphQLString},
+    yearBuilt: { type: GraphQLInt },
     sqft: { type: GraphQLInt },
+    zipcode: { type: GraphQLInt },
+    stories: { type: GraphQLInt },
+    bedrooms: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
+    garage: { type: GraphQLBoolean },
+    basement: { type: GraphQLBoolean }
   })
 });
 
