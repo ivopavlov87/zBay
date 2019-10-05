@@ -60,4 +60,5 @@ header{
 
 .navbar-link{
   margin: 0 15px;
+  min-width: 108px;
 }

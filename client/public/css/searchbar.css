@@ -23,10 +23,12 @@
 
 .searchbar-input-field{
     margin-right: 20px;
+    padding-left: 6px;
     height: 60%;
     width: 200px;
     border-radius: 4px;
     border: 1px solid gray;
+    font-size: 14px;
 }
 
 .searchbar-input-button{
@@ -34,7 +36,8 @@
     height: 67%;
     width: 100px;
     border: 1px solid lightgray;
-    color: rgb(11, 70, 230);
+    color: whitesmoke;
+    background-color: rgb(11, 70, 230);
     cursor: pointer;
 }
 
@@ -45,4 +48,20 @@
     border: 1px solid lightgray;
     color: rgb(11, 70, 230);
     cursor: pointer;
+}
+
+[class*="-button"]{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.clicked{
+    color: whitesmoke;
+    background-color: rgb(11, 70, 230);
+}
+
+.searchbar-input-button:focus, 
+.searchbar-input-field:focus, 
+.searchbar-button:focus{
+    outline: none;
 }

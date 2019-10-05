@@ -45,7 +45,7 @@ class Search extends React.Component {
                     <ul>
                         <Query query={SEARCH_HOMES} variables={{ searchQuery: this.state.searchQuery }}>
                             {({ loading, error, data }) => {
-                                if (loading) return <p>Loading...</p>;
+                                if (loading) return <p></p>;
                                 if (error) return <p>Error</p>;
                                 return data.searchHomes.map(home => {
                                     return <li key={home._id}>{home.name}</li>
