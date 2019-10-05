@@ -9,6 +9,7 @@
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
     "deck.gl": "^7.3.2",
+    "dotenv": "^8.1.0",
     "graphql-tag": "^2.10.1",
     "mapbox": "^1.0.0-beta10",
     "react": "^16.10.1",
