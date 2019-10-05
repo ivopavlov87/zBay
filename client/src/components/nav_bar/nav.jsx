@@ -1,8 +1,9 @@
 import { Query } from "react-apollo";
-import Queries from "../graphql/queries";
+import Queries from "../../graphql/queries";
 import { ApolloConsumer } from 'react-apollo';
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import "./nav.css"
 
 const { IS_LOGGED_IN } = Queries;
 
@@ -14,13 +15,9 @@ const Nav = props => {
           {({ data }) => {
             if (data.isLoggedIn) {
               return (
-                <div>
+                <div className="nav-items">
                   <Link to="/">Homes Index</Link>
-                  &nbsp;
-                  &nbsp;
                   <Link to="/homes/new">Create a Home</Link>
-                  &nbsp;
-                  &nbsp;
                   <button
                     onClick={e => {
                       e.preventDefault();
@@ -35,13 +32,9 @@ const Nav = props => {
               );
             } else {
               return (
-                <div>
+                <div className="nav-items">
                   <Link to="/login">Login</Link>
-                  &nbsp;
-                  &nbsp;
                   <Link to="/register">Register</Link>
-                  &nbsp;
-                  &nbsp;
                   <Link to="/">Homes Index</Link>
                 </div>
               );
