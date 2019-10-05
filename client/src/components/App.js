@@ -7,17 +7,19 @@ import HomeIndex from "./homes/HomeIndex";
 import Login from "./Login";
 import Register from "./Register";
 import AuthRoute from '../util/route_util'
-import Nav from "./Nav";
+import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import Search from './search/Search'
+require('dotenv').config()
 
 const App = () => {
   return (
     <HashRouter>
-      <div>
-        <Nav />
-        <h1>zBay Store</h1>
+      <div className="main">
+        <header>
+          <Nav />
+        </header>
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
           <Route exact path="/homes/:id" component={HomeDetail} />

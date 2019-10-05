@@ -1,32 +1,67 @@
 import React from 'react';
-import MapGL from 'react-map-gl';
-import DeckGL, { GeoJsonLayer } from "deck.gl";
+import MapGL, { StaticMap } from 'react-map-gl';
+import DeckGL, { GeoJsonLayer} from "deck.gl";
+import {IconLayer} from '@deck.gl/layers';
 import Geocoder from "react-map-gl-geocoder";
-// var MapboxClient = require('mapbox');
+import reactIcon from "./test2.png"
+import zBayIcon from "./test1.ico"
+import "./map_view.css"
+const token = process.env.REACT_APP_TOKEN
 
-const TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJtcGQ2eTAwNGMza212dzVwb2UyZmwifQ.CfNGkydDCpLC5hPoddptfA';
-
-
+// const ICON_MAPPING = {
+//   marker: {x: 0, y: 0, width: 32, height: 32, mask: true}
+// };
+const homeLocations = [
+  {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon},
+  {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon},
+  {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon},
+  {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon},
+  {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon},
+]
  class SearchableMap extends React.Component {
-  state = {
-    viewport: {
-      width: 400,
-      height: 400,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 5,
-    },
-    searchResultLayer: null
+   state = {
+     viewport: {
+       width: 400,
+       height: 400,
+       longitude: -123.466233,
+       latitude: 32.684638,
+       zoom: 5,
+      },
+      searchResultLayer: null,
+    homeIconsLayer: new IconLayer({
+      id: 'icon-layer',
+      data: homeLocations,
+      pickable: true,
+      // getIcon: return a string
+      // iconAtlas: reactIcon,
+      // iconMapping: ICON_MAPPING,
+      getIcon: d => ({
+        url: d.icon,
+        width: 428,
+        height: 428
+      }),
+      // getIcon: d => d.icon,
+      // sizeScale: 15,
+      getSize: d => 100,
+      getPosition: d => d.coordinates,
+      getColor: [0, 140, 0],
+      // onHover: ({object, x, y}) => {
+      //   const tooltip = `${object.name}\n${object.address}`;
+      //   /* Update tooltip
+      //      http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
+      //   */
+      // }
+    })
   };
-  componentDidMount(){
-    // mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJtcGQ2eTAwNGMza212dzVwb2UyZmwifQ.CfNGkydDCpLC5hPoddptfA';
-    // var map = new mapboxgl.Map({
-    //   container: 'killME',
-    //   style: 'mapbox://styles/mapbox/streets-v11'
-    // });
-  }
-  mapRef = React.createRef()
 
+  // query for the houses and store them somewhere or keep them on cache 
+  //then for every home they will 
+  // have an id pass that id to layer which will have the markers stored and each marker will kinda be
+  // its own object or at least have some data referncing it so we can pull that data and use it where
+  // needed to show house 
+   
+  mapRef = React.createRef()
+  
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
@@ -35,7 +70,6 @@ const TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJtcGQ2eTAwNGMza212dz
 
   handleGeocoderViewportChange = viewport => {
     const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
     return this.handleViewportChange({
       ...viewport,
       ...geocoderDefaultOverrides
@@ -56,27 +90,34 @@ const TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW5qb2huc29uIiwiYSI6ImNrMWJtcGQ2eTAwNGMza212dz
   }
  
   render() {
-    const { viewport, searchResultLayer} = this.state
+    const { viewport, searchResultLayer, homeIconsLayer} = this.state
     return (
-      <div style={{ height: '100vh'}}>
-        <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>Use the search bar to find a location or click <a href="/">here</a> to find your location</h1>
+      <div className="map-container">
+        {/* the map itself this is the base layer and all of DeckGl's layers go ontop of this canvas */}
         <MapGL
+          reuseMaps
           ref={this.mapRef}
           {...viewport}
           mapStyle="mapbox://styles/mapbox/streets-v9"
           width="100%"
-          height="90%"
+          height="100%"
           onViewportChange={this.handleViewportChange}
-          mapboxApiAccessToken={TOKEN}
+          mapboxApiAccessToken={token}
+        >
+          {/* DeckGl handles layers that go on and over map */}
+          <DeckGL 
+            viewState={viewport}
+            layers={[searchResultLayer, homeIconsLayer]}
           >
+          {/* the serching mechanic */}
           <Geocoder 
             mapRef={this.mapRef}
             onResult={this.handleOnResult}
             onViewportChange={this.handleGeocoderViewportChange}
-            mapboxApiAccessToken={TOKEN}
+            mapboxApiAccessToken={token}
             position='top-left'
           />
-          <DeckGL {...viewport} layers={[searchResultLayer]} />
+          </DeckGL>
         </MapGL>
       </div>
     );
