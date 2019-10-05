@@ -9,8 +9,8 @@ import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
-
 import Mutations from "./graphql/mutations"
+
 const { VERIFY_USER } = Mutations
 
 const token = localStorage.getItem("auth-token");

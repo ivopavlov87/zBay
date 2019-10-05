@@ -1,0 +1,41 @@
+.home-index{
+  display: flex;
+
+}
+.homes-ul{
+  display: flex;
+  padding: 25px;
+  width: 35%;
+  display: flex;
+  padding: 25px;
+  width: 35%;
+  align-content: center;
+  text-align: center;
+  list-style: none;
+  text-decoration: none;
+}
+
+.homes-ul li {
+  width: 50%;
+  height: 230px;
+  margin: 7px;
+}
+
+.homes-ul > a {
+  display: contents;
+  text-decoration: none;
+  color: black;
+}
+
+.top-info{
+  width: 100%;
+  height: 60%;
+  border: solid;
+  border-bottom: none;
+}
+
+.bottom-info{
+  width: 100%;
+  height: 40%;
+  border: solid;
+}

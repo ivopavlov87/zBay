@@ -1,0 +1,11 @@
+header{
+  height: 130px;
+  border: 2px solid;
+  font-size: 20px;
+}
+.nav-items{
+  margin: 25px;
+}
+.nav-items a{
+  margin: 25px;
+}
