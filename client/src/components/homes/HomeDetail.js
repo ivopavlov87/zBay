@@ -42,7 +42,9 @@ class HomeDetail extends React.Component {
                 &nbsp;-&nbsp;
                 {data.home.bathrooms} bathrooms
                 &nbsp;-&nbsp;
-                {data.home.bedrooms} bedrooms</p>
+                {data.home.bedrooms} bedrooms
+                &nbsp;-&nbsp;
+                Search Field: {data.home.searchField}</p>
               </div>
             </div>
           );
