@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString } = graphql;
+const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLBoolean } = graphql;
 
 const UserType = require("./user_type");
 const User = mongoose.model("user");
@@ -61,6 +61,43 @@ const RootQueryType = new GraphQLObjectType({
           return Home.find({})
         }
         return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
+      }
+    },
+    advancedSearch: {
+      type: new GraphQLList(HomeType),
+      args: { 
+        nameQuery: { type: GraphQLString },
+        categoryQuery: { type: GraphQLString },
+        descriptionQuery: { type: GraphQLString },
+        streetAddressQuery: { type: GraphQLString },
+        cityQuery: { type: GraphQLString },
+        stateQuery: { type: GraphQLString },
+        yearBuiltQuery: { type: GraphQLInt },
+        sqftQuery: { type: GraphQLInt },
+        zipcodeQuery: { type: GraphQLInt },
+        storiesQuery: { type: GraphQLInt },
+        bedroomsQuery: { type: GraphQLInt },
+        bathroomsQuery: { type: GraphQLFloat },
+        garageQuery: { type: GraphQLBoolean },
+        basementQuery: { type: GraphQLBoolean }
+      },
+      resolve(_, args){
+        return Home.find({
+          name: new RegExp(`${nameQuery}`, 'i'),
+          category: new RegExp(`${categoryQuery}`, 'i'),
+          description: new RegExp(`${descriptionQuery}`, 'i'),
+          streetAddress: new RegExp(`${streetAddressQuery}`, 'i'),
+          city: new RegExp(`${cityQuery}`, 'i'),
+          state: new RegExp(`${stateQuery}`, 'i'),
+          yearBuilt: new RegExp(`${yearBuiltQuery}`, 'i'),
+          sqft: new RegExp(`${sqftQuery}`, 'i'),
+          zipcode: new RegExp(`${zipcodeQuery}`, 'i'),
+          stories: new RegExp(`${storiesQuery}`, 'i'),
+          bedrooms: new RegExp(`${bedroomsQuery}`, 'i'),
+          bathrooms: new RegExp(`${bathroomsQuery}`, 'i'),
+          garage: new RegExp(`${garageQuery}`, 'i'),
+          basement: new RegExp(`${basementQuery}`, 'i')
+        })
       }
     }
   })
