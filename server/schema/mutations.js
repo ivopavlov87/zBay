@@ -45,7 +45,8 @@ const mutation = new GraphQLObjectType({
         bedrooms: { type: GraphQLInt },
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
-        basement: { type: GraphQLBoolean }
+        basement: { type: GraphQLBoolean },
+        searchField: { type: GraphQLString }
       },
       async resolve(_, { name, 
         description,
@@ -59,6 +60,7 @@ const mutation = new GraphQLObjectType({
         state,
         garage,
         basement,
+        searchField,
         zipcode }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
@@ -77,6 +79,7 @@ const mutation = new GraphQLObjectType({
             state,
             garage,
             basement,
+            searchField,
             zipcode }).save();
         } else {
           throw new Error('Sorry, you need to be logged in to create a home.');
