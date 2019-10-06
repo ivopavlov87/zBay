@@ -65,6 +65,10 @@ const HomeSchema = new Schema({
     type: Boolean,
     required: true
   },
+  searchField: {
+    type: String,
+    required: true
+  },
 });
 
 HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {
