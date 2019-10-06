@@ -7,7 +7,7 @@ export default {
   query FetchHomes {
     homes {
       _id
-
+      name
       description
       yearBuilt
       streetAddress
@@ -27,7 +27,7 @@ export default {
     query FetchHome($id: ID!) {
       home(_id: $id) {
         _id
-
+        name
         description
         yearBuilt
         streetAddress

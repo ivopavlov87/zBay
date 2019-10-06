@@ -18,31 +18,32 @@ class HomeDetail extends React.Component {
           if (error) return `Error! ${error.message}`;
 
           return (
-            <div>
-              <Link to="/">Homes Index</Link>
-              <div>
-                <p key={data.home._id}>
-                {data.home.name}
-                &nbsp;-&nbsp;
-                {data.home.description}
-                &nbsp;-&nbsp;
-                Year Built: {data.home.yearBuilt}
-                &nbsp;-&nbsp;
-                {data.home.streetAddress}
-                &nbsp;-&nbsp;
-                {data.home.city}
-                &nbsp;-&nbsp;
-                {data.home.state}
-                &nbsp;-&nbsp;
-                {data.home.zipcode}
-                &nbsp;-&nbsp;
-                {data.home.sqft} sqft.
-                &nbsp;-&nbsp;
-                {data.home.stories} stories
-                &nbsp;-&nbsp;
-                {data.home.bathrooms} bathrooms
-                &nbsp;-&nbsp;
-                {data.home.bedrooms} bedrooms</p>
+            <div className="home-show-container">
+              <Link className="back-to-home-link" to="/"> {'<--'} Back to home</Link>
+              <div className="home-show">
+                <div className="show-pics-col">
+                  Photo
+                </div>
+                <div className="show-info-col">
+                  <div className="show-info-box" key={data.home._id}>
+                    <h3>{data.home.name}</h3>
+                  
+                    <h5>{data.home.description}</h5>
+                    <h5>Year built: {data.home.yearBuilt}</h5>
+                    <h5>{data.home.streetAddress}</h5>
+                    <h5>{data.home.city}</h5>
+                    <h5>{data.home.state}</h5>
+                    <h5>{data.home.zipcode}</h5>
+                    <h5>{data.home.sqft} sqft.</h5>
+                    <h5>{data.home.stories} stories</h5>
+                    <h5>{data.home.bathrooms}  bathrooms</h5>
+                    <h5>{data.home.bedrooms} bedrooms</h5>
+                  
+                  </div>
+                  <div className="show-bidding-box">
+                    {/* secondary info/ bidding button? */}
+                  </div>
+                </div>
               </div>
             </div>
           );
