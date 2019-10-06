@@ -28,10 +28,10 @@ const App = () => {
               <Route exact path="/homes/:id" component={HomeDetail} />
               <AuthRoute exact path="/register" component={Register} routeType="auth" />
               <AuthRoute exact path="/login" component={Login} routeType="auth" />
-
+              <Route path="/" component={() => <HomeIndex cache={cache} />}/>
               <Redirect to="/" />
             </Switch>
-            <HomeIndex cache={cache}/>
+              {/* <HomeIndex cache={cache}/> */}
           </div>
           )}
         </ApolloConsumer>
