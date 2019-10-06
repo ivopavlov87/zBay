@@ -20,6 +20,7 @@ export default {
       bathrooms
       garage
       basement
+      searchField
     }
   }
   `,
@@ -40,6 +41,7 @@ export default {
         bathrooms
         garage
         basement
+        searchField
     }
   }
   `,
