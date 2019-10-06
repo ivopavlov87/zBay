@@ -62,5 +62,10 @@ export default {
         stories
       }
     }
-  `
+  `,
+  FETCH_RESULTS: gql`
+  query FetchCartItems {
+      results @client
+  }
+`
 }

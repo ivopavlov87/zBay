@@ -1,7 +1,7 @@
 import React from "react";
 // import React, { Component } from "react";
 // import gql from "graphql-tag";
-// import { Query } from "react-apollo";
+import { ApolloConsumer } from "react-apollo";
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import HomeIndex from "./homes/HomeIndex";
 import Login from "./Login";
@@ -15,23 +15,27 @@ require('dotenv').config()
 
 const App = () => {
   return (
-    <HashRouter>
-      <div className="main">
-        <header>
-          <Nav />
-          <SearchBar />
-        </header>
-        <Switch>
-          <Route exact path="/homes/new" component={CreateHome} />
-          <Route exact path="/homes/:id" component={HomeDetail} />
-          <AuthRoute exact path="/register" component={Register} routeType="auth" />
-          <AuthRoute exact path="/login" component={Login} routeType="auth" />
-          <Route path="/" component={HomeIndex} />
-          <Redirect to="/" />
-        </Switch>
-      
-      </div>
-    </HashRouter>
+        <HashRouter>
+        <ApolloConsumer >
+          {(cache) => (
+          <div className="main">
+            <header>
+              <Nav />
+              <SearchBar />
+            </header>
+            <Switch>
+              <Route exact path="/homes/new" component={CreateHome} />
+              <Route exact path="/homes/:id" component={HomeDetail} />
+              <AuthRoute exact path="/register" component={Register} routeType="auth" />
+              <AuthRoute exact path="/login" component={Login} routeType="auth" />
+
+              <Redirect to="/" />
+            </Switch>
+            <HomeIndex cache={cache}/>
+          </div>
+          )}
+        </ApolloConsumer>
+        </HashRouter>
   );
 };
 
