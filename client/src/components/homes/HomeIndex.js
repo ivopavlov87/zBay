@@ -20,22 +20,25 @@ const HomeIndex = () => {
         return (
           <div className="home-index">
             <Map />
-            <ul className="homes-ul">
-              {data.homes.map(home => (
-                <Link key={home._id} to={`/homes/${home._id}`}>
-                  <li>
-                    <div className="top-info">
-                      {/* house.photo it will be a backround*/}
-                      {/* button that addToWatchList this will probably be a function  */}
-                      {home.name}
-                    </div>
-                    <div className="bottom-info">
-                      {/* house.info you know info*/}
-                    </div>
-                  </li>
-                </ Link>
-              ))}
-            </ul>
+            <div className="ul-container">
+
+              <ul className="homes-ul">
+                {data.homes.map(home => (
+                  <Link key={home._id} to={`/homes/${home._id}`}>
+                    <li>
+                      <div className="top-info">
+                        {/* house.photo it will be a backround*/}
+                        {/* button that addToWatchList this will probably be a function  */}
+                      </div>
+                      <div className="bottom-info">
+                        {home.name}
+                        {/* house.info you know info*/}
+                      </div>
+                    </li>
+                  </ Link>
+                ))}
+              </ul>
+            </div>
           </div>
         );
       }}
