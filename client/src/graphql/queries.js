@@ -21,6 +21,7 @@ export default {
       garage
       basement
       searchField
+      bids
     }
   }
   `,
@@ -42,6 +43,9 @@ export default {
         garage
         basement
         searchField
+        bids{
+          amount
+        }
     }
   }
   `,
@@ -64,8 +68,35 @@ export default {
     }
   `,
   FETCH_RESULTS: gql`
-  query FetchCartItems {
+    query FetchCartItems {
       results @client
-  }
-`
+    }
+  `,
+  FETCH_HOME_BIDS: gql`
+    query FetchHomeBids($homeId: String) {
+      homeBids(homeId: $homeId) {
+        _id
+      }
+    }
+  `,
+  FETCH_BIDS: gql`
+    query FetchBids{
+      bids{
+        _id
+        homeId
+        userId
+        amount
+      }
+    }
+  `,
+  FETCH_BID: gql`
+    query FetchBid($id: ID) {
+      bid(_id: $id) {
+        userId
+        homeId
+        amount
+        date
+      }
+    }
+  `
 }

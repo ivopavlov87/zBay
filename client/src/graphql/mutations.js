@@ -44,5 +44,20 @@ export default {
         searchField
       }
     }
+  `,
+  CREATE_BID: gql`
+    mutation CreateBid($homeId: ID!, $amount: Int!) {
+      createBid(homeId: $homeId, amount: $amount) {
+        _id
+        userId{
+          username
+        }
+        homeId{
+          streetAddress
+        }
+        amount
+
+      }
+    }
   `
 }

@@ -119,12 +119,10 @@ const RootQueryType = new GraphQLObjectType({
     },
     homeBids: {
       type: new GraphQLList(BidType),
-      args: { _id: { type: GraphQLID }},
-      resolve(_, { _id }){
-        return Home.findById(_id).then(home => {
-          return home.bids.map(bid => {
-            return Bid.findById(bid)
-          })
+      args: { _homeId: { type: GraphQLID }},
+      resolve(_, { _homeId }){
+        return Home.findById(_homeId).then(home => {
+          return home.bids.map(bid => bid)
         })
       }
     }

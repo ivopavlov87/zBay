@@ -155,10 +155,14 @@ const mutation = new GraphQLObjectType({
       async resolve(_, args, ctx){
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
-          return new Bid(args).save().then(bid => {
-            const home = Home.findById(args.homeId);
-            home.bids.push(bid._id)
-            return bid
+          return new Bid({
+            userId: validUser.userId,
+            homeId: args.homeId,
+            amount: args.amount
+          }).save().then(bid => {
+            return Home.findById(args.homeId).then(home =>{
+              return home.bids.push(bid)
+            })
           })
         } else {
           throw new Error("Sorry, you must be logged in to bid on a home.")

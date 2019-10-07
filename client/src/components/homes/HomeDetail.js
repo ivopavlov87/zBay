@@ -1,16 +1,58 @@
 import React from "react";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
-
+import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
-const { FETCH_HOME } = Queries;
+const { FETCH_HOME, FETCH_BIDS } = Queries;
+const { CREATE_BID } = Mutations;
 
 class HomeDetail extends React.Component {
-  // constructor(props){
-  //   super(props)
-  // }
+  constructor(props){
+    super(props)
+    this.state = {
+      homeId: this.props.match.params.id,
+      amount: 1,
+      message: ""
+    }
+  }
+
+  update(field){
+    return (e) => {
+      this.setState({ [field]: e.target.value })
+    }
+  }
+
+  updateCache(cache, { data }) {
+    let bids;
+    try {
+
+      bids = cache.readQuery({ query: FETCH_BIDS });
+    } catch (err) {
+      return;
+    }
+    // if we had previously fetched homes we'll add our new home to our cache
+    if (bids) {
+      let bidsArray = bids.bids;
+      let createBid = data.createBid;
+      cache.writeQuery({
+        query: FETCH_BIDS,
+        data: { bids: bidsArray.concat(createBid) }
+      });
+    }
+  }
+
+  handleSubmit(e, func){
+    e.preventDefault();
+    func({
+      variables: {
+      homeId: this.state.homeId,
+      amount: parseInt(this.state.amount),
+      }
+    })
+  }
   
   render() {
+
     return (
       <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
@@ -41,7 +83,28 @@ class HomeDetail extends React.Component {
                   
                   </div>
                   <div className="show-bidding-box">
-                    {/* secondary info/ bidding button? */}
+                    <Mutation
+                      mutation={CREATE_BID}
+                      onError={err => this.setState({ message: err.message })}
+                     
+                      update={(cache, data) => this.updateCache(cache, data)}
+        
+                      onCompleted={data => {
+                        // const { amount } = data.createBid;
+                        this.setState({
+                          message: `Bid placed successfully`
+                        });
+                      }}
+                    >
+                      {(createBid, { data }) => (
+                        <div>
+                          <form onSubmit={e => this.handleSubmit(e, createBid)}>
+                            <input type="number" value={this.state.amount} onChange={this.update('amount')}/>
+                            <input type="submit" value="Bid Now"/>
+                          </form>
+                        </div>
+                      )}
+                    </Mutation>
                   </div>
                 </div>
               </div>
