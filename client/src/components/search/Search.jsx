@@ -2,10 +2,10 @@ import React from 'react';
 
 import Queries from '../../graphql/queries';
 
-import { Query } from 'react-apollo';
+import { Query, ApolloConsumer } from 'react-apollo';
 // import * as compose from 'lodash.flowright';
 import debounce from 'lodash/debounce'
-const { SEARCH_HOMES } = Queries;
+const { SEARCH_HOMES, FETCH_RESULTS } = Queries;
 
 class Search extends React.Component {
     constructor(props){
@@ -28,6 +28,7 @@ class Search extends React.Component {
     }
 
     render(){
+        let searchWords = this.state.searchQuery.split(" ")
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
             return (
                 <div className="searchbar-inputs">
@@ -43,15 +44,33 @@ class Search extends React.Component {
                     <input className="searchbar-input-field" type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
                     <button className="searchbar-input-button" onClick={(e) => this.handleSearch(e)}>Search</button>
                     <ul>
-                        <Query query={SEARCH_HOMES} variables={{ searchQuery: this.state.searchQuery }}>
-                            {({ loading, error, data }) => {
-                                if (loading) return <p></p>;
-                                if (error) return <p>Error</p>;
-                                return data.searchHomes.map(home => {
-                                    return <li key={home._id}>{home.name}</li>
-                                })
-                            }}
-                        </Query>
+                        <ApolloConsumer>
+                            {(cache) => (
+                                <Query query={SEARCH_HOMES} 
+                                    variables={{ searchQuery: this.state.searchQuery }}
+                                    update={(cache, { data: { results }}) => {
+                                        const data = cache.readQuery({ query: FETCH_RESULTS })
+                                        data.results = [...data.results, ...results]
+                                        cache.writeQuery({ query: FETCH_RESULTS, data })
+                                    }}>
+                                    {({ loading, error, data }) => {
+                                        if (loading) return <p></p>;
+                                        if (error) return <p>Error</p>;
+                                        const searchResults = { results: data.searchHomes }
+                                        // cache.writeQuery({ query: FETCH_RESULTS, data: searchResults})
+                                        // console.log(cache)
+                                        
+                                        
+                                        cache.cache.data.data.ROOT_QUERY.results.json = [];
+                                        cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
+                                        // return data.searchHomes.map(home => {
+                                        //     return <li key={home._id}>{home.name}</li>
+                                        // })
+                                        return ""
+                                    }}
+                                </Query>
+                            )}
+                        </ApolloConsumer>
                     </ul>
                 </div>
             )
