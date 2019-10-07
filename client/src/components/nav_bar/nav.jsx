@@ -3,18 +3,48 @@ import Queries from "../../graphql/queries";
 import { ApolloConsumer } from 'react-apollo';
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import zBayIcon from "../map/test1.ico"
+import zBayIcon from "../map/test1.ico";
+import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import Modal from 'react-modal';
+import LoginContainer from "../Login";
+import SignupContainer from "../Register";
+import gql from 'graphql-tag';
 
 
 const { IS_LOGGED_IN } = Queries;
 
+const MODAL = gql`
+  {
+    modalOpen @client
+    sessionForm @client
+  }
+`;
+
 const Nav = props => {
+  Modal.setAppElement("body");
+
+  let { data } = useQuery(MODAL);
+  const client = useApolloClient();
+
+  if (data === undefined) {
+    data = { modalOpen: false };
+  }
+
+  const changeState = (e, value) => {
+    client.writeData({
+      data: { modalOpen: value, sessionForm: e.target.innerText }
+    });
+  };
+
+  const sessionForm = data.sessionForm === "Login" ? <LoginContainer /> : <SignupContainer />
+
+
   return (
     <ApolloConsumer>
       {client => (
         <Query query={IS_LOGGED_IN}>
-          {({ data }) => {
-            if (data.isLoggedIn) {
+          {({ loginData }) => {
+            if (loginData && loginData.isLoggedIn) {
               return (
                 <div className="nav-items">
                   <div className="navbar-left">
@@ -41,9 +71,12 @@ const Nav = props => {
             } else {
               return (
                 <div className="nav-items">
+                  <Modal className="nav-modal" isOpen={data.modalOpen} onRequestClose={(e) => changeState(e, false)}>{sessionForm}</Modal>
                   <div className="navbar-left">
-                    <Link className="navbar-link" to="/login">Login</Link>
-                    <Link className="navbar-link" to="/register">Register</Link>
+                    <button className="navbar-link" onClick={(e) => changeState(e, true)}>Login</button>
+                    <button className="navbar-link" onClick={(e) => changeState(e, true)}>Register</button>
+                    {/* <Link className="navbar-link" to="/login">Login</Link> */}
+                    {/* <Link className="navbar-link" to="/register">Register</Link> */}
                   </div>
                   <div className="zbay-icon-main">
                     <img src={zBayIcon} alt="zBay" />
