@@ -16,7 +16,7 @@ const CategorySchema = new Schema({
 
 CategorySchema.statics.findHome = function(categoryId) {
   return this.findById(categoryId)
-  .populate("homes")
+  .populate("home")
   .then(category => category.homes)
 }
 

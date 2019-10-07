@@ -8,6 +8,8 @@ const HomeType = require("../schema/types/home_type");
 const Home = mongoose.model("home");
 const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
+const Bid = mongoose.model('bid');
+const BidType = require("../schema/types/bid_type")
 
 const AuthService = require("../services/auth")
 
@@ -141,6 +143,26 @@ const mutation = new GraphQLObjectType({
       },
       resolve(_, args) {
         return AuthService.verifyUser(args);
+      }
+    },
+    createBid: {
+      type: BidType,
+      args: {
+        userId: { type: GraphQLID },
+        homeId: { type: GraphQLID },
+        amount: { type: GraphQLInt }
+      },
+      async resolve(_, args, ctx){
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+        if (validUser.loggedIn) {
+          return new Bid(args).save().then(bid => {
+            const home = Home.findById(args.homeId);
+            home.bids.push(bid._id)
+            return bid
+          })
+        } else {
+          throw new Error("Sorry, you must be logged in to bid on a home.")
+        }
       }
     }
   }

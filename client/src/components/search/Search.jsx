@@ -46,7 +46,13 @@ class Search extends React.Component {
                     <ul>
                         <ApolloConsumer>
                             {(cache) => (
-                                <Query query={SEARCH_HOMES} variables={{ searchQuery: this.state.searchQuery }}>
+                                <Query query={SEARCH_HOMES} 
+                                    variables={{ searchQuery: this.state.searchQuery }}
+                                    update={(cache, { data: { results }}) => {
+                                        const data = cache.readQuery({ query: FETCH_RESULTS })
+                                        data.results = [...data.results, ...results]
+                                        cache.writeQuery({ query: FETCH_RESULTS, data })
+                                    }}>
                                     {({ loading, error, data }) => {
                                         if (loading) return <p></p>;
                                         if (error) return <p>Error</p>;
@@ -57,9 +63,10 @@ class Search extends React.Component {
                                         
                                         cache.cache.data.data.ROOT_QUERY.results.json = [];
                                         cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
-                                        return data.searchHomes.map(home => {
-                                            return <li key={home._id}>{home.name}</li>
-                                        })
+                                        // return data.searchHomes.map(home => {
+                                        //     return <li key={home._id}>{home.name}</li>
+                                        // })
+                                        return ""
                                     }}
                                 </Query>
                             )}
