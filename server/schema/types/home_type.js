@@ -19,10 +19,10 @@ const HomeType = new GraphQLObjectType({
     category: { 
       type: require('./category_type'),
       resolve(parentValue) {
-        return Home.findById(parentValue._id)
-          .populate("category")
-          .then(home => {
-            return home.category
+        return Category.findById(parentValue.category)
+          // .populate("category")
+          .then(category => {
+            return category
           });
       }
      },
@@ -39,7 +39,16 @@ const HomeType = new GraphQLObjectType({
     garage: { type: GraphQLBoolean },
     basement: { type: GraphQLBoolean },
     searchField: { type: GraphQLString },
-    bids: { type: GraphQLList(BidType) }
+    bids: {
+      type: new GraphQLList(BidType),
+      resolve(parentValue){
+
+        return Home.findById(parentValue._id)
+          .populate("bids")
+          .then(home => home.bids)
+
+        }
+      }
   })
 });
 

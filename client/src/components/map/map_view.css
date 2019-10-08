@@ -3,3 +3,36 @@
   height: 77vh;
   width: 65vw;
 }
+.the-display-none-map{
+  display: none;
+}
+.landing-page-map-search{
+    height: 100%;
+    background: lightpink;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+}
+.mapboxgl-ctrl {
+  clear: both;
+  pointer-events: auto;
+  transform: translate(0, 0);
+  top: -100px;
+  position: relative;
+  display: block;
+}
+svg.mapboxgl-ctrl-geocoder--icon.mapboxgl-ctrl-geocoder--icon-search {
+  float: right;
+}
+.suggestions-wrapper {
+
+}
+ul.suggestions {
+  list-style: none;
+}
+li.active {
+  background: white
+}

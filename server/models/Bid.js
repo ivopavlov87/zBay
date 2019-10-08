@@ -5,11 +5,11 @@ const graphql = require("graphql");
 
 
 const BidSchema = new Schema({
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "user"
   },
-  homeId: {
+  home: {
     type: Schema.Types.ObjectId,
     ref: "home"
   },
