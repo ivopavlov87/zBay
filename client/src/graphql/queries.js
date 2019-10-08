@@ -28,6 +28,7 @@ export default {
         }
       }
     }
+  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
