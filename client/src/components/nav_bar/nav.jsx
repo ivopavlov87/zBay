@@ -73,8 +73,8 @@ const Nav = props => {
                 <div className="nav-items">
                   <Modal className="nav-modal" isOpen={data.modalOpen} onRequestClose={(e) => changeState(e, false)}>{sessionForm}</Modal>
                   <div className="navbar-left">
-                    <button className="navbar-link" onClick={(e) => changeState(e, true)}>Login</button>
-                    <button className="navbar-link" onClick={(e) => changeState(e, true)}>Register</button>
+                    <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Login</button>
+                    <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Register</button>
                     {/* <Link className="navbar-link" to="/login">Login</Link> */}
                     {/* <Link className="navbar-link" to="/register">Register</Link> */}
                   </div>

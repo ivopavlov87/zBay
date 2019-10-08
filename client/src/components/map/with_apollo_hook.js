@@ -11,9 +11,15 @@ const MAP = gql`
 export function withApolloHook(Component) {
   return function WrappedComponent(props) {
     const client = useApolloClient()
-    const postViewportSearchPreParse = client.readQuery({ query: MAP })
-    const viewportPostSearch = JSON.parse(postViewportSearchPreParse.viewport)
-    return <Component {...props} lat={viewportPostSearch.geometry.coordinates[1]} long={viewportPostSearch.geometry.coordinates[0]} />
+    let postViewportSearchPreParse;
+    try {
+      postViewportSearchPreParse = client.readQuery({ query: MAP })
+      const viewportPostSearch = JSON.parse(postViewportSearchPreParse.viewport)
+      return <Component {...props} lat={viewportPostSearch.geometry.coordinates[1]} long={viewportPostSearch.geometry.coordinates[0]} />
+    } catch (error) {
+      props.history.push('/')
+      return <Component {...props} />
+    }
   }
 }
 

@@ -3,6 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
 import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
+import BidShow from '../bids/BidShow';
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
 
@@ -15,6 +16,8 @@ class HomeDetail extends React.Component {
       message: ""
     }
   }
+
+ 
 
   update(field){
     return (e) => {
@@ -58,15 +61,14 @@ class HomeDetail extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
-            // debugger
-          let allBids = data.home.bids.map(bid => {
-            return (
-              <div className="show-bid-item">
-                <h4>{bid.user.username}:</h4>
-                <h3>${bid.amount}</h3>
-              </div>
-            )
-          })
+          // let allBids = data.home.bids.map(bid => {
+          //   return (
+          //     <div className="show-bid-item">
+          //       <h4>{bid.user.username}:</h4>
+          //       <h3>${bid.amount}</h3>
+          //     </div>
+          //   )
+          
           return (
             <div className="home-show-container">
              
@@ -75,37 +77,29 @@ class HomeDetail extends React.Component {
                   <div className="show-photo">
                   Photo
                   </div>
-                  <h2>Bids on this listing:</h2>
-                 <div className="show-high-bid">
+                  
+                 {/* <div className="show-high-bid">
                     {allBids}
-                 </div>
-                  {/* <Query query={FETCH_HOME_BIDS} variables={{ _homeId: this.props.match.params.id }}>
-                    {({ loading, error, data }) => {
-                      if (loading) return <div className="loading">Loading...</div>;
-                      if (error) return `Error! ${error.message}`;
-
-                      let bidLis = data.homeBids.map(bid => (
-                        <li key={bid._id}>{bid.amount}&nbsp;by&nbsp;{bid.user.username}</li>
-                      ))
-                      return (
-                        <div className="show-high-bid">
-                          <ul>
-                          {bidLis}
-                          </ul>
-                        </div>
-                      )}}
-                  </Query> */}
+                 </div> */}
+                <BidShow bids={data.home.bids} />
                 </div>
                 <div className="show-info-col">
                   <div className="show-bidding-box">
                     <Mutation
                       mutation={CREATE_BID}
                       onError={err => this.setState({ message: err.message })}
-                     
+                      refetchQueries={() => {
+                        return [
+                          {
+                            query: FETCH_HOME,
+                            variables: { id: this.props.match.params.id }
+                          }
+                        ];
+                      }}
                       update={(cache, data) => this.updateCache(cache, data)}
         
                       onCompleted={data => {
-                        // const { amount } = data.createBid;
+             
                         this.setState({
                           message: `Bid placed successfully`
                         });

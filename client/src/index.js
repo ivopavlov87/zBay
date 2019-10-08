@@ -11,7 +11,6 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations";
-// import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 
 
 const { VERIFY_USER } = Mutations;
@@ -41,9 +40,6 @@ const client = new ApolloClient({
   },
   link: ApolloLink.from([errorLink, httpLink]),
   cache,
-  clientState: {
-    defaults: {}
-  },
   onError: ({ networkError, graphQLErrors }) => {
     console.log("graphQLErrors", graphQLErrors);
     console.log("networkError", networkError);

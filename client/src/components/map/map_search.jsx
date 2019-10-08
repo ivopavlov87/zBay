@@ -25,32 +25,21 @@ class MapSearchBar extends React.Component {
   mapRef = React.createRef()
   geocoderContainerRef = React.createRef();
 
-
-  handleViewportChange = viewport => {
-    this.setState({
-      viewport: { ...this.state.viewport, ...viewport }
-    })
-  };
-
-  handleGeocoderViewportChange = viewport => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides
-    });
-  };
-
   handleOnResult = event => {
     this.setState({
-      searchResultLayer: new GeoJsonLayer({
-        id: "search-result",
-        data: event.result.geometry,
-        getFillColor: [255, 0, 0, 128],
-        getRadius: 1000,
-        pointRadiusMinPixels: 10,
-        pointRadiusMaxPixels: 10}),
+    //   searchResultLayer: new GeoJsonLayer({
+    //     id: "search-result",
+    //     data: event.result.geometry,
+    //     getFillColor: [255, 0, 0, 128],
+    //     getRadius: 1000,
+    //     pointRadiusMinPixels: 10,
+    //     pointRadiusMaxPixels: 10}),
       viewport: event.result
     })
+    this.finished()
+  }
+
+  finished(){
     this.props.setCache(this.state.viewport)
     this.props.history.push("/home")
   }
@@ -59,21 +48,24 @@ class MapSearchBar extends React.Component {
     const {viewport} = this.state
     return(
       <div className="search-bar">
-          <div  
+          <div className="landing-page-map-search"
             ref={this.geocoderContainerRef}
-            className="landing-page-map-search"
-          />
+            >
+              <h1 className="map-search-title">Reimagine home</h1>
+              <h4 className="map-search-title subtext">We’ll help you find a place you’ll love.</h4>
+          </div>
         <MapGL className="the-display-none-map"
           ref={this.mapRef}
           {...viewport}
-          onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={token}
+          visible={false}
+          attributionControl={false}
           >
           <Geocoder 
+            options={{ flyTo: false }}
             mapRef={this.mapRef}
             containerRef={this.geocoderContainerRef}
             onResult={this.handleOnResult}
-            onViewportChange={this.handleGeocoderViewportChange}
             mapboxApiAccessToken={token}
           />
         </MapGL>
@@ -84,3 +76,5 @@ class MapSearchBar extends React.Component {
 }
 
 export default withRouter(writeApolloHook(MapSearchBar))
+
+
