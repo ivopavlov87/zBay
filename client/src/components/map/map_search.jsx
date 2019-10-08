@@ -24,22 +24,7 @@ class MapSearchBar extends React.Component {
 
   mapRef = React.createRef()
   geocoderContainerRef = React.createRef();
-
-
-  // handleViewportChange = viewport => {
-  //   this.setState({
-  //     viewport: { ...this.state.viewport, ...viewport }
-  //   })
-  // };
-
-  // handleGeocoderViewportChange = viewport => {
-  //   const geocoderDefaultOverrides = { transitionDuration: 1000 };
-  //   return this.handleViewportChange({
-  //     ...viewport,
-  //     ...geocoderDefaultOverrides
-  //   });
-  // };
-
+  
   handleOnResult = event => {
     this.setState({
     //   searchResultLayer: new GeoJsonLayer({
@@ -70,7 +55,6 @@ class MapSearchBar extends React.Component {
         <MapGL className="the-display-none-map"
           ref={this.mapRef}
           {...viewport}
-          // onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={token}
           visible={false}
           attributionControl={false}
@@ -80,7 +64,6 @@ class MapSearchBar extends React.Component {
             mapRef={this.mapRef}
             containerRef={this.geocoderContainerRef}
             onResult={this.handleOnResult}
-            // onViewportChange={this.handleGeocoderViewportChange}
             mapboxApiAccessToken={token}
           />
         </MapGL>

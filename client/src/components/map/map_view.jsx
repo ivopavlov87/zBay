@@ -91,7 +91,6 @@ const homeLocations = [
     const { viewport, homeIconsLayer, mounted} = this.state
     return (
       <div className="map-container">
-        {/* the map itself this is the base layer and all of DeckGl's layers go ontop of this canvas */}
         <MapGL
           reuseMaps
           ref={this.mapRef}
@@ -105,7 +104,6 @@ const homeLocations = [
           mapboxApiAccessToken={token}
           attributionControl={false}
         >
-          {/* DeckGl handles layers that go on and over map */}
           <DeckGL 
             viewState={viewport}
             layers={[homeIconsLayer]}
