@@ -104,4 +104,12 @@ HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {
   });
 };
 
+HomeSchema.statics.findBids = (homeId) => {
+  const Home = mongoose.model("home");
+
+  return Home.findById(homeId)
+    .populate("bids")
+    .then(home => home.bids)
+}
+
 module.exports = mongoose.model("home", HomeSchema);

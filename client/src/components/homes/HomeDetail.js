@@ -102,6 +102,7 @@ class HomeDetail extends React.Component {
                             <input type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input type="submit" value="Bid Now"/>
                           </form>
+                          <h5>{this.state.message}</h5>
                         </div>
                       )}
                     </Mutation>
