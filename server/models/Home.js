@@ -104,10 +104,10 @@ HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {
   });
 };
 
-HomeSchema.statics.findBids = (homeId) => {
+HomeSchema.statics.findBids = (_homeId) => {
   const Home = mongoose.model("home");
 
-  return Home.findById(homeId)
+  return Home.findById(_homeId)
     .populate("bids")
     .then(home => home.bids)
 }

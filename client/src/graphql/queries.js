@@ -21,7 +21,12 @@ export default {
       garage
       basement
       searchField
-      bids
+      bids{
+        amount
+        user{
+          username
+        }
+      }
     }
   }
   `,
@@ -45,6 +50,9 @@ export default {
         searchField
         bids{
           amount
+          user{
+            username
+          }
         }
     }
   }
@@ -73,9 +81,13 @@ export default {
     }
   `,
   FETCH_HOME_BIDS: gql`
-    query FetchHomeBids($homeId: String) {
-      homeBids(homeId: $homeId) {
+    query FetchHomeBids($homeId: ID) {
+      homeBids(_homeId: $homeId) {
         _id
+        amount
+        user{
+          username
+        }
       }
     }
   `,

@@ -40,8 +40,9 @@ const HomeType = new GraphQLObjectType({
     basement: { type: GraphQLBoolean },
     searchField: { type: GraphQLString },
     bids: {
-      type: GraphQLList(BidType),
+      type: new GraphQLList(BidType),
       resolve(parentValue){
+
         return Home.findById(parentValue._id)
           .populate("bids")
           .then(home => home.bids)
