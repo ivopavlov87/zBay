@@ -148,7 +148,7 @@ const mutation = new GraphQLObjectType({
     createBid: {
       type: BidType,
       args: {
-        userId: { type: GraphQLID },
+        // userId: { type: GraphQLID },
         homeId: { type: GraphQLID },
         amount: { type: GraphQLInt }
       },
@@ -156,12 +156,13 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Bid({
-            userId: validUser.userId,
-            homeId: args.homeId,
+            user: validUser.userId,
+            home: args.homeId,
             amount: args.amount
           }).save().then(bid => {
             return Home.findById(args.homeId).then(home =>{
-              return home.bids.push(bid)
+              home.bids.push(bid)
+              return home.save().then(home => bid)
             })
           })
         } else {

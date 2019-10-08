@@ -1,7 +1,7 @@
 @import "nav.css";
 @import "searchbar.css";
 @import "home-detail.css";
-
+@import "home-create.css";
 
 *{
     font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif

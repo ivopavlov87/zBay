@@ -2,26 +2,28 @@ const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
 
-const Bid = mongoose.model("home");
+const Bid = mongoose.model("bid");
+const Home = mongoose.model("home");
+const User = mongoose.model("user");
 
 const BidType = new GraphQLObjectType({
     name: "BidType",
     fields: () => ({
         _id: { type: GraphQLID },
-        userId: {
+        user: {
             type: require('./user_type'),
             resolve(parentValue){
-                return User.findById(parentValue._id)
-                    .populate("userId")
-                    .then(user => user._id)
+                return User.findById(parentValue.user)
+                    // .populate("user")
+                    .then(user => user)
             } 
         },
-        homeId: {
+        home: {
             type: require('./home_type'),
             resolve(parentValue){
-                return Home.findById(parentValue._id)
-                    .populate("homeId")
-                    .then(home => home._id)
+                return Home.findById(parentValue.home)
+                    // .populate("home")
+                    .then(home => home)
             }},
         amount: { type: GraphQLInt }
     })

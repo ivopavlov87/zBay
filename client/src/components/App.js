@@ -17,7 +17,6 @@ import { useQuery, useApolloClient } from 'react-apollo-hooks'
 import Map from "./map/map_view";
 
 require('dotenv').config()
-
 const App = (props) => {
   const client = useApolloClient()
   return (
@@ -32,8 +31,8 @@ const App = (props) => {
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
           <Route exact path="/homes/:id" component={HomeDetail} />
-          <AuthRoute exact path="/register" component={Register} routeType="auth" />
-          <AuthRoute exact path="/login" component={Login} routeType="auth" />
+              {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
+              {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
           <Route path="/" component={() => <MapSerchBar client={client}/>} />
           <Redirect to="/" />

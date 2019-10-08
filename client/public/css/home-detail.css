@@ -37,6 +37,16 @@
     border: 1px solid blue;
 }
 
+.show-photo{
+    height: 80%;
+    width: 100%
+}
+
+.show-high-bid{
+    height: 20%;
+    width: 100%
+}
+
 .show-info-col{
     width: 44%;
     height: 100%;
@@ -48,7 +58,7 @@
     /* background-color: pink; */
 }
 
-.show-info-box{
+.show-bidding-box{
     height: 39%;
     width: 99%;
     display: flex;
@@ -58,12 +68,73 @@
     border: 1px solid blue;
 }
 
-.show-bidding-box{
+.show-info-box{
     height: 59%;
     width: 99%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     border: 1px solid blue;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+
+.show-info-box::-webkit-scroll{
+    width: 0;
+}
+
+.show-info-text{
+    margin: 15px 0;
+}
+
+.bid-form-container{
+    width: 99%;
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bid-form{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.bid-input{
+    width: 200px;
+    height: 20px;
+    
+    border-radius: 2px;
+    font-size: 20px;
+}
+
+.bid-submit{
+    width: 200px;
+    height: 50px;
+    color: whitesmoke;
+    background-color: rgb(11, 70, 230);
+    border-radius: 2px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.bid-success{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.loading{
+    margin-top: 50vh;
+    margin-left: 50vw;
+}
+
