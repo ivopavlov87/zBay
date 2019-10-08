@@ -30,7 +30,6 @@ class CreateHome extends Component {
   }
 
   update(field) {
-    // debugger;
     return e => this.setState({ [field]: e.target.value });
   }
 
