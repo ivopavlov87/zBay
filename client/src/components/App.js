@@ -12,13 +12,11 @@ import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
 import MapSerchBar from "./map/map_search";
-import { useApolloClient } from 'react-apollo-hooks';
 
 import Map from "./map/map_view";
 
 require('dotenv').config();
 const App = (props) => {
-  const client = useApolloClient();
   return (
     <HashRouter>
       <ApolloConsumer >
@@ -34,7 +32,7 @@ const App = (props) => {
               {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
               {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
-          <Route path="/" component={() => <MapSerchBar client={client}/>} />
+          <Route path="/" component={() => <MapSerchBar />} />
           <Redirect to="/" />
         </Switch>
       </div>

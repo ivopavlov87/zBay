@@ -13,7 +13,6 @@ import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations";
 
 
-
 const { VERIFY_USER } = Mutations;
 
 const token = localStorage.getItem("auth-token");
