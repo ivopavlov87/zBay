@@ -3,27 +3,18 @@ import MapGL, { StaticMap } from 'react-map-gl';
 import Geocoder from "react-map-gl-geocoder";
 import { useQuery, useApolloClient } from 'react-apollo-hooks'
 import { gql } from 'apollo-boost'
-import DeckGL, { GeoJsonLayer} from "deck.gl";
-import Map from "./map_view"
 
 const token = process.env.REACT_APP_TOKEN
 
-
 export default () => {
   const [viewport, setViewport] = useState({ width: 1, height: 1, latitude: 37.684638, longitude: -122.466233, zoom: 7 })
-  const [searchResultLayer, setSearchResultLayer] = useState("")
-  // let { data } = useQuery(MAP)
+  // const [searchResultLayer, setSearchResultLayer] = useState("")
   const client = useApolloClient()
 
 
   const mapRef = React.createRef()
   const geocoderContainerRef = React.createRef();
 
-
-  // const changeState = value => {
-    
-  //   debugger
-  // }
 
   const handleViewportChange = nextViewport => {
     setViewport({ ...nextViewport, ...viewport })

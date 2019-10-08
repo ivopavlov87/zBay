@@ -11,7 +11,7 @@ import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
-import MapSerchBar from "./map/map_search_2_0";
+import MapSerchBar from "./map/map_search";
 import { useQuery, useApolloClient } from 'react-apollo-hooks'
 
 import Map from "./map/map_view";
@@ -34,8 +34,8 @@ const App = (props) => {
           <Route exact path="/homes/:id" component={HomeDetail} />
           <AuthRoute exact path="/register" component={Register} routeType="auth" />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />
-          <Route eaxt path="/search" component={() => <MapSerchBar client={client}/>} />
-          <Route path="/" component={() => <HomeIndex cache={cache} />} />
+          <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
+          <Route path="/" component={() => <MapSerchBar client={client}/>} />
           <Redirect to="/" />
         </Switch>
       </div>

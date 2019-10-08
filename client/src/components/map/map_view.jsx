@@ -3,7 +3,7 @@ import MapGL from 'react-map-gl';
 import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
 import { useQuery, useApolloClient } from 'react-apollo-hooks'
-import withApolloHook from './with_apollo_hook'
+import {withApolloHook} from './with_apollo_hook'
 import zBayIcon from "./test1.ico"
 import reactIcon from "./test1.ico"
 

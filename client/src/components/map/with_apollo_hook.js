@@ -4,18 +4,26 @@ import  gql  from 'graphql-tag'
 
 const MAP = gql`
 {
-  coordinates @client
+  viewport @client
 }
 `
 
-function withApolloHook(Component) {
+export function withApolloHook(Component) {
   return function WrappedComponent(props) {
     const client = useApolloClient()
-    const coordinatesPreParse = client.readQuery({ query: MAP })
-    const coordinates = JSON.parse(coordinatesPreParse.coordinates)
-    debugger
-    return <Component {...props} lat={coordinates.latitude} long={coordinates.longitude} />
+    const postViewportSearchPreParse = client.readQuery({ query: MAP })
+    const viewportPostSearch = JSON.parse(postViewportSearchPreParse.viewport)
+    return <Component {...props} lat={viewportPostSearch.geometry.coordinates[1]} long={viewportPostSearch.geometry.coordinates[0]} />
   }
 }
 
-export default withApolloHook
+export function writeApolloHook(Component) {
+  return function WrappedViewport(props){
+    const client = useApolloClient()
+    function setCache(viewport) {
+      client.writeData({ data: {viewport: JSON.stringify(viewport) } })
+    } 
+    return <Component {...props} setCache={setCache}/>
+  }
+}
+
