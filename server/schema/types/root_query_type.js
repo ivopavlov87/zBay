@@ -121,7 +121,9 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(BidType),
       args: { _homeId: { type: GraphQLID }},
       resolve(_, { _homeId }){
+
         return Home.findBids(_homeId)
+
       }
     }
   })

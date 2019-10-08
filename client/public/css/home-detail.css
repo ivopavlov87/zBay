@@ -38,13 +38,30 @@
 }
 
 .show-photo{
-    height: 80%;
+    height: 70%;
     width: 100%
 }
 
 .show-high-bid{
-    height: 20%;
-    width: 100%
+    height: 30%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    
+}
+
+.show-bid-item{
+    margin: 0 auto;
+    height: 60px;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.show-bid-item h4{
+    margin-right: 10px;
 }
 
 .show-info-col{
