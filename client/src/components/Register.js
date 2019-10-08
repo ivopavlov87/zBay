@@ -32,7 +32,7 @@ class Register extends Component {
         onCompleted={data => {
           const { token } = data.register;
           localStorage.setItem("auth-token", token);
-          this.props.history.push("/");
+          // this.props.history.push("/");
         }}
         update={(client, data) => this.updateCache(client, data)}
       >

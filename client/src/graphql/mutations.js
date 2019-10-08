@@ -59,5 +59,10 @@ export default {
 
       }
     }
-  `
-}
+  `,
+  // OPEN_MODAL: gql`
+  //   mutation openModal {
+  //     openModal @client
+  //   }
+  // `
+};
