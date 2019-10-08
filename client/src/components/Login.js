@@ -10,10 +10,9 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errors: ""
     };
-
-    // this.handleDemo = this.handleDemo.bind(this);
   }
 
   update(field) {
@@ -27,16 +26,16 @@ class Login extends Component {
     });
   }
 
-  // handleDemo(e) {
-  //   e.preventDefault();
-  //   this.props
-  //     .login({
-  //       email: "demo@user.com",
-  //       password: "password"
-  //     });
-  // }
-
   render() {
+
+    const errors = this.state.errors ? (
+      <li className="modal-li-errors">
+        {this.state.errors.graphQLErrors[0].message}
+      </li>
+    ) : (
+      <li className="modal-li-errors"></li>
+    );
+
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -45,12 +44,15 @@ class Login extends Component {
           localStorage.setItem("auth-token", token);
           // this.props.history.push("/");
         }}
+        onError={err => {
+          this.setState({ errors: err });
+        }}
         update={(client, data) => this.updateCache(client, data)}
       >
         {loginUser => (
           <div className="modal">
             <h1 className="modal-header">Welcome Back</h1>
-              <div className="modal-container">
+            <div className="modal-container">
               <div className="modal-header-container">
                 <div className="zbay-icon-modal">
                   <img className="zbay-logo" src={zBayIcon} alt="zBay" />
@@ -83,12 +85,26 @@ class Login extends Component {
                   type="password"
                   placeholder="Password"
                 />
+                <ul className="modal-ul-errors">{errors}</ul>
                 <button className="modal-button" type="submit">
                   Log In
                 </button>
                 <button
                   className="modal-button"
-                  onClick={this.handleDemo}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState(
+                      { email: "demo@user.com", password: "password" },
+                      () => {
+                        loginUser({
+                          variables: {
+                            email: this.state.email,
+                            password: this.state.password
+                          }
+                        });
+                      }
+                    );
+                  }}
                 >
                   Demo Login
                 </button>

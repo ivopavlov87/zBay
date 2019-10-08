@@ -38,7 +38,7 @@
 }
 
 .zbay-logo {
-  height: 80%;
+  height: auto;
   width: auto;
   border-radius: 50%;
 }
@@ -106,4 +106,12 @@
   font-size: 30px;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.modal-ul-errors {
+  list-style: none;
+}
+
+.modal-li-errors {
+  color: white;
 }

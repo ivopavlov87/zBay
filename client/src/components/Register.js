@@ -11,7 +11,8 @@ class Register extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      errors: ""
     };
   }
 
@@ -26,7 +27,17 @@ class Register extends Component {
     });
   }
 
+  
   render() {
+    const errors = this.state.errors ? (
+      <li className="modal-li-errors">
+        {this.state.errors.graphQLErrors[0].message}
+      </li>
+    ) : (
+      <li className="modal-li-errors"></li>
+      );
+      // console.log(errors)
+      
     return (
       <Mutation
         mutation={REGISTER_USER}
@@ -35,11 +46,14 @@ class Register extends Component {
           localStorage.setItem("auth-token", token);
           // this.props.history.push("/");
         }}
+        onError={err => {
+          this.setState({ errors: err });
+        }}
         update={(client, data) => this.updateCache(client, data)}
       >
         {registerUser => (
           <div className="modal">
-              <h1 className="modal-header">Welcome To zBay</h1>
+            <h1 className="modal-header">Welcome To zBay</h1>
             <div className="modal-container">
               <div className="modal-header-container">
                 <div className="zbay-icon-modal">
@@ -81,6 +95,7 @@ class Register extends Component {
                   type="password"
                   placeholder="Password"
                 />
+                <ul className="modal-ul-errors">{errors}</ul>
                 <button className="modal-button" type="submit">
                   Register
                 </button>
