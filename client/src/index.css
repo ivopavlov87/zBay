@@ -19,6 +19,7 @@ time, mark, audio, video {
   vertical-align: baseline;
   text-decoration: none;
   color: black;
+  box-sizing: border-box;
 }
 
 body {

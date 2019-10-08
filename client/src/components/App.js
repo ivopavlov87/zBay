@@ -4,9 +4,9 @@ import React from "react";
 import { ApolloConsumer } from "react-apollo";
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import HomeIndex from "./homes/HomeIndex";
-import Login from "./Login";
-import Register from "./Register";
-import AuthRoute from '../util/route_util'
+// import Login from "./Login";
+// import Register from "./Register";
+// import AuthRoute from '../util/route_util'
 import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
@@ -24,7 +24,7 @@ const App = (props) => {
       <div className="main">
         <header>
           <Nav />
-          <SearchBar />
+          <Route exact path="/home" component={SearchBar}/>
         </header>
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />

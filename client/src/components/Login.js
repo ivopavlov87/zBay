@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-import Mutations from "../graphql/mutations"
-const { LOGIN_USER } = Mutations
+import zBayIcon from "./map/test1.ico";
+import Mutations from "../graphql/mutations";
+const { LOGIN_USER } = Mutations;
 
 class Login extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errors: ""
     };
   }
 
@@ -25,6 +27,15 @@ class Login extends Component {
   }
 
   render() {
+
+    const errors = this.state.errors ? (
+      <li className="modal-li-errors">
+        {this.state.errors.graphQLErrors[0].message}
+      </li>
+    ) : (
+      <li className="modal-li-errors"></li>
+    );
+
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -33,34 +44,72 @@ class Login extends Component {
           localStorage.setItem("auth-token", token);
           // this.props.history.push("/");
         }}
+        onError={err => {
+          this.setState({ errors: err });
+        }}
         update={(client, data) => this.updateCache(client, data)}
       >
         {loginUser => (
-          <div>
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                loginUser({
-                  variables: {
-                    email: this.state.email,
-                    password: this.state.password
-                  }
-                });
-              }}
-            >
-              <input
-                value={this.state.email}
-                onChange={this.update("email")}
-                placeholder="Email"
-              />
-              <input
-                value={this.state.password}
-                onChange={this.update("password")}
-                type="password"
-                placeholder="Password"
-              />
-              <button type="submit">Log In</button>
-            </form>
+          <div className="modal">
+            <h1 className="modal-header">Welcome Back</h1>
+            <div className="modal-container">
+              <div className="modal-header-container">
+                <div className="zbay-icon-modal">
+                  <img className="zbay-logo" src={zBayIcon} alt="zBay" />
+                </div>
+              </div>
+              <form
+                className="modal-form"
+                onSubmit={e => {
+                  e.preventDefault();
+                  loginUser({
+                    variables: {
+                      email: this.state.email,
+                      password: this.state.password
+                    }
+                  });
+                }}
+              >
+                <h3 className="modal-field">Email</h3>
+                <input
+                  className="modal-input"
+                  value={this.state.email}
+                  onChange={this.update("email")}
+                  placeholder="Email"
+                />
+                <h3 className="modal-field">Password</h3>
+                <input
+                  className="modal-input"
+                  value={this.state.password}
+                  onChange={this.update("password")}
+                  type="password"
+                  placeholder="Password"
+                />
+                <ul className="modal-ul-errors">{errors}</ul>
+                <button className="modal-button" type="submit">
+                  Log In
+                </button>
+                <button
+                  className="modal-button"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState(
+                      { email: "demo@user.com", password: "password" },
+                      () => {
+                        loginUser({
+                          variables: {
+                            email: this.state.email,
+                            password: this.state.password
+                          }
+                        });
+                      }
+                    );
+                  }}
+                >
+                  Demo Login
+                </button>
+              </form>
+            </div>
           </div>
         )}
       </Mutation>
