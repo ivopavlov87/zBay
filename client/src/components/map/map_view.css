@@ -15,6 +15,7 @@
     justify-content: center;
     position: fixed;
     width: 100%;
+    margin-top: 160px;
 }
 .mapboxgl-ctrl {
   clear: both;
@@ -35,4 +36,8 @@ ul.suggestions {
 }
 li.active {
   background: white
+}
+
+a.mapboxgl-ctrl-logo{
+  display: none !important;
 }

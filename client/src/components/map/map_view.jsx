@@ -15,15 +15,14 @@ const token = process.env.REACT_APP_TOKEN
 //   marker: {x: 0, y: 0, width: 32, height: 32, mask: true}
 // };
 
-// const data = useQuery(MAP_VIEWPORT)
-
 const homeLocations = [
   {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
   {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
   {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
   {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
   {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-]
+  ]
+
  class TheMap extends React.Component {
    constructor(props){
      super(props)
@@ -65,7 +64,8 @@ const homeLocations = [
               console.log(home)
               console.log(event)
             }
-        })
+        }),
+        mounted: false
       }
   };
 
@@ -77,35 +77,18 @@ const homeLocations = [
   
   mapRef = React.createRef()
 
+  componentDidMount () {
+    this.setState({ mounted: true })
+  }
+
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   };
-
-  handleGeocoderViewportChange = viewport => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides
-    });
-  };
-
-  handleOnResult = event => {
-    this.setState({
-      searchResultLayer: new GeoJsonLayer({
-        id: "search-result",
-        data: event.result.geometry,
-        getFillColor: [255, 0, 0, 128],
-        getRadius: 1000,
-        pointRadiusMinPixels: 10,
-        pointRadiusMaxPixels: 10
-      })
-    })
-  }
  
   render() {
-    const { viewport, homeIconsLayer} = this.state
+    const { viewport, homeIconsLayer, mounted} = this.state
     return (
       <div className="map-container">
         {/* the map itself this is the base layer and all of DeckGl's layers go ontop of this canvas */}
@@ -116,8 +99,11 @@ const homeLocations = [
           mapStyle="mapbox://styles/mapbox/streets-v9"
           width="100%"
           height="100%"
-          onViewportChange={this.handleViewportChange}
+          onViewportChange={(viewport) => {
+            if (mounted) { this.setState({ viewport }) }
+          }}
           mapboxApiAccessToken={token}
+          attributionControl={false}
         >
           {/* DeckGl handles layers that go on and over map */}
           <DeckGL 
