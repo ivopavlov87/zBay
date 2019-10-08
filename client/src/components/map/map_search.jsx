@@ -53,7 +53,6 @@ class MapSearchBar extends React.Component {
     })
     this.props.setCache(this.state.viewport)
     this.props.history.push("/home")
-    debugger
   }
 
   render(){
