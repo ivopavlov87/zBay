@@ -1,4 +1,6 @@
 import React from 'react';
+
+// eslint-disable-next-line
 import MapGL, { StaticMap } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
