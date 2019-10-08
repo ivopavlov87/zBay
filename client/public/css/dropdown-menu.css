@@ -1,0 +1,18 @@
+
+.hidden{
+    display: none;
+}
+
+.main{
+    transition: all 0.3s ease-in-out;
+}
+
+.dropdown-container{
+    background-color: pink;
+    top: 130px;
+    position: fixed;
+    width: 100vw;
+    height: 275px;
+    z-index: 4;
+    
+}

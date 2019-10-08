@@ -13,7 +13,7 @@ import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
 import MapSerchBar from "./map/map_search";
 import { useQuery, useApolloClient } from 'react-apollo-hooks'
-
+import DropdownMenu from './search/DropdownMenu';
 import Map from "./map/map_view";
 
 require('dotenv').config()
@@ -28,6 +28,7 @@ const App = (props) => {
           <Nav />
           <Route exact path="/home" component={SearchBar}/>
         </header>
+        <DropdownMenu />
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
           <Route exact path="/homes/:id" component={HomeDetail} />

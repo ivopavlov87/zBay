@@ -9,6 +9,7 @@ header{
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 }
 .nav-items{
   /* margin: 25px; */
