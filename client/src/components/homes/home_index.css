@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 160px;
+  width: 100vw;
+
 }
 
 .ul-container{
@@ -37,27 +39,79 @@
   min-height: 270px;
   max-width: 330px;
   margin: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .homes-ul > a {
   display: contents;
   text-decoration: none;
   color: black;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; */
 }
 
 .top-info{
   width: 100%;
-  height: 60%;
+  height: 210px;
   border: solid;
   border-bottom: none;
 }
 
 .bottom-info{
   width: 100%;
-  height: 40%;
+  height: 60px;
   border: solid;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+@media all and (min-width: 1600px){
+
+  .map-container{
+    max-width: 60%;
+  }
+  .ul-container{
+    max-width: 35%;
+    /* height: 77vh;
+    width: 30%;
+    max-width: 30%;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly; */
+  }
+  .homes-ul{
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* padding: 25px; */
+    width: 98%;
+    height: 100%;
+    align-items: flex-start;
+    text-align: center;
+    list-style: none;
+    text-decoration: none;
+    flex-wrap: wrap;
+
+  }
+  .homes-ul a {
+    width: 49%;
+    height: 300px;
+  }
+  .homes-ul li {
+    width: 47%;
+    /* min-height: 270px; */
+    max-width: 330px;
+    margin: 7px;
+  }
 }

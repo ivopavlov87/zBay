@@ -7,6 +7,7 @@
   display: none;
 }
 .landing-page-map-search{
+    margin-top: 130px;
     height: 100%;
     background: lightpink;
     display: flex;

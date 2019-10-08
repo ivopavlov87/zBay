@@ -7,10 +7,10 @@
     font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif
 }
 
-button:active{
+button:focus{
     outline: none;
 }
 
-input:active{
+input:focus{
     outline: none;
 }

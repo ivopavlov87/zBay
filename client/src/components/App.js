@@ -26,7 +26,7 @@ const App = (props) => {
       <div className="main">
         <header>
           <Nav />
-          <SearchBar />
+          <Route exact path="/home" component={SearchBar}/>
         </header>
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />

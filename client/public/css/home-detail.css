@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
 .back-to-home-link{
@@ -45,9 +46,40 @@
 .show-high-bid{
     height: 30%;
     width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     
+}
+
+.show-high-bid-info{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 3px;
+    background-color: rgb(58, 58, 241);
+}
+
+.current-high-bidder-header{
+    font-weight: 700;
+
+}
+
+.current-high-bidder{
+    font-size: 25px; 
+    /* height: 40px; */
+    color: whitesmoke;
+    font-weight: 700;
+}
+
+.high-bid{
+    font-size: 25px;
+    color: whitesmoke;
+    font-weight: 700;
 }
 
 .show-bid-item{

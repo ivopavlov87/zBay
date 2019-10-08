@@ -31,8 +31,8 @@ const homeLocations = [
         viewport: {
           width: 400,
           height: 400,
-          longitude: this.props.long,
-          latitude: this.props.lat,
+          longitude: this.props.long ? this.props.long : -112.466233,
+          latitude: this.props.lat ? this.props.lat : 37.684638,
           zoom: 7,
           },
           searchResultLayer: null,
