@@ -4,6 +4,7 @@ import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
 import { useQuery, useApolloClient } from 'react-apollo-hooks'
 import {withApolloHook} from './with_apollo_hook'
+import { withRouter } from 'react-router-dom';
 import zBayIcon from "./test1.ico"
 import reactIcon from "./test1.ico"
 
@@ -115,4 +116,4 @@ const homeLocations = [
   }
 }
 
-export default withApolloHook(TheMap)
+export default withRouter(withApolloHook(TheMap))

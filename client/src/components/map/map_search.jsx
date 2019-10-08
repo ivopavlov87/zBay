@@ -24,7 +24,7 @@ class MapSearchBar extends React.Component {
 
   mapRef = React.createRef()
   geocoderContainerRef = React.createRef();
-  
+
   handleOnResult = event => {
     this.setState({
     //   searchResultLayer: new GeoJsonLayer({
@@ -48,10 +48,12 @@ class MapSearchBar extends React.Component {
     const {viewport} = this.state
     return(
       <div className="search-bar">
-          <div  
+          <div className="landing-page-map-search"
             ref={this.geocoderContainerRef}
-            className="landing-page-map-search"
-          />
+            >
+              <h1 className="map-search-title">Reimagine home</h1>
+              <h4 className="map-search-title subtext">We’ll help you find a place you’ll love.</h4>
+          </div>
         <MapGL className="the-display-none-map"
           ref={this.mapRef}
           {...viewport}
@@ -74,3 +76,5 @@ class MapSearchBar extends React.Component {
 }
 
 export default withRouter(writeApolloHook(MapSearchBar))
+
+
