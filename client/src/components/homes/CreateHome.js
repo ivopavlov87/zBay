@@ -54,6 +54,10 @@ class CreateHome extends Component {
     }
   }
 
+  handleFileSelect(files) {
+    console.log(files)
+  }
+
   handleSubmit(e, newHome) {
     e.preventDefault();
 
@@ -222,6 +226,13 @@ class CreateHome extends Component {
                 <div className="create-checkbox">
                   <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
                   <label>Basement</label>
+                </div>
+                <div>
+                  Add images:
+                  <br />
+                  <input type="file" 
+                  onChange={this.handleFileSelect}
+                  multiple />
                 </div>
                 <button className="create-submit" type="submit">Create Home</button>
               </div>

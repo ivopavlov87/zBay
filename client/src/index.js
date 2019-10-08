@@ -13,7 +13,6 @@ import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations";
 
 
-
 const { VERIFY_USER } = Mutations;
 
 const token = localStorage.getItem("auth-token");
@@ -41,9 +40,6 @@ const client = new ApolloClient({
   },
   link: ApolloLink.from([errorLink, httpLink]),
   cache,
-  clientState: {
-    defaults: {}
-  },
   onError: ({ networkError, graphQLErrors }) => {
     console.log("graphQLErrors", graphQLErrors);
     console.log("networkError", networkError);
