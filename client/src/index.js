@@ -11,7 +11,7 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations";
-import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
+// import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 
 
 const { VERIFY_USER } = Mutations;
