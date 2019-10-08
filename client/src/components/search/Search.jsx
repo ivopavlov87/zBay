@@ -4,6 +4,8 @@ import Queries from '../../graphql/queries';
 
 import { Query, ApolloConsumer } from 'react-apollo';
 // import * as compose from 'lodash.flowright';
+
+// eslint-disable-next-line
 import debounce from 'lodash/debounce'
 const { SEARCH_HOMES, FETCH_RESULTS } = Queries;
 
