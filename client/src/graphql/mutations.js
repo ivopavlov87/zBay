@@ -49,10 +49,10 @@ export default {
     mutation CreateBid($homeId: ID!, $amount: Int!) {
       createBid(homeId: $homeId, amount: $amount) {
         _id
-        userId{
+        user{
           username
         }
-        homeId{
+        home{
           streetAddress
         }
         amount

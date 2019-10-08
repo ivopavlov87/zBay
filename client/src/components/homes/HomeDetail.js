@@ -11,7 +11,7 @@ class HomeDetail extends React.Component {
     super(props)
     this.state = {
       homeId: this.props.match.params.id,
-      amount: 1,
+      amount: "",
       message: ""
     }
   }
@@ -48,7 +48,7 @@ class HomeDetail extends React.Component {
       homeId: this.state.homeId,
       amount: parseInt(this.state.amount),
       }
-    })
+    }).then(() => this.setState({ amount: ""}))
   }
   
   render() {
@@ -56,32 +56,22 @@ class HomeDetail extends React.Component {
     return (
       <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
 
           return (
             <div className="home-show-container">
-              <Link className="back-to-home-link" to="/"> {'<--'} Back to home</Link>
+             
               <div className="home-show">
                 <div className="show-pics-col">
+                  <div className="show-photo">
                   Photo
+                  </div>
+                  <div className="show-high-bid">
+                    Highest bid
+                  </div>
                 </div>
                 <div className="show-info-col">
-                  <div className="show-info-box" key={data.home._id}>
-                    <h3>{data.home.name}</h3>
-                  
-                    <h5>{data.home.description}</h5>
-                    <h5>Year built: {data.home.yearBuilt}</h5>
-                    <h5>{data.home.streetAddress}</h5>
-                    <h5>{data.home.city}</h5>
-                    <h5>{data.home.state}</h5>
-                    <h5>{data.home.zipcode}</h5>
-                    <h5>{data.home.sqft} sqft.</h5>
-                    <h5>{data.home.stories} stories</h5>
-                    <h5>{data.home.bathrooms}  bathrooms</h5>
-                    <h5>{data.home.bedrooms} bedrooms</h5>
-                  
-                  </div>
                   <div className="show-bidding-box">
                     <Mutation
                       mutation={CREATE_BID}
@@ -97,17 +87,36 @@ class HomeDetail extends React.Component {
                       }}
                     >
                       {(createBid, { data }) => (
-                        <div>
-                          <form onSubmit={e => this.handleSubmit(e, createBid)}>
-                            <input type="number" value={this.state.amount} onChange={this.update('amount')}/>
-                            <input type="submit" value="Bid Now"/>
+                        <div className="bid-form-container">
+                          <form className="bid-form" onSubmit={e => this.handleSubmit(e, createBid)}>
+                            <h3>Enter a bid for this home:</h3>
+                            <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
+                            <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
+                          <div className="bid-success">
+                            <h5>{this.state.message}</h5>
+                          </div>
                         </div>
                       )}
                     </Mutation>
                   </div>
+                  <div className="show-info-box" key={data.home._id}>
+                    <h1 className="show-info-text">{data.home.name}</h1>
+                    <h2 className="show-info-text">{data.home.description}</h2>
+                    <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
+                    <h5 className="show-info-text">{data.home.streetAddress}</h5>
+                    <h5 className="show-info-text">{data.home.city}</h5>
+                    <h5 className="show-info-text">{data.home.state}</h5>
+                    <h5 className="show-info-text">{data.home.zipcode}</h5>
+                    <h5 className="show-info-text">{data.home.sqft} sqft.</h5>
+                    <h5 className="show-info-text">{data.home.stories} stories</h5>
+                    <h5 className="show-info-text">{data.home.bathrooms}  bathrooms</h5>
+                    <h5 className="show-info-text">{data.home.bedrooms} bedrooms</h5>
+                  
+                  </div>
                 </div>
               </div>
+               <Link className="back-to-home-link" to="/">Back to home</Link>
             </div>
           );
         }}
