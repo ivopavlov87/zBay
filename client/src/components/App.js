@@ -10,8 +10,8 @@ import AuthRoute from '../util/route_util'
 import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
-import SearchBar from './search/SearchBar'
-require('dotenv').config()
+import SearchBar from './search/SearchBar';
+require('dotenv').config();
 
 const App = () => {
   return (
@@ -26,8 +26,8 @@ const App = () => {
             <Switch>
               <Route exact path="/homes/new" component={CreateHome} />
               <Route exact path="/homes/:id" component={HomeDetail} />
-              <AuthRoute exact path="/register" component={Register} routeType="auth" />
-              <AuthRoute exact path="/login" component={Login} routeType="auth" />
+              {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
+              {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
               <Route path="/" component={() => <HomeIndex cache={cache} />}/>
               <Redirect to="/" />
             </Switch>

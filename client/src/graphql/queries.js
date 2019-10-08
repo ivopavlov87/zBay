@@ -28,7 +28,6 @@ export default {
         }
       }
     }
-  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
@@ -48,14 +47,14 @@ export default {
         garage
         basement
         searchField
-        bids{
+        bids {
           amount
           user{
             username
           }
         }
+      }
     }
-  }
   `,
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
@@ -92,8 +91,8 @@ export default {
     }
   `,
   FETCH_BIDS: gql`
-    query FetchBids{
-      bids{
+    query FetchBids {
+      bids {
         _id
         homeId
         userId
@@ -110,5 +109,10 @@ export default {
         date
       }
     }
-  `
-}
+  `,
+  // GET_MODAL: gql`
+  //   query IsModalOpen {
+  //     modalOpen @client
+  //   }
+  // `
+};
