@@ -2,6 +2,7 @@
 @import "searchbar.css";
 @import "home-detail.css";
 @import "home-create.css";
+@import "modal.css";
 
 *{
     font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif
@@ -12,5 +13,13 @@ button:focus{
 }
 
 input:focus{
+    outline: none;
+}
+
+form:focus{
+    outline: none;
+}
+
+div:focus{
     outline: none;
 }

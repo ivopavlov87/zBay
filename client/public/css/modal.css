@@ -1,0 +1,117 @@
+.nav-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 4;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open.nav-modal {
+  border-radius: 8px;
+
+}
+
+.modal {
+  background-image: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 69%,rgba(32,124,202,1) 69%,rgba(125,185,232,1) 100%);
+  padding: 40px;
+  height: auto;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.modal-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-form {
+  flex-direction: column;
+  font-size: 13px;
+  width: 50%;
+}
+
+.zbay-logo {
+  height: auto;
+  width: auto;
+  border-radius: 50%;
+}
+
+.zbay-icon-modal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-input {
+  height: 35px;
+  padding: 0px 7px;
+  font-size: 15px;
+  border: 1px solid #C7C7C7;
+  width: 93%;
+  margin-bottom: 8px;
+  border-radius:5px;
+}
+
+.modal-field {
+  display: flex;
+  font-weight: bold;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  text-align: left;
+  margin: 1px 4px;
+}
+
+.modal-button {
+  background-color: #d32323;
+  color: #FFFFFF;
+  border: 1px solid #d32323;
+  position: relative;
+  width: 100%;
+  height: 45px;
+  line-height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  margin-bottom: 5px;
+  margin-top:10px;
+  border-radius: 5px;
+  font-weight:700;
+}
+
+.modal-button:hover {
+  background-color: #9c1919;
+  border: 1px solid #9c1919;
+}
+
+.modal-header-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.modal-header {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.modal-ul-errors {
+  list-style: none;
+}
+
+.modal-li-errors {
+  color: white;
+}

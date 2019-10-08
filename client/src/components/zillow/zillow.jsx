@@ -1,7 +1,7 @@
 const Zillow = require('node-zillow');
-
+const z = process.env.REACT_APP_ZWSID;
+const zillow = new Zillow('z', options);
 // get key from environment variable
-const z = new Zillow(process.env.ZWSID);
 
 const params = {
     address: '2512 Mapleton Ave.',
