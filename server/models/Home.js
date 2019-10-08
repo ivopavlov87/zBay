@@ -7,7 +7,7 @@ const graphql = require("graphql");
 const HomeSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "user"
   },
   category: {
     type: Schema.Types.ObjectId,
@@ -65,6 +65,18 @@ const HomeSchema = new Schema({
     type: Boolean,
     required: true
   },
+  searchField: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  bids: [{
+    type: Schema.Types.ObjectId,
+    ref: 'bid'
+  }]
 });
 
 HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {

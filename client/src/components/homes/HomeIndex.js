@@ -8,41 +8,83 @@ import Map from "../map/map_view"
 
 import Queries from "../../graphql/queries";
 import "./home_index.css"
-const { FETCH_HOMES } = Queries;
+const { FETCH_HOMES, FETCH_RESULTS } = Queries;
 
-const HomeIndex = () => {
-  return (
-    <Query query={FETCH_HOMES}>
-      {({ loading, error, data }) => {
-        if (loading) return "Loading...";
-        if (error) return `Error! ${error.message}`;
+const HomeIndex = ({cache}) => {
 
-        return (
-          <div className="home-index">
-            {console.log(data.homes)}
-            <Map homes={data.homes}/>
-            <ul className="homes-ul">
-              {data.homes.map(home => (
-                <Link key={home._id} to={`/homes/${home._id}`}>
-                  <li>
-                    <div className="top-info">
-                      {/* house.photo it will be a backround*/}
-                      {/* button that addToWatchList this will probably be a function  */}
-                      {home.name}
-                      {home.description}
-                    </div>
-                    <div className="bottom-info">
-                      {/* house.info you know info*/}
-                    </div>
-                  </li>
-                </ Link>
-              ))}
-            </ul>
-          </div>
-        );
-      }}
-    </Query>
-  );
+  // if (cache.cache.data.data.ROOT_QUERY.results.json.length === 0){
+  //   return (
+  //     <Query query={FETCH_HOMES}>
+  //       {({ loading, error, data }) => {
+  //         if (loading) return "Loading...";
+  //         if (error) return `Error! ${error.message}`;
+  
+  //         return (
+  //           <div className="home-index">
+  //             <Map />
+  //             <div className="ul-container">
+  
+  //               <ul className="homes-ul">
+  //                 {data.homes.map(home => (
+  //                   <Link key={home._id} to={`/homes/${home._id}`}>
+  //                     <li>
+  //                       <div className="top-info">
+  //                         {/* house.photo it will be a backround*/}
+  //                         {/* button that addToWatchList this will probably be a function  */}
+  //                       </div>
+  //                       <div className="bottom-info">
+  //                         <h2>{home.name}</h2>
+  //                         <h3>Click to See Listing</h3>
+  //                       </div>
+  //                     </li>
+  //                   </ Link>
+  //                 ))}
+  //               </ul>
+  //             </div>
+  //           </div>
+  //         );
+  //       }}
+  //     </Query>
+  //   );
+  // } else {
+    return (
+      <Query query={FETCH_RESULTS}>
+         {({ loading, error, data }) => {
+          if (loading) return "Loading...";
+          if (error) return `Error! ${error.message}`;
+        
+  
+          return (
+            <div className="home-index">
+              <Map homes={data.homes}/>
+              <div className="ul-container">
+  
+                <ul className="homes-ul">
+                  {data.results.map(home => {
+                    return home.map(hm => {
+                      return <Link key={hm._id} to={`/homes/${hm._id}`}>
+                        <li>
+                          <div className="top-info">
+                            {/* house.photo it will be a backround*/}
+                            {/* button that addToWatchList this will probably be a function  */}
+                          </div>
+                          <div className="bottom-info">
+                            <h2>{hm.name}</h2>
+                            <h3>Click to See Listing</h3>
+                          </div>
+                        </li>
+                      </ Link>
+                    })}
+
+                  )}
+                </ul>
+              </div>
+            </div>
+          );
+        }}
+      </Query>
+    )
+  // }
 };
 
 export default HomeIndex;

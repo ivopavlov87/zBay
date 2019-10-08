@@ -2,7 +2,6 @@ import React from "react";
 // import React, { Component } from "react";
 // import gql from "graphql-tag";
 import { ApolloConsumer } from "react-apollo";
-// import { Query } from "react-apollo";
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import HomeIndex from "./homes/HomeIndex";
 import Login from "./Login";

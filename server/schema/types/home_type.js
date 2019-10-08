@@ -5,9 +5,10 @@
 
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
 
 const Home = mongoose.model("home")
+const BidType = require('./bid_type')
 
 const HomeType = new GraphQLObjectType({
   name: "HomeType",
@@ -36,7 +37,9 @@ const HomeType = new GraphQLObjectType({
     bedrooms: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
-    basement: { type: GraphQLBoolean }
+    basement: { type: GraphQLBoolean },
+    searchField: { type: GraphQLString },
+    bids: { type: GraphQLList(BidType) }
   })
 });
 

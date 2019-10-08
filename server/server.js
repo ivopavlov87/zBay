@@ -6,6 +6,7 @@ const expressGraphQL = require("express-graphql");
 const User = require("../server/models/User");
 const Category = require("../server/models/Category");
 const Home = require("../server/models/Home");
+const Bid = require("../server/models/Bid")
 const schema = require("./schema/schema");
 const cors = require("cors");
 const app = express();

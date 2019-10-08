@@ -7,7 +7,7 @@ export default {
   query FetchHomes {
     homes {
       _id
-
+      name
       description
       yearBuilt
       streetAddress
@@ -20,6 +20,8 @@ export default {
       bathrooms
       garage
       basement
+      searchField
+      bids
     }
   }
   `,
@@ -27,7 +29,7 @@ export default {
     query FetchHome($id: ID!) {
       home(_id: $id) {
         _id
-
+        name
         description
         yearBuilt
         streetAddress
@@ -40,6 +42,10 @@ export default {
         bathrooms
         garage
         basement
+        searchField
+        bids{
+          amount
+        }
     }
   }
   `,
@@ -58,6 +64,38 @@ export default {
         bathrooms
         sqft
         stories
+      }
+    }
+  `,
+  FETCH_RESULTS: gql`
+    query FetchCartItems {
+      results @client
+    }
+  `,
+  FETCH_HOME_BIDS: gql`
+    query FetchHomeBids($homeId: String) {
+      homeBids(homeId: $homeId) {
+        _id
+      }
+    }
+  `,
+  FETCH_BIDS: gql`
+    query FetchBids{
+      bids{
+        _id
+        homeId
+        userId
+        amount
+      }
+    }
+  `,
+  FETCH_BID: gql`
+    query FetchBid($id: ID) {
+      bid(_id: $id) {
+        userId
+        homeId
+        amount
+        date
       }
     }
   `

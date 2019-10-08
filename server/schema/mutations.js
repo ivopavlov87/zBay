@@ -8,6 +8,8 @@ const HomeType = require("../schema/types/home_type");
 const Home = mongoose.model("home");
 const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
+const Bid = mongoose.model('bid');
+const BidType = require("../schema/types/bid_type")
 
 const AuthService = require("../services/auth")
 
@@ -45,7 +47,8 @@ const mutation = new GraphQLObjectType({
         bedrooms: { type: GraphQLInt },
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
-        basement: { type: GraphQLBoolean }
+        basement: { type: GraphQLBoolean },
+        searchField: { type: GraphQLString }
       },
       async resolve(_, { name, 
         description,
@@ -59,6 +62,7 @@ const mutation = new GraphQLObjectType({
         state,
         garage,
         basement,
+        searchField,
         zipcode }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
@@ -77,6 +81,7 @@ const mutation = new GraphQLObjectType({
             state,
             garage,
             basement,
+            searchField,
             zipcode }).save();
         } else {
           throw new Error('Sorry, you need to be logged in to create a home.');
@@ -138,6 +143,30 @@ const mutation = new GraphQLObjectType({
       },
       resolve(_, args) {
         return AuthService.verifyUser(args);
+      }
+    },
+    createBid: {
+      type: BidType,
+      args: {
+        userId: { type: GraphQLID },
+        homeId: { type: GraphQLID },
+        amount: { type: GraphQLInt }
+      },
+      async resolve(_, args, ctx){
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+        if (validUser.loggedIn) {
+          return new Bid({
+            userId: validUser.userId,
+            homeId: args.homeId,
+            amount: args.amount
+          }).save().then(bid => {
+            return Home.findById(args.homeId).then(home =>{
+              return home.bids.push(bid)
+            })
+          })
+        } else {
+          throw new Error("Sorry, you must be logged in to bid on a home.")
+        }
       }
     }
   }

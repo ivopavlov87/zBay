@@ -25,6 +25,7 @@ class CreateHome extends Component {
       yearBuilt: "",
       garage: false,
       basement: false,
+      searchField: ""
     };
   }
 
@@ -55,6 +56,10 @@ class CreateHome extends Component {
 
   handleSubmit(e, newHome) {
     e.preventDefault();
+
+    const garagePresent = this.state.garage ? "Garage" : "";
+    const basementPresent = this.state.basement ? "Basement" : "";
+
     newHome({
       variables: {
         name: this.state.name,
@@ -69,7 +74,8 @@ class CreateHome extends Component {
         bedrooms: parseInt(this.state.bedrooms),
         bathrooms: parseFloat(this.state.bathrooms),
         garage: this.state.garage,
-        basement: this.state.basement
+        basement: this.state.basement,
+        searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
       }
     });
   }

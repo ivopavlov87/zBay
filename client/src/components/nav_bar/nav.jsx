@@ -41,10 +41,16 @@ const Nav = props => {
             } else {
               return (
                 <div className="nav-items">
-                  <Link to="/login">Login</Link>
-                  <Link to="/register">Register</Link>
-                  <Link to="/">Homes Index</Link>
-                  <Link to="/search">Search Bar Test</Link>
+                  <div className="navbar-left">
+                    <Link className="navbar-link" to="/login">Login</Link>
+                    <Link className="navbar-link" to="/register">Register</Link>
+                  </div>
+                  <div className="zbay-icon-main">
+                    <img src={zBayIcon} alt="zBay" />
+                  </div>
+                  <div className="navbar-right">
+                    <Link to="/">Homes Index</Link>
+                  </div>
                 </div>
               );
             }
