@@ -39,7 +39,7 @@
 
 .zbay-logo {
   height: auto;
-  width: auto;
+  width: inherit;
   border-radius: 50%;
 }
 
@@ -97,6 +97,7 @@
   display: flex;
   flex-direction: column;
   align-content: center;
+  width: 45%;
 }
 
 .modal-header {

@@ -12,13 +12,13 @@ import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
 import MapSerchBar from "./map/map_search";
-import { useQuery, useApolloClient } from 'react-apollo-hooks'
+import { useApolloClient } from 'react-apollo-hooks';
 
 import Map from "./map/map_view";
 
-require('dotenv').config()
+require('dotenv').config();
 const App = (props) => {
-  const client = useApolloClient()
+  const client = useApolloClient();
   return (
     <HashRouter>
       <ApolloConsumer >
