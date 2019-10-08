@@ -72,7 +72,7 @@ const homeLocations = [
   // query for the houses and store them somewhere or keep them on cache 
   //then for every home they will 
   // have an id pass that id to layer which will have the markers stored and each marker will kinda be
-  // its own object or at least have some data referncing it so we can pull that data and use it where
+  // its own object or at least have some data referencing it so we can pull that data and use it where
   // needed to show house 
   
   mapRef = React.createRef()
