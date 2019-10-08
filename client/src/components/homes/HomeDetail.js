@@ -58,7 +58,7 @@ class HomeDetail extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
-            debugger
+            // debugger
           let allBids = data.home.bids.map(bid => {
             return (
               <div className="show-bid-item">
