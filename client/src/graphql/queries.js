@@ -4,26 +4,26 @@ import gql from 'graphql-tag';
 
 export default {
   FETCH_HOMES: gql`
-  query FetchHomes {
-    homes {
-      _id
-      name
-      description
-      yearBuilt
-      streetAddress
-      city
-      state
-      zipcode
-      sqft
-      stories
-      bedrooms
-      bathrooms
-      garage
-      basement
-      searchField
-      bids
+    query FetchHomes {
+      homes {
+        _id
+        name
+        description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        searchField
+        bids
+      }
     }
-  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
@@ -43,11 +43,11 @@ export default {
         garage
         basement
         searchField
-        bids{
+        bids {
           amount
         }
+      }
     }
-  }
   `,
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
@@ -80,8 +80,8 @@ export default {
     }
   `,
   FETCH_BIDS: gql`
-    query FetchBids{
-      bids{
+    query FetchBids {
+      bids {
         _id
         homeId
         userId
@@ -98,5 +98,10 @@ export default {
         date
       }
     }
-  `
-}
+  `,
+  // GET_MODAL: gql`
+  //   query IsModalOpen {
+  //     modalOpen @client
+  //   }
+  // `
+};
