@@ -43,8 +43,8 @@ const Nav = props => {
     <ApolloConsumer>
       {client => (
         <Query query={IS_LOGGED_IN}>
-          {({ loginData }) => {
-            if (loginData && loginData.isLoggedIn) {
+          {(response) => {
+            if (response.data.isLoggedIn) {
               return (
                 <div className="nav-items">
                   <div className="navbar-left">
@@ -60,7 +60,7 @@ const Nav = props => {
                         e.preventDefault();
                         localStorage.removeItem("auth-token");
                         client.writeData({ data: { isLoggedIn: false } });
-                        props.history.push("/");
+                        // props.history.push("/");
                       }}
                     >
                       Logout
