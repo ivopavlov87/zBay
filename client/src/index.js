@@ -7,6 +7,7 @@ import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations"
@@ -32,6 +33,10 @@ const errorLink = onError(({ graphQLErrors }) => {
 });
 
 const client = new ApolloClient({
+  resolvers: {},
+  clientState: {
+    defaults: {},
+  },
   link: ApolloLink.from([errorLink, httpLink]),
   cache,
   onError: ({ networkError, graphQLErrors }) => {
@@ -64,7 +69,9 @@ if (token) {
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-      <App />
+       <ApolloHooksProvider client={client}>
+          <App />
+       </ApolloHooksProvider>
     </ApolloProvider>
   );
 };

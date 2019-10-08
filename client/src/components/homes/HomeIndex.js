@@ -19,7 +19,8 @@ const HomeIndex = () => {
 
         return (
           <div className="home-index">
-            <Map />
+            {console.log(data.homes)}
+            <Map homes={data.homes}/>
             <ul className="homes-ul">
               {data.homes.map(home => (
                 <Link key={home._id} to={`/homes/${home._id}`}>
@@ -28,6 +29,7 @@ const HomeIndex = () => {
                       {/* house.photo it will be a backround*/}
                       {/* button that addToWatchList this will probably be a function  */}
                       {home.name}
+                      {home.description}
                     </div>
                     <div className="bottom-info">
                       {/* house.info you know info*/}
