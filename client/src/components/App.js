@@ -15,7 +15,7 @@ import MapSerchBar from "./map/map_search";
 import Map from "./map/map_view";
 import DropdownMenu from './search/DropdownMenu';
 
-require('dotenv').config()
+require('dotenv').config();
 const App = (props) => {
   return (
     <HashRouter>
