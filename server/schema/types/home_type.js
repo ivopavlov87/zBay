@@ -47,8 +47,9 @@ const HomeType = new GraphQLObjectType({
           .populate("bids")
           .then(home => home.bids)
 
-        }
       }
+    },
+    date: { type: GraphQLString }
   })
 });
 
