@@ -11,11 +11,13 @@ import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
-import MapSerchBar from "./map/map_search";
+import MapSearchBar from "./map/map_search";
 
 import Map from "./map/map_view";
 
+
 require('dotenv').config();
+
 const App = (props) => {
   return (
     <HashRouter>
@@ -32,7 +34,7 @@ const App = (props) => {
               {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
               {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
-          <Route path="/" component={() => <MapSerchBar />} />
+          <Route path="/" component={() => <MapSearchBar />} />
           <Redirect to="/" />
         </Switch>
       </div>
