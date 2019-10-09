@@ -48,8 +48,10 @@ export default {
         garage
         basement
         searchField
+        date
         bids {
           amount
+          date
           user{
             username
           }
@@ -72,7 +74,13 @@ export default {
         bathrooms
         sqft
         stories
-
+        bids{
+          amount
+          date
+          user{
+            username
+          }
+        }
       }
     }
   `,

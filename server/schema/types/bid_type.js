@@ -25,7 +25,8 @@ const BidType = new GraphQLObjectType({
                     // .populate("home")
                     .then(home => home)
             }},
-        amount: { type: GraphQLInt }
+        amount: { type: GraphQLInt },
+        date: { type: GraphQLString }
     })
 })
 
