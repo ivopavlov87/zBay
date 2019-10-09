@@ -2,7 +2,7 @@
 
 .create-form-container{
     margin: 0 auto;
-    margin-top: 170px;
+    margin-top: 30px;
     width: 900px;
     height: 500px;
     /* border: 1px solid blue; */
@@ -79,6 +79,7 @@ textarea.create-input{
     border-radius: 2px;
     font-size: 20px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .create-form-header{

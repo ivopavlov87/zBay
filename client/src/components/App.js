@@ -22,10 +22,10 @@ const App = (props) => {
       <ApolloConsumer >
       {(cache) => (
       <div className="main">
-        <header>
+        {/* <header> */}
           <Nav />
           <Route exact path="/home" component={SearchBar}/>
-        </header>
+        {/* </header> */}
         <DropdownMenu />
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />

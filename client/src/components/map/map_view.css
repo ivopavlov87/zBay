@@ -7,7 +7,7 @@
   display: none;
 }
 .landing-page-map-search{
-    margin-top: 130px;
+    /* margin-top: 130px; */
     height: 100%;
     background: lightpink;
     display: flex;
@@ -16,7 +16,7 @@
     justify-content: center;
     position: fixed;
     width: 100%;
-    margin-top: 160px;
+    /* margin-top: 160px; */
 }
 .mapboxgl-ctrl {
   clear: both;

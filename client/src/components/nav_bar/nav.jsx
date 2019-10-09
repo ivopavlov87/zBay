@@ -52,7 +52,9 @@ const Nav = props => {
                     <Link className="navbar-link" to="/homes/new">Create a Home</Link>
                   </div>
                   <div className="zbay-icon-main">
-                    <img src={zBayIcon} alt="zBay"/> 
+                    <Link className="zbay-icon-main" to="/">
+                      <img src={zBayIcon} alt="zBay"/> 
+                    </Link>
                   </div>
                   <div className="navbar-right">
                     <button className="logout-button-nav"
