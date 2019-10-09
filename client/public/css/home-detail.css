@@ -14,7 +14,8 @@
 }
 
 .back-to-home-link{
-    margin-bottom: 30px;
+    margin-top: 30px;
+    font-weight: 700;
 }
 
 .home-show{
@@ -115,6 +116,10 @@
     align-items: center;
     justify-content: space-evenly;
     border: 1px solid blue;
+}
+
+.enter-bid-header{
+    font-weight: 700;
 }
 
 .show-info-box{

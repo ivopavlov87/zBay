@@ -108,10 +108,11 @@ class HomeDetail extends React.Component {
                       {(createBid, { data }) => (
                         <div className="bid-form-container">
                           <form className="bid-form" onSubmit={e => this.handleSubmit(e, createBid)}>
-                            <h3>Enter a bid for this home:</h3>
+                            <h3 className="enter-bid-header">Enter a bid for this home:</h3>
                             <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
+                            <input className="bid-submit" type="submit" value="Add to Watchlist"/>
                           <div className="bid-success">
                             <h5>{this.state.message}</h5>
                           </div>
@@ -135,7 +136,7 @@ class HomeDetail extends React.Component {
                   </div>
                 </div>
               </div>
-               <Link className="back-to-home-link" to="/">Back to home</Link>
+               <Link className="back-to-home-link" to="/">Back to Home</Link>
             </div>
           );
         }}
