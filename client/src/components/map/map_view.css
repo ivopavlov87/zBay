@@ -1,39 +1,69 @@
 .map-container{
-  
   height: 77vh;
   width: 65vw;
 }
 .the-display-none-map{
   display: none;
 }
-.landing-page-map-search{
-    margin-top: 130px;
-    height: 100%;
-    background: lightpink;
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-    margin-top: 160px;
+.map-search-page{
+  height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  margin-top: 160px;
+  background-size: 400% 400%;
+  animation: gradientBG 13s ease infinite;
+}
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+.map-search-header{
+  height: 25%;
+  width: 50%;
+  position: absolute;
+  display: flex;
+  top: 0;
+  justify-content: center;
+  font-family: "Ivar Headline","Times New Roman",serif;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.landing-page-map-search {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+}
+.map-search-inner{
+  height: 50%;
+  width: 50%;
 }
 .mapboxgl-ctrl {
   clear: both;
   pointer-events: auto;
-  transform: translate(0, 0);
-  top: -220px;
-  position: relative;
-  right: 50px;
-  display: block;
 }
 svg.mapboxgl-ctrl-geocoder--icon.mapboxgl-ctrl-geocoder--icon-search {
-  float: right;
-  height: 72px;
-  width: 50px
+  height: 73px;
+  width: 50px;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  border-left: 1px solid rgb(241, 241, 244);
 }
 input.mapboxgl-ctrl-geocoder--input {
-  position: relative;
   width: 600px;
   height: 26px;
   padding: 22px;
@@ -43,7 +73,8 @@ input.mapboxgl-ctrl-geocoder--input {
 .suggestions-wrapper {
   position: absolute;
   background: #ffffff;
-  width: 648px;
+  width: 647px;
+  right: 0;
 }
 ul.suggestions {
   list-style: none;
@@ -52,6 +83,10 @@ ul.suggestions {
 li.active {
   background-color: #F1F1F4;
 }
+.suggestions-wrapper li:hover{
+  background-color: #F1F1F4;
+  cursor: pointer;
+}
 .mapboxgl-ctrl-logo{
   display: none !important;
 }
@@ -59,9 +94,8 @@ li.active {
   display: none !important;
 }
 .map-search-title{
-  position: absolute;
-  top: 100px;
-  padding-right: 50px;
+  margin: 15px 0;
+  color: #eee;
 }
 h1.map-search-title {
   font-size: 60px
