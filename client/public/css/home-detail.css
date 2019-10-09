@@ -3,7 +3,7 @@
     /* background-color: green; */
     z-index: 3;
     margin: 0 auto;
-    margin-top: 160px;
+    /* margin-top: 160px; */
     width: 90%;
     height: 77vh;
     display: flex;
@@ -14,7 +14,8 @@
 }
 
 .back-to-home-link{
-    margin-bottom: 30px;
+    margin-top: 30px;
+    font-weight: 700;
 }
 
 .home-show{
@@ -108,7 +109,7 @@
 }
 
 .show-bidding-box{
-    height: 39%;
+    height: 59%;
     width: 99%;
     display: flex;
     flex-direction: column;
@@ -117,8 +118,12 @@
     border: 1px solid blue;
 }
 
+.enter-bid-header{
+    font-weight: 700;
+}
+
 .show-info-box{
-    height: 59%;
+    height: 39%;
     width: 99%;
     display: flex;
     flex-direction: column;
@@ -187,3 +192,10 @@
     margin-left: 50vw;
 }
 
+.auction-alert-text{
+    color: red;
+    border: 1px solid gray;
+    border-radius: 2px;
+    padding: 8px 10px;
+    font-weight: 700;
+}

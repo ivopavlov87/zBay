@@ -3,6 +3,7 @@
 @import "home-detail.css";
 @import "home-create.css";
 @import "modal.css";
+@import "dropdown-menu.css";
 
 *{
     font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif

@@ -48,8 +48,10 @@ export default {
         garage
         basement
         searchField
+        date
         bids {
           amount
+          date
           user{
             username
           }
@@ -72,6 +74,13 @@ export default {
         bathrooms
         sqft
         stories
+        bids{
+          amount
+          date
+          user{
+            username
+          }
+        }
       }
     }
   `,
@@ -111,9 +120,27 @@ export default {
       }
     }
   `,
-  // GET_MODAL: gql`
-  //   query IsModalOpen {
-  //     modalOpen @client
-  //   }
-  // `
+  ADVANCED_SEARCH: gql`
+    query AdvancedSearch($nameQuery: String, $categoryQuery: String, $descriptionQuery: String, $streetAddressQuery: String, $cityQuery: String, $stateQuery: String, $yearBuiltQuery: Int, $sqftQuery: Int, $zipcodeQuery: Int, $storiesQuery: Int, $bedroomsQuery: Int, $bathroomsQuery: Int, $garageQuery: Boolean, $basementQuery: Boolean){
+      advancedSearch(nameQuery: $nameQuery, categoryQuery: $categoryQuery, descriptionQuery: $descriptionQuery, streetAddressQuery: $streetAddressQuery, cityQuery: $cityQuery, stateQuery: $stateQuery, yearBuiltQuery: $yearBuiltQuery, sqftQuery: $sqftQuery, zipcodeQuery: $zipcodeQuery, storiesQuery: $storiesQuery, bedroomsQuery: $bedroomsQuery, bathroomsQuery: $bathroomsQuery, garageQuery: $garageQuery, basementQuery: $basementQuery){
+        _id
+        name
+        category{
+          name
+        }
+        description
+        streetAddress
+        city
+        state
+        zipcode
+        yearBuilt
+        garage
+        basement
+        bedrooms
+        bathrooms
+        sqft
+        stories
+      }
+    }
+  `
 };

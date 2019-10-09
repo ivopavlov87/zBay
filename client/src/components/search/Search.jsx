@@ -30,7 +30,7 @@ class Search extends React.Component {
     }
 
     render(){
-        let searchWords = this.state.searchQuery.split(" ")
+        // let searchWords = this.state.searchQuery.split(" ")
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
             return (
                 <div className="searchbar-inputs">

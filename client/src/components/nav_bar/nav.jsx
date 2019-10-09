@@ -48,13 +48,16 @@ const Nav = props => {
               return (
                 <div className="nav-items">
                   <div className="navbar-left">
-                    <Link className="navbar-link" to="/">Homes Index</Link>
-                    <Link className="navbar-link" to="/homes/new">Create a Home</Link>
+                    <Link className="navbar-link logout-button-nav" to="/">Homes Index</Link>
+                    <Link className="navbar-link logout-button-nav" to="/homes/new">Create a Home</Link>
                   </div>
                   <div className="zbay-icon-main">
-                    <img src={zBayIcon} alt="zBay"/> 
+                    <Link className="zbay-icon-main" to="/">
+                      <img src={zBayIcon} alt="zBay"/> 
+                    </Link>
                   </div>
                   <div className="navbar-right">
+                    <button className="logout-button-nav">Your Watchlist</button>
                     <button className="logout-button-nav"
                       onClick={e => {
                         e.preventDefault();

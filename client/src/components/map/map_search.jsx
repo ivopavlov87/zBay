@@ -47,28 +47,31 @@ class MapSearchBar extends React.Component {
   render(){
     const {viewport} = this.state
     return(
-      <div className="search-bar">
+      <div className="map-search-page">
+        <div className="map-search-inner">
+          <div className="map-search-header">
+            <h1 className="map-search-title">Reimagine home</h1>
+            <h4 className="map-search-title subtext">We’ll help you find a place you’ll love.</h4>
+          </div>
           <div className="landing-page-map-search"
             ref={this.geocoderContainerRef}
-            >
-              <h1 className="map-search-title">Reimagine home</h1>
-              <h4 className="map-search-title subtext">We’ll help you find a place you’ll love.</h4>
-          </div>
-        <MapGL className="the-display-none-map"
-          ref={this.mapRef}
-          {...viewport}
-          mapboxApiAccessToken={token}
-          visible={false}
-          attributionControl={false}
-          >
-          <Geocoder 
-            options={{ flyTo: false }}
-            mapRef={this.mapRef}
-            containerRef={this.geocoderContainerRef}
-            onResult={this.handleOnResult}
+            />
+          <MapGL className="the-display-none-map"
+            ref={this.mapRef}
+            {...viewport}
             mapboxApiAccessToken={token}
-          />
-        </MapGL>
+            visible={false}
+            attributionControl={false}
+            >
+            <Geocoder 
+              options={{ flyTo: false }}
+              mapRef={this.mapRef}
+              containerRef={this.geocoderContainerRef}
+              onResult={this.handleOnResult}
+              mapboxApiAccessToken={token}
+            />
+          </MapGL>
+        </div>
       </div>
     )
   }

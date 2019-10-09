@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
+import Timer from '../timer/timer'
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
 
@@ -68,7 +69,13 @@ class HomeDetail extends React.Component {
           //       <h3>${bid.amount}</h3>
           //     </div>
           //   )
-          
+          let conditionalTimer = "";
+      
+          if (data.home.bids.length !== 0){
+            let bidTime = data.home.bids[0].date
+            conditionalTimer = <div><Timer date={bidTime} /></div>
+          }
+         
           return (
             <div className="home-show-container">
              
@@ -85,6 +92,7 @@ class HomeDetail extends React.Component {
                 </div>
                 <div className="show-info-col">
                   <div className="show-bidding-box">
+                    {conditionalTimer}
                     <Mutation
                       mutation={CREATE_BID}
                       onError={err => this.setState({ message: err.message })}
@@ -108,10 +116,11 @@ class HomeDetail extends React.Component {
                       {(createBid, { data }) => (
                         <div className="bid-form-container">
                           <form className="bid-form" onSubmit={e => this.handleSubmit(e, createBid)}>
-                            <h3>Enter a bid for this home:</h3>
+                            <h3 className="enter-bid-header">Enter a bid for this home:</h3>
                             <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
+                            <input className="bid-submit" type="submit" value="Add to Watchlist"/>
                           <div className="bid-success">
                             <h5>{this.state.message}</h5>
                           </div>
@@ -135,7 +144,7 @@ class HomeDetail extends React.Component {
                   </div>
                 </div>
               </div>
-               <Link className="back-to-home-link" to="/">Back to home</Link>
+               <Link className="back-to-home-link" to="/">Back to Home</Link>
             </div>
           );
         }}
