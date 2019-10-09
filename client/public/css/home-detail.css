@@ -3,7 +3,7 @@
     /* background-color: green; */
     z-index: 3;
     margin: 0 auto;
-    margin-top: 160px;
+    /* margin-top: 160px; */
     width: 90%;
     height: 77vh;
     display: flex;
@@ -14,7 +14,8 @@
 }
 
 .back-to-home-link{
-    margin-bottom: 30px;
+    margin-top: 30px;
+    font-weight: 700;
 }
 
 .home-show{
@@ -115,6 +116,10 @@
     align-items: center;
     justify-content: space-evenly;
     border: 1px solid blue;
+}
+
+.enter-bid-header{
+    font-weight: 700;
 }
 
 .show-info-box{
