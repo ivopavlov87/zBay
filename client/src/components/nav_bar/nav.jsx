@@ -57,6 +57,7 @@ const Nav = props => {
                     </Link>
                   </div>
                   <div className="navbar-right">
+                    <button className="logout-button-nav">Your Watchlist</button>
                     <button className="logout-button-nav"
                       onClick={e => {
                         e.preventDefault();
