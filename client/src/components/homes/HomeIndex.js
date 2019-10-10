@@ -1,4 +1,5 @@
 import React from "react";
+import Slider from 'react-slick';
 // import React, { Component } from "react";
 // import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -10,8 +11,12 @@ import Queries from "../../graphql/queries";
 import "./home_index.css";
 import DeleteHome from "./DeleteHome";
 
+import { Image } from 'cloudinary-react';
+
 
 const { FETCH_HOMES, FETCH_RESULTS } = Queries;
+
+const token2 = process.env.REACT_APP_TOKEN2
 
 const HomeIndex = ({cache}) => {
 
@@ -56,8 +61,6 @@ const HomeIndex = ({cache}) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
         
-          
-  
           return (
             <div className="home-index">
               <Map homes={data.homes}/>
@@ -65,7 +68,28 @@ const HomeIndex = ({cache}) => {
   
                 <ul className="homes-ul">
                   {data.results.map(home => {
+
+                    
                     return home.map(hm => {
+
+                      const imageSettings = {
+                        infinite: true,
+                        speed: 500,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        className: "index-slider",
+                        adaptiveHeight: true,
+                      }
+                      
+                      let images;
+                      if (hm.images && hm.images.length > 0){
+                        images = hm.images.map(image => {
+                        return <div><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                        })
+                      } else {
+                        images = <div>`there are no images for {hm.name}`</div>
+                      }
+
                       let maybeTimer;
                       if (hm.bids.length > 0){
                         maybeTimer = <Timer date={hm.bids[0].date} />
@@ -76,6 +100,11 @@ const HomeIndex = ({cache}) => {
                             {/* house.photo it will be a backround*/}
                             {/* button that addToWatchList this will probably be a function  */}
                             {maybeTimer}
+                            <div className="home-index-detail-slideshow-container">
+                            <Slider {...imageSettings}>
+                              {images}
+                            </Slider>
+                            </div>
                           </div>
                           <div className="bottom-info">
                             <h2>{hm.name}</h2>
