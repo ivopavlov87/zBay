@@ -50,59 +50,97 @@ const mutation = new GraphQLObjectType({
         basement: { type: GraphQLBoolean },
         searchField: { type: GraphQLString }
       },
-      async resolve(_, { name, 
-        description,
-        yearBuilt,
-        sqft, 
-        bathrooms, 
-        bedrooms, 
-        stories, 
-        streetAddress, 
-        city, 
-        state,
-        garage,
-        basement,
-        searchField,
-        zipcode }, ctx) {
+      async resolve(
+        _,
+        {
+          name,
+          description,
+          yearBuilt,
+          sqft,
+          bathrooms,
+          bedrooms,
+          stories,
+          streetAddress,
+          city,
+          state,
+          garage,
+          basement,
+          searchField,
+          zipcode
+        },
+        ctx
+      ) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
-          return new Home({ name, 
+          return new Home({
+            name,
             description,
             yearBuilt,
-            sqft, 
-            bathrooms, 
-            bedrooms, 
-            stories, 
-            streetAddress, 
-            city, 
+            sqft,
+            bathrooms,
+            bedrooms,
+            stories,
+            streetAddress,
+            city,
             state,
             garage,
             basement,
             searchField,
-            zipcode }).save();
+            zipcode
+          }).save();
         } else {
-          throw new Error('Sorry, you need to be logged in to create a home.');
+          throw new Error("Sorry, you need to be logged in to create a home.");
         }
       }
-    }, 
+    },
     deleteHome: {
       type: HomeType,
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
-        return Home.remove({ _id: id });
+        return Home.findByIdAndRemove({ _id: id });
       }
     },
-    updateHomeCategory: {
+    updateHome: {
       type: HomeType,
       args: {
-        homeId: { type: GraphQLID },
-        categoryId: { type: GraphQLID },
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        streetAddress: { type: GraphQLString },
+        city: { type: GraphQLString },
+        state: { type: GraphQLString },
+        yearBuilt: { type: GraphQLInt },
+        sqft: { type: GraphQLInt },
+        zipcode: { type: GraphQLInt },
+        stories: { type: GraphQLInt },
+        bedrooms: { type: GraphQLInt },
+        bathrooms: { type: GraphQLFloat },
+        garage: { type: GraphQLBoolean },
+        basement: { type: GraphQLBoolean },
+        searchField: { type: GraphQLString }
       },
-      resolve(parentValue, { homeId, categoryId }) {
-        return Home.updateHomeCategory(homeId, categoryId)
+      resolve(parentValue, { homeId, name, description, streetAddress, city, state, yearBuilt, sqft, zipcode, stories, bedrooms, bathrooms, garage, basement }) {
+        const updateObj = {};
+        updateObj.id = id;
+        if (name) updateObj.name = name;
+        if (description) updateObj.description = description;
+        if (streetAddress) updateObj.streetAddress = streetAddress;
+        if (city) updateObj.city = city;
+        if (state) updateObj.state = state;
+        if (yearBuilt) updateObj.yearBuilt = yearBuilt;
+        if (sqft) updateObj.sqft = sqft;
+        if (zipcode) updateObj.zipcode = zipcode;
+        if (stories) updateObj.stories = stories;
+        if (bedrooms) updateObj.bedrooms = bedrooms;
+        if (bathrooms) updateObj.bathrooms = bathrooms;
+        if (garage) updateObj.garage = garage;
+        if (basement) updateObj.basement = basement;
+        return Home.findOneAndUpdate({_id: id}, {$set: updateObj}, {new: true}, (err, home) => {
+          return home;
+        });
       }
     },
     register: {
@@ -152,21 +190,23 @@ const mutation = new GraphQLObjectType({
         homeId: { type: GraphQLID },
         amount: { type: GraphQLInt }
       },
-      async resolve(_, args, ctx){
+      async resolve(_, args, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Bid({
             user: validUser.userId,
             home: args.homeId,
             amount: args.amount
-          }).save().then(bid => {
-            return Home.findById(args.homeId).then(home =>{
-              home.bids.push(bid)
-              return home.save().then(home => bid)
-            })
           })
+            .save()
+            .then(bid => {
+              return Home.findById(args.homeId).then(home => {
+                home.bids.push(bid);
+                return home.save().then(home => bid);
+              });
+            });
         } else {
-          throw new Error("Sorry, you must be logged in to bid on a home.")
+          throw new Error("Sorry, you must be logged in to bid on a home.");
         }
       }
     }
