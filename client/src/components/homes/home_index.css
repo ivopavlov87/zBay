@@ -43,6 +43,12 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.homes-ul li:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .homes-ul > a {
@@ -58,14 +64,14 @@
 .top-info{
   width: 100%;
   height: 210px;
-  border: solid;
-  border-bottom: none;
+  border: solid thin rgba(0,0,0,0.24);
+  /* border-bottom: none; */
 }
 
 .bottom-info{
   width: 100%;
   height: 60px;
-  border: solid;
+  border: solid thin rgba(0,0,0,0.24);
   display: flex;
   flex-direction: column;
   align-items: center;

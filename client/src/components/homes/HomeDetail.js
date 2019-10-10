@@ -168,6 +168,8 @@ class HomeDetail extends React.Component {
                 </div>
               </div>
                <Link className="back-to-home-link" to="/">Back to Home</Link>
+               <br/>
+
             </div>
           );
         }}

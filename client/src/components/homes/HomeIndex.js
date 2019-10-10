@@ -4,10 +4,13 @@ import React from "react";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 
-import Map from "../map/map_view"
+import Map from "../map/map_view";
 import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
-import "./home_index.css"
+import "./home_index.css";
+import DeleteHome from "./DeleteHome";
+
+
 const { FETCH_HOMES, FETCH_RESULTS } = Queries;
 
 const HomeIndex = ({cache}) => {
