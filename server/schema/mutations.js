@@ -1,17 +1,23 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean, GraphQLList } = graphql;
 const mongoose = require("mongoose");
 
-const CategoryType = require('../schema/types/category_type')
+const CategoryType = require('../schema/types/category_type');
 const Category = mongoose.model("category");
+
 const HomeType = require("../schema/types/home_type");
 const Home = mongoose.model("home");
+
 const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
-const Bid = mongoose.model('bid');
-const BidType = require("../schema/types/bid_type")
 
-const AuthService = require("../services/auth")
+const BidType = require("../schema/types/bid_type");
+const Bid = mongoose.model('bid');
+
+const ImageType = require('./types/image_type');
+const Image = mongoose.model('image');
+
+const AuthService = require("../services/auth");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -48,28 +54,24 @@ const mutation = new GraphQLObjectType({
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
         basement: { type: GraphQLBoolean },
+        images: { type: new GraphQLList(GraphQLString) },
         searchField: { type: GraphQLString }
       },
-      async resolve(
-        _,
-        {
-          name,
-          description,
-          yearBuilt,
-          sqft,
-          bathrooms,
-          bedrooms,
-          stories,
-          streetAddress,
-          city,
-          state,
-          garage,
-          basement,
-          searchField,
-          zipcode
-        },
-        ctx
-      ) {
+      async resolve(_, { name, 
+        description,
+        yearBuilt,
+        sqft, 
+        bathrooms, 
+        bedrooms, 
+        stories, 
+        streetAddress, 
+        city, 
+        state,
+        garage,
+        basement,
+        images,
+        searchField,
+        zipcode }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
@@ -88,6 +90,7 @@ const mutation = new GraphQLObjectType({
             state,
             garage,
             basement,
+            images,
             searchField,
             zipcode
           }).save();
@@ -141,6 +144,17 @@ const mutation = new GraphQLObjectType({
         return Home.findOneAndUpdate({_id: id}, {$set: updateObj}, {new: true}, (err, home) => {
           return home;
         });
+      }
+    },
+    createImage: {
+      type: ImageType,
+      args: {
+        name: { type: GraphQLString },
+        publicId: { type: GraphQLString },
+        home: { type: GraphQLString }
+      },
+      resolve(_, { name, publicId, home }) {
+        return new Image({ name, publicId, home }).save();
       }
     },
     register: {

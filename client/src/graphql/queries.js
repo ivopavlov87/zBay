@@ -20,6 +20,7 @@ export default {
       bathrooms
       garage
       basement
+      images
       searchField
       bids{
         amount
@@ -47,6 +48,7 @@ export default {
         bathrooms
         garage
         basement
+        images
         searchField
         date
         bids {
@@ -59,6 +61,24 @@ export default {
       }
     }
   `,
+  FETCH_IMAGE: gql`
+      query FetchImage($id: String!){
+        image(id: $id){
+          id
+          name
+          publicId
+        }
+      }
+    `,
+  FETCH_IMAGES: gql`
+      query FetchImages{
+        images{
+          id
+          name
+          publicId
+        }
+      }
+    `,
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
       isLoggedIn @client

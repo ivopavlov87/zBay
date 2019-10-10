@@ -1,10 +1,14 @@
 import React from "react";
+import Slider from 'react-slick';
 import { Query, Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
 import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
+
+import { Image } from 'cloudinary-react';
+
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
 
@@ -57,6 +61,15 @@ class HomeDetail extends React.Component {
   
   render() {
 
+    const imageSettings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      variableWidth: false,
+      variableHeight: false
+    }
+
     return (
       <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
@@ -75,14 +88,26 @@ class HomeDetail extends React.Component {
             let bidTime = data.home.bids[0].date
             conditionalTimer = <div><Timer date={bidTime} /></div>
           }
+
+          const images = data.home.images.map(image => {
+            return <div><Image className='image-slide' cloudName='dqddk5agf' publicId={image} /></div>
+            // </li>
+          });
          
           return (
             <div className="home-show-container">
              
               <div className="home-show">
                 <div className="show-pics-col">
-                  <div className="show-photo">
-                  Photo
+                  <div className="home-detail-slideshow-container">
+                  {/* <div className="show-photo"> */}
+                  {/* Photo */}
+                    {/* <ul> */}
+                    <Slider {...imageSettings}>
+                      {images}
+                      </Slider>
+                    {/* </ul> */}
+                  {/* </div> */}
                   </div>
                   
                  {/* <div className="show-high-bid">

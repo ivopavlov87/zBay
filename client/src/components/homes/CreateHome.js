@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import Dropzone from 'react-dropzone'
 import { uploadImage } from "../../util/image_api_util";
+import axios from 'axios';
 
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
@@ -14,7 +15,6 @@ class CreateHome extends Component {
     super(props);
 
     this.state = {
-      message: "",
       name: "",
       streetAddress: "",
       city: "",
@@ -29,23 +29,34 @@ class CreateHome extends Component {
       garage: false,
       basement: false,
       searchField: "",
-      pictures: []
+      pictures: [],
+      images: []
     };
 
+    this.files = [];
     this.handleOnDrop = this.handleOnDrop.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleOnDrop(files, rejectedFiles) {
-    console.log(files)
-    console.log('rejected files are', rejectedFiles)
+  // handleOnDrop(files, rejectedFiles) {
+  //   console.log(files)
+  //   console.log('rejected files are', rejectedFiles)
 
-    files.forEach(file => {
-      const imageObj = new FormData();
-      imageObj.append('image', file);
-      let newPictures = this.state.pictures.slice();
-      newPictures.push(imageObj);
-      this.setState({pictures: newPictures})
-    })
+  //   files.forEach(file => {
+  //     const imageObj = new FormData();
+  //     imageObj.append('image', file);
+  //     let newPictures = this.state.pictures.slice();
+  //     newPictures.push(imageObj);
+  //     this.setState({pictures: newPictures})
+  //   })
+  // }
+
+  handleOnDrop(e) {
+    e.preventDefault();
+    const files = Array.from(e.target.files);
+    for (let i = 0; i < files.length; i++) {
+      this.files.push(files[i]);
+    }
   }
 
   update(field) {
@@ -77,13 +88,31 @@ class CreateHome extends Component {
     console.log(files);
   }
 
+  async updateImageURLs() {
+    const publicIdsArray = [];
+
+    for (let i = 0; i < this.files.length; i++) {
+      const formData = new FormData();
+      formData.append('file', this.files[i]);
+      formData.append('upload_preset', 'nt6hgyr3');
+      const image = await axios.post(
+        'https://api.cloudinary.com/v1_1/dqddk5agf/image/upload',
+        formData
+      )
+
+      publicIdsArray.push(image.data.public_id);
+    }
+    return publicIdsArray;
+  }
+
   handleSubmit(e, newHome) {
     e.preventDefault();
 
     const garagePresent = this.state.garage ? "Garage" : "";
     const basementPresent = this.state.basement ? "Basement" : "";
 
-    newHome({
+    this.updateImageURLs().then(images => {
+      newHome({
       variables: {
         name: this.state.name,
         streetAddress: this.state.streetAddress,
@@ -98,17 +127,60 @@ class CreateHome extends Component {
         bathrooms: parseFloat(this.state.bathrooms),
         garage: this.state.garage,
         basement: this.state.basement,
+        images: images,
         searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
       }
-    }).then(payload => {
-      const newHomeId = payload.data.newHome._id;
-
-      this.state.pictures.forEach(image => {
-        image.append('homeId', newHomeId)
-        uploadImage(image);
+      }).then(response => {
+        this.setState({
+          name: "",
+          streetAddress: "",
+          city: "",
+          state: "",
+          zipcode: "",
+          sqft: "",
+          stories: "",
+          description: "",
+          bathrooms: "",
+          bedrooms: "",
+          yearBuilt: "",
+          garage: false,
+          basement: false,
+          searchField: "",
+          pictures: [],
+          images: []
+        });
+        this.files = [];
       })
     })
   }
+
+  //   newHome({
+  //     variables: {
+  //       name: this.state.name,
+  //       streetAddress: this.state.streetAddress,
+  //       city: this.state.city,
+  //       state: this.state.state,
+  //       zipcode: parseInt(this.state.zipcode),
+  //       description: this.state.description,
+  //       sqft: parseInt(this.state.sqft),
+  //       yearBuilt: parseInt(this.state.yearBuilt),
+  //       stories: parseInt(this.state.stories),
+  //       bedrooms: parseInt(this.state.bedrooms),
+  //       bathrooms: parseFloat(this.state.bathrooms),
+  //       garage: this.state.garage,
+  //       basement: this.state.basement,
+  //       images: images,
+  //       searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
+  //     }
+  //   }).then(payload => {
+  //     const newHomeId = payload.data.newHome._id;
+
+  //     this.state.pictures.forEach(image => {
+  //       image.append('homeId', newHomeId)
+  //       uploadImage(image);
+  //     })
+  //   })
+  // }
 
   render() {
     return (
@@ -263,7 +335,7 @@ class CreateHome extends Component {
                   <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
                   <label>Basement</label>
                 </div>
-              <div>
+              {/* <div>
                 <Dropzone onDrop={this.handleOnDrop}>
                   {({ getRootProps, getInputProps }) => (
                     <section>
@@ -274,6 +346,12 @@ class CreateHome extends Component {
                     </section>
                   )}
                 </Dropzone>
+              </div> */}
+                <div>
+                <label>
+                  Add Images: &nbsp;
+                  <input type="file" multiple onChange={this.handleOnDrop} />
+                </label>
               </div>
                 <button className="create-submit" type="submit">Create Home</button>
               </div>
