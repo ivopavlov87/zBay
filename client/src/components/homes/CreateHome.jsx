@@ -3,11 +3,17 @@ import { Mutation } from "react-apollo";
 import Dropzone from 'react-dropzone'
 import { uploadImage } from "../../util/image_api_util";
 import axios from 'axios';
-
+import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
 const { CREATE_HOME } = Mutations;
 const { FETCH_HOMES } = Queries;
+
+
+const token2 = process.env.REACT_APP_TOKEN2
+const token3 = process.env.REACT_APP_TOKEN3
+
+debugger;
 
 
 class CreateHome extends Component {
@@ -90,13 +96,12 @@ class CreateHome extends Component {
 
   async updateImageURLs() {
     const publicIdsArray = [];
-
     for (let i = 0; i < this.files.length; i++) {
       const formData = new FormData();
       formData.append('file', this.files[i]);
-      formData.append('upload_preset', 'nt6hgyr3');
+      formData.append('upload_preset', token3);
       const image = await axios.post(
-        'https://api.cloudinary.com/v1_1/dqddk5agf/image/upload',
+        `https://api.cloudinary.com/v1_1/${token2}/image/upload`,
         formData
       )
 
@@ -146,10 +151,11 @@ class CreateHome extends Component {
           garage: false,
           basement: false,
           searchField: "",
-          pictures: [],
+          // pictures: [],
           images: []
         });
         this.files = [];
+        this.props.history.push(`/homes/${newHome.id}`)
       })
     })
   }
@@ -364,4 +370,4 @@ class CreateHome extends Component {
   }
 }
 
-export default CreateHome;
+export default withRouter(CreateHome);
