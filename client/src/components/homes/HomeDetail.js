@@ -6,7 +6,6 @@ import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
-
 import { Image } from 'cloudinary-react';
 
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
@@ -90,7 +89,7 @@ class HomeDetail extends React.Component {
           }
 
           const images = data.home.images.map(image => {
-            return <div><Image className='image-slide' cloudName='dqddk5agf' publicId={image} /></div>
+            return <div><Image className='image-slide' cloudName='zbaybae' publicId={image} /></div>
             // </li>
           });
          
