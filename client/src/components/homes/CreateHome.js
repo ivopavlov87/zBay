@@ -85,7 +85,7 @@ class CreateHome extends Component {
   }
 
   handleFileSelect(files) {
-    console.log(files)
+    console.log(files);
   }
 
   async updateImageURLs() {

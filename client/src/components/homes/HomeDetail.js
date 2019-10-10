@@ -6,7 +6,9 @@ import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
+
 import { Image } from 'cloudinary-react';
+
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
 
@@ -168,6 +170,8 @@ class HomeDetail extends React.Component {
                 </div>
               </div>
                <Link className="back-to-home-link" to="/">Back to Home</Link>
+               <br/>
+
             </div>
           );
         }}
