@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
+import Dropzone from 'react-dropzone'
+import { uploadImage } from "../../util/image_api_util";
 
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
 const { CREATE_HOME } = Mutations;
 const { FETCH_HOMES } = Queries;
+
 
 class CreateHome extends Component {
   constructor(props) {
@@ -25,8 +28,24 @@ class CreateHome extends Component {
       yearBuilt: "",
       garage: false,
       basement: false,
-      searchField: ""
+      searchField: "",
+      pictures: []
     };
+
+    this.handleOnDrop = this.handleOnDrop.bind(this);
+  }
+
+  handleOnDrop(files, rejectedFiles) {
+    console.log(files)
+    console.log('rejected files are', rejectedFiles)
+
+    files.forEach(file => {
+      const imageObj = new FormData();
+      imageObj.append('image', file);
+      let newPictures = this.state.pictures.slice();
+      newPictures.push(imageObj);
+      this.setState({pictures: newPictures})
+    })
   }
 
   update(field) {
@@ -81,7 +100,14 @@ class CreateHome extends Component {
         basement: this.state.basement,
         searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
       }
-    });
+    }).then(payload => {
+      const newHomeId = payload.data.newHome._id;
+
+      this.state.pictures.forEach(image => {
+        image.append('homeId', newHomeId)
+        uploadImage(image);
+      })
+    })
   }
 
   render() {
@@ -187,9 +213,13 @@ class CreateHome extends Component {
                   placeholder="Zipcode"
                 />
                 <input className="create-input"
+                  type="number"
                   onChange={this.update("yearBuilt")}
                   value={this.state.yearBuilt}
                   placeholder="Year built"
+                  min="1901"
+                  max="2019"
+                  step="1"
                 />
                 <input className="create-input"
                   onChange={this.update("sqft")}
@@ -205,6 +235,9 @@ class CreateHome extends Component {
                 />
                 
                 <input className="create-input"
+                  type="number"
+                  min="1"
+                  step="0.5"
                   onChange={this.update("bathrooms")}
                   value={this.state.bathrooms}
                   placeholder="Number of bathrooms"
@@ -215,6 +248,9 @@ class CreateHome extends Component {
                   placeholder="Number of stories"
                 />
                 <input className="create-input"
+                  type="number"
+                  min="0"
+                  step="1"
                   onChange={this.update("bedrooms")}
                   value={this.state.bedrooms}
                   placeholder="Number of bedrooms"
@@ -227,13 +263,18 @@ class CreateHome extends Component {
                   <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
                   <label>Basement</label>
                 </div>
-                <div>
-                  Add images:
-                  <br />
-                  <input type="file" 
-                  onChange={this.handleFileSelect}
-                  multiple />
-                </div>
+              <div>
+                <Dropzone onDrop={this.handleOnDrop}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop some files here, or click to select files</p>
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
+              </div>
                 <button className="create-submit" type="submit">Create Home</button>
               </div>
             </form>
