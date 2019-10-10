@@ -6,6 +6,7 @@ export default {
       register(username: $username, email: $email, password: $password) { 
         token
         loggedIn
+        _id
       }
     }
   `,
@@ -14,6 +15,7 @@ export default {
       login(email: $email, password: $password) {
         token
         loggedIn
+        _id
       }
     }
   `,
@@ -21,6 +23,7 @@ export default {
     mutation VerifyUser($token: String!) {
       verifyUser(token: $token) {
         loggedIn
+        _id
       }
     }
   `,
@@ -60,6 +63,32 @@ export default {
       }
     }
   `,
+  ADD_HOME: gql`
+    mutation AddHome($watchlistId: ID, $homeId: ID) {
+      addHomeToWatchlist(watchlistId: $watchlistId, homeId: $homeId) {
+        _id
+        user{
+          username
+        }
+        homes{
+          _id
+          name
+          description
+          streetAddress
+          city
+          state
+          zipcode
+          sqft
+          stories
+          bedrooms
+          bathrooms
+          garage
+          basement
+          yearBuilt
+        }
+      }
+    }
+  `
   // OPEN_MODAL: gql`
   //   mutation openModal {
   //     openModal @client

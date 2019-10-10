@@ -142,5 +142,27 @@ export default {
         stories
       }
     }
+  `,
+  FETCH_USER: gql`
+    query FetchUser($id: ID!) {
+      user(_id: $id){
+        _id
+        username
+        email
+        watchlist{
+          _id
+          homes{
+            name
+            streetAddress
+
+          }
+        }
+      }
+    }
+  `,
+  FETCH_USER_ID: gql`
+    {
+      _id @client
+    }
   `
 };

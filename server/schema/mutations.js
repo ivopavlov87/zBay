@@ -10,7 +10,8 @@ const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
 const Bid = mongoose.model('bid');
 const BidType = require("../schema/types/bid_type")
-
+const WatchlistType = require("../schema/types/watchlist_type");
+const Watchlist = mongoose.model("watchlist")
 const AuthService = require("../services/auth")
 
 const mutation = new GraphQLObjectType({
@@ -113,7 +114,7 @@ const mutation = new GraphQLObjectType({
         password: { type: GraphQLString }
       },
       resolve(_, args) {
-        return AuthService.register(args);
+        return AuthService.register(args)
       }
     },
     login: {
@@ -168,6 +169,35 @@ const mutation = new GraphQLObjectType({
         } else {
           throw new Error("Sorry, you must be logged in to bid on a home.")
         }
+      }
+    },
+    createWatchlist: {
+      type: WatchlistType,
+      args: {
+        homeId: { type: GraphQLID }
+      },
+      async resolve(_, args, ctx){
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+        if (validUser.loggedIn){
+          return new Watchlist({
+            user: validUser.userId
+          }).save().then(watchlist => {
+            return Home.findById(args.homeId).then(home => {
+              watchlist.homes.push(home)
+              return watchlist.save().then(watchlist => watchlist)
+            })
+          })
+        }
+      }
+    },
+    addHomeToWatchlist: {
+      type: WatchlistType,
+      args: {
+        watchlistId: { type: GraphQLID },
+        homeId: { type: GraphQLID }
+      },
+      resolve(_, { watchlistId, homeId}) {
+        return Watchlist.addHome(watchlistId, homeId)
       }
     }
   }

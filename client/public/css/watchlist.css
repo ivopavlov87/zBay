@@ -1,0 +1,7 @@
+
+.watchlist-container{
+    width: 90%;
+    height: 88vh;
+    background-color: pink;
+    z-index: 10;
+}

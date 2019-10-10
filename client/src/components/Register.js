@@ -23,7 +23,7 @@ class Register extends Component {
   updateCache(client, { data }) {
     console.log(data);
     client.writeData({
-      data: { isLoggedIn: data.register.loggedIn }
+      data: { isLoggedIn: data.register.loggedIn, _id: data.register._id }
     });
   }
 

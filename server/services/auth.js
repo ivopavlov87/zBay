@@ -46,12 +46,12 @@ const register = async data => {
     );
 
     // save our user
-    user.save();
+    user.save().then(user => User.generateWatchlist(user._id))
     // we'll create a token for the user
     const token = jwt.sign({ id: user._id }, keys.secretOrKey);
-
+    console.log(token)
     // then return our created token, set loggedIn to be true, null their password, and send the rest of the user
-    return { token, loggedIn: true, ...user._doc, password: null };
+    return { token, _id: user._id, loggedIn: true, ...user._doc, password: null };
 
   } catch (err) {
     throw err;
@@ -79,7 +79,7 @@ const login = async data => {
 
     const token = jwt.sign({ id: user._id }, keys.secretOrKey);
 
-    return { token, loggedIn: true, ...user._doc, password: null };
+    return { token, _id: user._id, loggedIn: true, ...user._doc, password: null };
   } catch (err) {
     throw err;
   }
@@ -118,9 +118,9 @@ const verifyUser = async data => {
       return user ? true : false;
     });
 
-    return { loggedIn, userId: currentUser._id };
+    return { loggedIn, _id: currentUser._id };
   } catch (err) {
-    return { loggedIn: false };
+    return { loggedIn: false, _id: null };
   }
 };
 

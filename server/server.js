@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const db = require("../config/keys.js").MONGO_URI;
 const expressGraphQL = require("express-graphql");
 const User = require("../server/models/User");
+const Watchlist = require("../server/models/Watchlist");
 const Category = require("../server/models/Category");
 const Home = require("../server/models/Home");
 const Bid = require("../server/models/Bid")
