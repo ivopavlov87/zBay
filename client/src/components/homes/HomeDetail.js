@@ -37,7 +37,7 @@ class HomeDetail extends React.Component {
     } catch (err) {
       return;
     }
-    // if we had previously fetched homes we'll add our new home to our cache
+
     if (bids) {
       let bidsArray = bids.bids;
       let createBid = data.createBid;
@@ -74,13 +74,7 @@ class HomeDetail extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
-          // let allBids = data.home.bids.map(bid => {
-          //   return (
-          //     <div className="show-bid-item">
-          //       <h4>{bid.user.username}:</h4>
-          //       <h3>${bid.amount}</h3>
-          //     </div>
-          //   )
+
           let conditionalTimer = "";
       
           if (data.home.bids.length !== 0){
@@ -99,19 +93,14 @@ class HomeDetail extends React.Component {
               <div className="home-show">
                 <div className="show-pics-col">
                   <div className="home-detail-slideshow-container">
-                  {/* <div className="show-photo"> */}
-                  {/* Photo */}
-                    {/* <ul> */}
+
                     <Slider {...imageSettings}>
                       {images}
                       </Slider>
-                    {/* </ul> */}
-                  {/* </div> */}
+
                   </div>
                   
-                 {/* <div className="show-high-bid">
-                    {allBids}
-                 </div> */}
+
                 <BidShow bids={data.home.bids} />
                 </div>
                 <div className="show-info-col">

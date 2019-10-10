@@ -20,7 +20,6 @@ class SearchBar extends React.Component{
         return (
            <div className="searchbar-container">
                <Search />
-               {/* These are temp button names, mimicing Zillow for now */}
                 <button value="sale-type" onClick={(e) => this.handleOpen(e, "sale-type")} className="searchbar-button">Sale type</button>
                 <button value="price" onClick={(e) => this.handleOpen(e, "price")} className="searchbar-button">Price</button>
                 <button value="beds" onClick={(e) => this.handleOpen(e, "beds")} className="searchbar-button">Beds</button>

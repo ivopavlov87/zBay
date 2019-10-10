@@ -6,6 +6,7 @@ export default {
       register(username: $username, email: $email, password: $password) { 
         token
         loggedIn
+        _id
       }
     }
   `,
@@ -14,6 +15,7 @@ export default {
       login(email: $email, password: $password) {
         token
         loggedIn
+        _id
       }
     }
   `,
@@ -21,6 +23,7 @@ export default {
     mutation VerifyUser($token: String!) {
       verifyUser(token: $token) {
         loggedIn
+        _id
       }
     }
   `,
@@ -94,6 +97,17 @@ export default {
         id
         name
         publicId
+      }
+    }
+  `,
+  CREATE_WATCHLIST: gql`
+    mutation CreateWatchlist($userId: ID) {
+      createWatchlist(userId: $userId){
+        _id
+        user{
+          _id
+          username
+        }
       }
     }
   `

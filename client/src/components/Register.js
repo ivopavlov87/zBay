@@ -36,7 +36,7 @@ class Register extends Component {
     ) : (
       <li className="modal-li-errors"></li>
       );
-      // console.log(errors)
+  
       
     return (
       <Mutation
@@ -44,7 +44,7 @@ class Register extends Component {
         onCompleted={data => {
           const { token } = data.register;
           localStorage.setItem("auth-token", token);
-          // this.props.history.push("/");
+
         }}
         onError={err => {
           this.setState({ errors: err });

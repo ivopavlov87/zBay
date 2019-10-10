@@ -41,17 +41,16 @@ class UpdateHome extends Component {
     return e => this.setState({ [field]: e.target.value });
   }
 
-  // we need to remember to update our cache directly with our home
+
   updateCache(cache, { data }) {
     let homes;
     try {
-      // if we've already fetched the homes then we can read the
-      // query here
+
       homes = cache.readQuery({ query: FETCH_HOMES });
     } catch (err) {
       return;
     }
-    // if we had previously fetched homes we'll add our home to our cache
+
     if (homes) {
       let homeArray = homes.homes;
       let updatedHome = data.updatedHome;
@@ -96,11 +95,11 @@ class UpdateHome extends Component {
     return (
       <Mutation
         mutation={UPDATE_HOME}
-        // if we error out we can set the message here
+
         onError={err => this.setState({ message: err.message })}
-        // we need to make sure we update our cache once our home is updated
+
         update={(cache, data) => this.updateCache(cache, data)}
-        // when our query is complete we'll display a success message
+
         onCompleted={data => {
           const { name } = data.updatedHome;
           this.setState({

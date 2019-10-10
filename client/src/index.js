@@ -49,6 +49,7 @@ const client = new ApolloClient({
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
+    _id: null,
     results: []
   }
 });
@@ -67,7 +68,10 @@ if (token) {
           results: []
         }
       });
+      ReactDOM.render(<Root />, document.getElementById('root'));
     });
+} else {
+  ReactDOM.render(<Root />, document.getElementById('root'));
 }
 
 const Root = () => {
@@ -80,7 +84,7 @@ const Root = () => {
   );
 };
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

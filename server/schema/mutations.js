@@ -229,20 +229,19 @@ const mutation = new GraphQLObjectType({
     },
     createWatchlist: {
       type: WatchlistType,
-      args: {
-        homeId: { type: GraphQLID }
-      },
+      args: { userId: { type: GraphQLID }},
       async resolve(_, args, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Watchlist({
-            user: validUser.userId
+            user: args.userId
           }).save().then(watchlist => {
-            return Home.findById(args.homeId).then(home => {
-              watchlist.homes.push(home)
-              return watchlist.save().then(watchlist => watchlist)
+            return User.findById(args.userId).then(user => {
+              console.log(args.userId)
+              user.watchlist = watchlist
+              return user.save()
             })
-          })
+          }).then(watchlist => watchlist)
         }
       }
     },

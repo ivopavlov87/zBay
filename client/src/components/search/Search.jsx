@@ -3,10 +3,7 @@ import React from 'react';
 import Queries from '../../graphql/queries';
 
 import { Query, ApolloConsumer } from 'react-apollo';
-// import * as compose from 'lodash.flowright';
 
-// eslint-disable-next-line
-import debounce from 'lodash/debounce'
 const { SEARCH_HOMES, FETCH_RESULTS } = Queries;
 
 class Search extends React.Component {
@@ -30,7 +27,7 @@ class Search extends React.Component {
     }
 
     render(){
-        // let searchWords = this.state.searchQuery.split(" ")
+
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
             return (
                 <div className="searchbar-inputs">
@@ -59,15 +56,10 @@ class Search extends React.Component {
                                         if (loading) return <p></p>;
                                         if (error) return <p>Error</p>;
                                         const searchResults = { results: data.searchHomes }
-                                        // cache.writeQuery({ query: FETCH_RESULTS, data: searchResults})
-                                        // console.log(cache)
-                                        
-                                        
+
                                         cache.cache.data.data.ROOT_QUERY.results.json = [];
                                         cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
-                                        // return data.searchHomes.map(home => {
-                                        //     return <li key={home._id}>{home.name}</li>
-                                        // })
+                               
                                         return ""
                                     }}
                                 </Query>

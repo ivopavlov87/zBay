@@ -21,7 +21,7 @@ const WatchlistType = new GraphQLObjectType({
             resolve(parentValue) {
                 return Watchlist.findById(parentValue._id)
                     .populate("homes")
-                    .then(watchlist => watchlist)
+                    .then(watchlist => watchlist.homes)
             }
         }
     })

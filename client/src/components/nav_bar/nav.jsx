@@ -38,7 +38,6 @@ const Nav = props => {
 
   const sessionForm = data.sessionForm === "Login" ? <LoginContainer /> : <SignupContainer />
 
-  // const watchlistButton = 
 
   return (
     <ApolloConsumer>
@@ -59,13 +58,13 @@ const Nav = props => {
                   </div>
                   <div className="navbar-right">
                     <Link to="/watchlist" className="navbar-link logout-button-nav">Watchlist</Link>
-                    {/* {watchlistButton} */}
-                    <button className="logout-button-nav"
+
+                    <button className="nav-links logout-button-nav"
                       onClick={e => {
                         e.preventDefault();
                         localStorage.removeItem("auth-token");
                         client.writeData({ data: { isLoggedIn: false } });
-                        // props.history.push("/");
+ 
                       }}
                     >
                       Logout
@@ -80,8 +79,7 @@ const Nav = props => {
                   <div className="navbar-left">
                     <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Login</button>
                     <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Register</button>
-                    {/* <Link className="navbar-link" to="/login">Login</Link> */}
-                    {/* <Link className="navbar-link" to="/register">Register</Link> */}
+
                   </div>
                   <div className="zbay-icon-main">
                     <img src={zBayIcon} alt="zBay" />
