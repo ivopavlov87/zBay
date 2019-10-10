@@ -11,6 +11,8 @@ import { Image } from 'cloudinary-react';
 const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
 
+const token2 = process.env.REACT_APP_TOKEN2
+
 class HomeDetail extends React.Component {
   constructor(props){
     super(props)
@@ -89,8 +91,7 @@ class HomeDetail extends React.Component {
           }
 
           const images = data.home.images.map(image => {
-            return <div><Image className='image-slide' cloudName='zbaybae' publicId={image} /></div>
-            // </li>
+            return <div><Image className='image-slide' cloudName={token2} publicId={image} /></div>
           });
          
           return (
