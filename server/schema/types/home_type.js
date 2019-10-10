@@ -12,7 +12,7 @@ const BidType = require('./bid_type')
 
 const HomeType = new GraphQLObjectType({
   name: "HomeType",
-  // remember we wrap the fields in a thunk to avoid circular dependency issues
+
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },

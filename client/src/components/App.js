@@ -16,7 +16,7 @@ import MapSearchBar from "./map/map_search";
 
 import Map from "./map/map_view";
 import DropdownMenu from './search/DropdownMenu';
-
+import Watchlist from './watchlist/watchlist'
 
 require('dotenv').config();
 
@@ -38,6 +38,7 @@ const App = (props) => {
               {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
           <Route path="/" component={() => <MapSearchBar />} />
+          <Route exact path="/watchlist" component={Watchlist} />
           <Redirect to="/" />
         </Switch>
       </div>

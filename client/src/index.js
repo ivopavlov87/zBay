@@ -63,6 +63,7 @@ if (token) {
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
+          _id: data.verifyUser._id,
           results: []
         }
       });

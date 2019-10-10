@@ -38,6 +38,7 @@ const Nav = props => {
 
   const sessionForm = data.sessionForm === "Login" ? <LoginContainer /> : <SignupContainer />
 
+  // const watchlistButton = 
 
   return (
     <ApolloConsumer>
@@ -57,7 +58,8 @@ const Nav = props => {
                     </Link>
                   </div>
                   <div className="navbar-right">
-                    <button className="logout-button-nav">Your Watchlist</button>
+                    <Link to="/watchlist" className="navbar-link logout-button-nav">Watchlist</Link>
+                    {/* {watchlistButton} */}
                     <button className="logout-button-nav"
                       onClick={e => {
                         e.preventDefault();
