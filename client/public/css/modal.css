@@ -14,16 +14,30 @@
 
 .ReactModal__Content.ReactModal__Content--after-open.nav-modal {
   border-radius: 8px;
-
 }
 
 .modal {
-  background-image: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 69%,rgba(32,124,202,1) 69%,rgba(125,185,232,1) 100%);
+  /* background-image: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 69%,rgba(32,124,202,1) 69%,rgba(125,185,232,1) 100%); */
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   padding: 40px;
   height: auto;
   width: 500px;
   border-radius: 8px;
+  background-size: 1000% 400%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	animation: Gradient 10s ease infinite;
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
 .modal-container {

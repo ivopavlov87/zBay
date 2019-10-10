@@ -61,7 +61,7 @@ const RootQueryType = new GraphQLObjectType({
       args: { searchQuery: { type: GraphQLString }},
       resolve(_, { searchQuery }) {
         if (searchQuery === ""){
-          return Home.find({})
+          return Home.find({});
         }
         return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
       }
@@ -106,7 +106,7 @@ const RootQueryType = new GraphQLObjectType({
     bids: {
       type: new GraphQLList(BidType),
       resolve(){
-        return Bid.find({})
+        return Bid.find({});
       }
 
     },
@@ -114,7 +114,7 @@ const RootQueryType = new GraphQLObjectType({
       type: BidType,
       args: { _id: { type: GraphQLNonNull(GraphQLID)}},
       resolve(_, { _id }){
-        return Bid.findById(_id)
+        return Bid.findById(_id);
       }
     },
     homeBids: {
@@ -122,7 +122,7 @@ const RootQueryType = new GraphQLObjectType({
       args: { _homeId: { type: GraphQLID }},
       resolve(_, { _homeId }){
 
-        return Home.findBids(_homeId)
+        return Home.findBids(_homeId);
 
       }
     }
