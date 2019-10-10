@@ -155,7 +155,7 @@ class CreateHome extends Component {
           images: []
         });
         this.files = [];
-        this.props.history.push(`/homes/${newHome.id}`)
+        this.props.history.push(`/homes/${response.data.newHome._id}`)
       })
     })
   }
