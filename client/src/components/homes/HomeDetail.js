@@ -67,8 +67,8 @@ class HomeDetail extends React.Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      variableWidth: false,
-      variableHeight: false
+      className: "detail-slider",
+      adaptiveHeight: true,
     }
 
     return (

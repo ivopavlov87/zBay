@@ -242,6 +242,10 @@
     height: 100%;
 }
 
+.detail-slider img {
+	height: 450px;
+}
+
 .index-slider img {
   height: 170px;
 }
