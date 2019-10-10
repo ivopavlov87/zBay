@@ -94,6 +94,7 @@ export default {
         bathrooms
         sqft
         stories
+        images
         bids{
           amount
           date
@@ -156,6 +157,7 @@ export default {
         yearBuilt
         garage
         basement
+        images
         bedrooms
         bathrooms
         sqft
