@@ -45,6 +45,34 @@ export default {
       }
     }
   `,
+  DELETE_HOME: gql`
+    mutation DeleteHome($id: ID) {
+      deleteHome(id: $id) {
+        id
+      }
+    }
+  `,
+  UPDATE_HOME: gql`
+    mutation UpdateHome($id: ID, $name: String!, $description: String!, $sqft: Int!, $stories: Int!, $bedrooms: Int!, $bathrooms: Float!, $streetAddress: String!, $city: String!, $state: String!, $zipcode: Int!, $yearBuilt: Int!, $garage: Boolean!, $basement: Boolean!, $searchField: String!) {
+      updateHome(_id: $id, name: $name, description: $description, sqft: $sqft, stories: $stories, bedrooms: $bedrooms, bathrooms: $bathrooms, streetAddress: $streetAddress, city: $city, state: $state, zipcode: $zipcode, yearBuilt: $yearBuilt, garage: $garage, basement: $basement, searchField: $searchField) { 
+        _id
+        name
+        description
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        yearBuilt
+        searchField
+      }
+    }
+  `,
   CREATE_BID: gql`
     mutation CreateBid($homeId: ID!, $amount: Int!) {
       createBid(homeId: $homeId, amount: $amount) {
@@ -56,13 +84,7 @@ export default {
           streetAddress
         }
         amount
-
       }
     }
-  `,
-  // OPEN_MODAL: gql`
-  //   mutation openModal {
-  //     openModal @client
-  //   }
-  // `
+  `
 };

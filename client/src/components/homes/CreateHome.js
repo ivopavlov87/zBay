@@ -74,7 +74,7 @@ class CreateHome extends Component {
   }
 
   handleFileSelect(files) {
-    console.log(files)
+    console.log(files);
   }
 
   handleSubmit(e, newHome) {
