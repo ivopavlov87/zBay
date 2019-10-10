@@ -37,6 +37,7 @@ const HomeType = new GraphQLObjectType({
     bedrooms: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
+    images: { type: new GraphQLList(GraphQLString) },
     basement: { type: GraphQLBoolean },
     searchField: { type: GraphQLString },
     bids: {
