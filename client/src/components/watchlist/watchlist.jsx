@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Queries from '../../graphql/queries'
 import Mutations from "../../graphql/mutations";
 import { Query } from 'react-apollo';
@@ -29,12 +30,20 @@ const Watchlist = () => {
                     )
                 } else {
                     let watchlistItems = data.user.watchlist.map(home => {
-                        return <li key={home._id}>{home.name}</li>
+                        return (
+                            <li key={home._id} className="watchlist-li">
+                                <Link to={`/homes/${home._id}`}>
+                                    <h3>{home.name}</h3>
+                                    <h3>{home.streetAddress},&nbsp;{home.city},&nbsp;{home.state}</h3>
+                                </Link>
+                                <button className="remove-wl-button">Remove Listing</button>
+                            </li>
+                        )
                     })
                     return (
                         <div className="watchlist-container">
-                            <h1>Your watched listings</h1>
-                            <ul>
+                            <h1 className="watchlist-header">Your watched listings</h1>
+                            <ul className="watchlist-ul">
                                 {watchlistItems}
                             </ul>
                         </div>

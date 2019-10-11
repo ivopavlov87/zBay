@@ -85,8 +85,8 @@ class HomeDetail extends React.Component {
             conditionalTimer = <div><Timer date={bidTime} /></div>
           }
 
-          const images = data.home.images.map(image => {
-            return <div><Image className='image-slide' cloudName={token2} publicId={image} /></div>
+          const images = data.home.images.map((image, i) => {
+            return <div key={i}><Image className='image-slide' cloudName={token2} publicId={image} /></div>
           });
          
           return (
@@ -135,14 +135,14 @@ class HomeDetail extends React.Component {
                             <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
-                            {/* <input className="bid-submit" type="submit" value="Add to Watchlist"/> */}
                           <div className="bid-success">
                             <h5>{this.state.message}</h5>
                           </div>
                         </div>
                       )}
                     </Mutation>
-                    <AddButtonContainer homeId={data.home._id}/>
+                    <AddButtonContainer homeId={data.home._id} />
+                    
                   </div>
                   <div className="show-info-box" key={data.home._id}>
                     <h1 className="show-info-text">{data.home.name}</h1>
