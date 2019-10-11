@@ -12,7 +12,14 @@ const HomeType = require("./home_type");
 const Home = mongoose.model("home");
 
 const BidType = require("./bid_type");
-const Bid = mongoose.model("bid")
+const Bid = mongoose.model("bid");
+
+const WatchlistType = require("./watchlist_type");
+const Watchlist = mongoose.model("watchlist");
+
+// defined, never used . . . take out????
+const ImageType = require('./image_type');
+const Image = mongoose.model('image');
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -61,7 +68,7 @@ const RootQueryType = new GraphQLObjectType({
       args: { searchQuery: { type: GraphQLString }},
       resolve(_, { searchQuery }) {
         if (searchQuery === ""){
-          return Home.find({})
+          return Home.find({});
         }
         return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
       }
@@ -106,7 +113,7 @@ const RootQueryType = new GraphQLObjectType({
     bids: {
       type: new GraphQLList(BidType),
       resolve(){
-        return Bid.find({})
+        return Bid.find({});
       }
 
     },
@@ -114,7 +121,7 @@ const RootQueryType = new GraphQLObjectType({
       type: BidType,
       args: { _id: { type: GraphQLNonNull(GraphQLID)}},
       resolve(_, { _id }){
-        return Bid.findById(_id)
+        return Bid.findById(_id);
       }
     },
     homeBids: {
@@ -122,8 +129,15 @@ const RootQueryType = new GraphQLObjectType({
       args: { _homeId: { type: GraphQLID }},
       resolve(_, { _homeId }){
 
-        return Home.findBids(_homeId)
+        return Home.findBids(_homeId);
 
+      }
+    },
+    watchlist: {
+      type: WatchlistType,
+      args: { _id: { type: GraphQLID }},
+      resolve(_, { _id }) {
+        return Watchlist.findById(_id)
       }
     }
   })

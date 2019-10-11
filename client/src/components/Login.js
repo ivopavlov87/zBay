@@ -42,7 +42,7 @@ class Login extends Component {
         onCompleted={data => {
           const { token } = data.login;
           localStorage.setItem("auth-token", token);
-          // this.props.history.push("/");
+
         }}
         onError={err => {
           this.setState({ errors: err });
@@ -116,4 +116,5 @@ class Login extends Component {
     );
   }
 }
+
 export default Login;

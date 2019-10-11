@@ -2,8 +2,8 @@ import React from 'react';
 import MapGL from 'react-map-gl';
 import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
-import { useQuery, useApolloClient } from 'react-apollo-hooks'
-import {withApolloHook} from './with_apollo_hook'
+import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import {withApolloHook} from './with_apollo_hook';
 import { withRouter } from 'react-router-dom';
 import zBayIcon from "./test1.ico"
 import reactIcon from "./test1.ico"
@@ -26,8 +26,7 @@ const homeLocations = [
 
  class TheMap extends React.Component {
    constructor(props){
-     super(props)
-     debugger
+     super(props);
       this.state = {
         viewport: {
           width: 400,

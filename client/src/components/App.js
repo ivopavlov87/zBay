@@ -12,8 +12,9 @@ import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
 import MapSerchBar from "./map/map_search";
-// import MapSerchBar from "./map/coordinates_assigner";
 import DropdownMenu from './search/DropdownMenu';
+import Watchlist from './watchlist/watchlist'
+
 require('dotenv').config();
 
 const App = (props) => {
@@ -22,18 +23,18 @@ const App = (props) => {
       <ApolloConsumer >
       {(cache) => (
       <div className="main">
-        {/* <header> */}
+
           <Nav />
           <Route exact path="/home" component={SearchBar}/>
-        {/* </header> */}
+
         <DropdownMenu />
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
           <Route exact path="/homes/:id" component={HomeDetail} />
-              {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
-              {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
+
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
-          <Route path="/" component={() => <MapSerchBar />} />
+          <Route exact path="/" component={() => <MapSearchBar />} />
+          <Route exact path="/watchlist" component={Watchlist} />
           <Redirect to="/" />
         </Switch>
       </div>

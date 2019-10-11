@@ -61,6 +61,7 @@ header{
   border: 1px solid lightgray;
   color: rgb(11, 70, 230);
   cursor: pointer;
+  font-weight: 800;
 }
 
 .navbar-link{

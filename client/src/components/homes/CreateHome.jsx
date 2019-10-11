@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-
+import Dropzone from 'react-dropzone'
+import { uploadImage } from "../../util/image_api_util";
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
 import CoordinateFinder from "../map/coordinates_assigner";
@@ -9,12 +12,16 @@ const { FETCH_HOMES } = Queries;
 const mapToken = process.env.REACT_APP_TOKEN
 
 
+
+const token2 = process.env.REACT_APP_TOKEN2
+const token3 = process.env.REACT_APP_TOKEN3
+
+
 class CreateHome extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      message: "",
       name: "",
       streetAddress: "",
       city: "",
@@ -30,8 +37,35 @@ class CreateHome extends Component {
       basement: false,
       searchField: "",
       coordinates: [],
-      viewport: {}
+      viewport: {},
+      pictures: [],
+      images: []
     };
+
+    this.files = [];
+    this.handleOnDrop = this.handleOnDrop.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // handleOnDrop(files, rejectedFiles) {
+  //   console.log(files)
+  //   console.log('rejected files are', rejectedFiles)
+
+  //   files.forEach(file => {
+  //     const imageObj = new FormData();
+  //     imageObj.append('image', file);
+  //     let newPictures = this.state.pictures.slice();
+  //     newPictures.push(imageObj);
+  //     this.setState({pictures: newPictures})
+  //   })
+  // }
+
+  handleOnDrop(e) {
+    e.preventDefault();
+    const files = Array.from(e.target.files);
+    for (let i = 0; i < files.length; i++) {
+      this.files.push(files[i]);
+    }
   }
 
   update(field) {
@@ -62,7 +96,23 @@ class CreateHome extends Component {
   }
 
   handleFileSelect(files) {
-    console.log(files)
+    console.log(files);
+  }
+
+  async updateImageURLs() {
+    const publicIdsArray = [];
+    for (let i = 0; i < this.files.length; i++) {
+      const formData = new FormData();
+      formData.append('file', this.files[i]);
+      formData.append('upload_preset', token3);
+      const image = await axios.post(
+        `https://api.cloudinary.com/v1_1/${token2}/image/upload`,
+        formData
+      )
+
+      publicIdsArray.push(image.data.public_id);
+    }
+    return publicIdsArray;
   }
 
   async handleSubmit(e, newHome) {
@@ -78,7 +128,8 @@ class CreateHome extends Component {
       debugger
        return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})});
       debugger
-    newHome({
+    this.updateImageURLs().then(images => {
+      newHome({
       variables: {
         name: this.state.name,
         streetAddress: this.state.streetAddress,
@@ -93,11 +144,63 @@ class CreateHome extends Component {
         bathrooms: parseFloat(this.state.bathrooms),
         garage: this.state.garage,
         basement: this.state.basement,
-        searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`,
-        coordinates: this.state.coordinates
+        coordinates: this.state.coordinates,
+        images: images,
+        searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
       }
-    });
+      }).then(response => {
+        this.setState({
+          name: "",
+          streetAddress: "",
+          city: "",
+          state: "",
+          zipcode: "",
+          sqft: "",
+          stories: "",
+          description: "",
+          bathrooms: "",
+          bedrooms: "",
+          yearBuilt: "",
+          garage: false,
+          basement: false,
+          searchField: "",
+          // pictures: [],
+          images: []
+        });
+        this.files = [];
+        this.props.history.push(`/homes/${response.data.newHome._id}`)
+      })
+    })
   }
+
+  //   newHome({
+  //     variables: {
+  //       name: this.state.name,
+  //       streetAddress: this.state.streetAddress,
+  //       city: this.state.city,
+  //       state: this.state.state,
+  //       zipcode: parseInt(this.state.zipcode),
+  //       description: this.state.description,
+  //       sqft: parseInt(this.state.sqft),
+  //       yearBuilt: parseInt(this.state.yearBuilt),
+  //       stories: parseInt(this.state.stories),
+  //       bedrooms: parseInt(this.state.bedrooms),
+  //       bathrooms: parseFloat(this.state.bathrooms),
+  //       garage: this.state.garage,
+  //       basement: this.state.basement,
+  //       images: images,
+  //       searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
+  //     }
+  //   }).then(payload => {
+  //     const newHomeId = payload.data.newHome._id;
+
+  //     this.state.pictures.forEach(image => {
+  //       image.append('homeId', newHomeId)
+  //       uploadImage(image);
+  //     })
+  //   })
+  // }
+
   render() {
     return (
       <Mutation
@@ -201,9 +304,13 @@ class CreateHome extends Component {
                   placeholder="Zipcode"
                 />
                 <input className="create-input"
+                  type="number"
                   onChange={this.update("yearBuilt")}
                   value={this.state.yearBuilt}
                   placeholder="Year built"
+                  min="1901"
+                  max="2019"
+                  step="1"
                 />
                 <input className="create-input"
                   onChange={this.update("sqft")}
@@ -219,6 +326,9 @@ class CreateHome extends Component {
                 />
                 
                 <input className="create-input"
+                  type="number"
+                  min="1"
+                  step="0.5"
                   onChange={this.update("bathrooms")}
                   value={this.state.bathrooms}
                   placeholder="Number of bathrooms"
@@ -229,6 +339,9 @@ class CreateHome extends Component {
                   placeholder="Number of stories"
                 />
                 <input className="create-input"
+                  type="number"
+                  min="0"
+                  step="1"
                   onChange={this.update("bedrooms")}
                   value={this.state.bedrooms}
                   placeholder="Number of bedrooms"
@@ -241,13 +354,24 @@ class CreateHome extends Component {
                   <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
                   <label>Basement</label>
                 </div>
+              {/* <div>
+                <Dropzone onDrop={this.handleOnDrop}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop some files here, or click to select files</p>
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
+              </div> */}
                 <div>
-                  Add images:
-                  <br />
-                  <input type="file" 
-                  onChange={this.handleFileSelect}
-                  multiple />
-                </div>
+                <label>
+                  Add Images: &nbsp;
+                  <input type="file" multiple onChange={this.handleOnDrop} />
+                </label>
+              </div>
                 <button className="create-submit" type="submit">Create Home</button>
               </div>
             </form>
@@ -259,4 +383,4 @@ class CreateHome extends Component {
   }
 }
 
-export default CreateHome;
+export default withRouter(CreateHome);

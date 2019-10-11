@@ -109,7 +109,7 @@
 }
 
 .show-bidding-box{
-    height: 39%;
+    height: 59%;
     width: 99%;
     display: flex;
     flex-direction: column;
@@ -123,7 +123,7 @@
 }
 
 .show-info-box{
-    height: 59%;
+    height: 39%;
     width: 99%;
     display: flex;
     flex-direction: column;
@@ -192,3 +192,135 @@
     margin-left: 50vw;
 }
 
+.auction-alert-text{
+    color: red;
+    border: 1px solid gray;
+    border-radius: 2px;
+    padding: 8px 10px;
+    font-weight: 700;
+}
+
+
+.home-detail-slideshow-container {
+	position: relative;
+    margin: 0 auto;
+    width: 500px;
+    background: #fff;
+	height: 500px;
+	overflow: hidden;
+	margin-bottom: 15px;	
+}
+.image-slide img {
+	height: 500px;
+	width: 500px;
+}
+
+.slick-list {
+	height: 100%;
+}
+
+.slick-prev {
+    visibility: hidden;
+  	display: block;
+
+	font-size: 30px;
+	line-height: 1.5;
+	top: 45%;
+	width: 50px;
+	height: 50px;
+	transform: translate(0,-50%);
+	cursor: pointer;
+
+	color:blue;
+	border: none;
+	position: absolute;
+	left: 10px;
+	padding: 0;
+	z-index: 15
+}
+
+.slick-next {
+  	visibility: hidden;
+	display: block;
+
+	font-size: 30px;
+	line-height: 1.5;
+	top: 45%;
+	width: 50px;
+	height: 50px;
+	transform: translate(0,-50%);
+	cursor: pointer;
+
+	color:blue;
+	border: none;
+	position: absolute;
+	right: -15px;
+	padding: 0;
+	z-index:15
+ 
+}
+
+
+.slick-arrow.slick-prev:after {
+	content: '❮'; 
+	visibility: visible;
+	display: block;
+
+	font-size: 40px;
+	line-height: 1.5;
+	top: 50%;
+	width: 50px;
+	height: 50px;
+	transform: translate(0,-50%);
+	cursor: pointer;
+
+	color:white;
+	border: none;
+	position: absolute;
+	left: 0px;
+	padding: 0;
+	z-index:100
+
+}
+
+.slick-arrow.slick-next:after {
+	content:'❯'; 
+	visibility: visible;
+	display: block;
+
+	font-size: 40px;
+	line-height: 1.5;
+	top: 50%;
+	width: 50px;
+	height: 50px;
+	transform: translate(0,-50%);
+	cursor: pointer;
+
+	color:white;
+	border: none;
+	position: absolute;
+	right: 30px;
+	padding: 0;
+	z-index:100
+}
+
+.slick-slide {
+	margin: 0px 2px;
+	float: left;
+	height: auto;
+	overflow: hidden;
+
+}
+
+.slick-slide img {
+    width:500px;
+    height: 500px;
+}
+
+.detail-slider img {
+	height: 500px;
+}
+
+.index-slider img {
+  height: 170px;
+}

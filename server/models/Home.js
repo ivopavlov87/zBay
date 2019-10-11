@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const graphql = require("graphql");
+
 
 
 
@@ -79,7 +79,10 @@ const HomeSchema = new Schema({
   bids: [{
     type: Schema.Types.ObjectId,
     ref: 'bid'
-  }]
+  }],
+  images: [{
+    type: String,
+  }],
 });
 
 HomeSchema.statics.updateHomeCategory = (homeId, categoryId) => {

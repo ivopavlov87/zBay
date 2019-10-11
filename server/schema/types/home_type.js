@@ -12,7 +12,7 @@ const BidType = require('./bid_type')
 
 const HomeType = new GraphQLObjectType({
   name: "HomeType",
-  // remember we wrap the fields in a thunk to avoid circular dependency issues
+
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
@@ -37,6 +37,7 @@ const HomeType = new GraphQLObjectType({
     bedrooms: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
+    images: { type: new GraphQLList(GraphQLString) },
     basement: { type: GraphQLBoolean },
     searchField: { type: GraphQLString },
     bids: {
@@ -49,7 +50,8 @@ const HomeType = new GraphQLObjectType({
 
         }
       },
-    coordinates: {type: new GraphQLList(GraphQLFloat)}
+    coordinates: {type: new GraphQLList(GraphQLFloat)},
+    date: { type: GraphQLString }
   })
 });
 

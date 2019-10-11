@@ -20,6 +20,7 @@ export default {
       bathrooms
       garage
       basement
+      images
       searchField
       bids{
         amount
@@ -47,9 +48,12 @@ export default {
         bathrooms
         garage
         basement
+        images
         searchField
+        date
         bids {
           amount
+          date
           user{
             username
           }
@@ -57,6 +61,24 @@ export default {
       }
     }
   `,
+  FETCH_IMAGE: gql`
+      query FetchImage($id: String!){
+        image(id: $id){
+          id
+          name
+          publicId
+        }
+      }
+    `,
+  FETCH_IMAGES: gql`
+      query FetchImages{
+        images{
+          id
+          name
+          publicId
+        }
+      }
+    `,
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
       isLoggedIn @client
@@ -73,6 +95,14 @@ export default {
         sqft
         stories
         coordinates
+        images
+        bids{
+          amount
+          date
+          user{
+            username
+          }
+        }
       }
     }
   `,
@@ -128,11 +158,33 @@ export default {
         yearBuilt
         garage
         basement
+        images
         bedrooms
         bathrooms
         sqft
         stories
       }
+    }
+  `,
+  FETCH_USER: gql`
+    query FetchUser($id: ID!) {
+      user(_id: $id){
+        _id
+        username
+        email
+        watchlist{
+          _id
+          homes{
+            name
+            streetAddress
+          }
+        }
+      }
+    }
+  `,
+  FETCH_USER_ID: gql`
+    {
+      _id @client
     }
   `
 };
