@@ -118,7 +118,7 @@ h1.map-search-title {
   color: rgb(10, 10, 20);
   font-size: 22px;
 }
-.mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+/* .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
   display: flex;
   align-items: center;
-}
+} */

@@ -31,28 +31,9 @@ export default {
           username
           _id
         }
-        name
-        description
-        yearBuilt
-        streetAddress
-        city
-        state
-        zipcode
-        sqft
-        stories
-        bedrooms
-        bathrooms
-        garage
-        basement
-        searchField
-        bids {
-          amount
-          user {
-            username
-          }
-        }
       }
     }
+  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
