@@ -34,9 +34,10 @@ UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
     return Home.findById(homeId).then(home => {
       if (user.watchlist.includes(home)){
         return 
+      } else {
+        user.watchlist.push(home)
+        return user.save().then(user => user.watchlist)
       }
-      user.watchlist.push(home)
-      return user.save().then(user => user.watchlist)
     })
   })
 }
