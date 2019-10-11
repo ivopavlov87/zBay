@@ -50,9 +50,20 @@ cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
     _id: null,
-    results: []
+    results: [],
+    viewport: ""
   }
 });
+
+const Root = () => {
+  return (
+    <ApolloProvider client={client}>
+       <ApolloHooksProvider client={client}>
+          <App />
+       </ApolloHooksProvider>
+    </ApolloProvider>
+  );
+};
 
 // then if we do have a token we'll go through with our mutation
 if (token) {
@@ -65,7 +76,8 @@ if (token) {
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
           _id: data.verifyUser._id,
-          results: []
+          results: [],
+          viewport: ""
         }
       });
       ReactDOM.render(<Root />, document.getElementById('root'));
@@ -74,15 +86,6 @@ if (token) {
   ReactDOM.render(<Root />, document.getElementById('root'));
 }
 
-const Root = () => {
-  return (
-    <ApolloProvider client={client}>
-       <ApolloHooksProvider client={client}>
-          <App />
-       </ApolloHooksProvider>
-    </ApolloProvider>
-  );
-};
 
 
 
