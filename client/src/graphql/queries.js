@@ -19,6 +19,7 @@ export default {
       bedrooms
       bathrooms
       garage
+      price
       basement
       images
       searchField
@@ -48,6 +49,7 @@ export default {
         bathrooms
         garage
         basement
+        price
         images
         searchField
         date
@@ -96,6 +98,7 @@ export default {
         stories
         coordinates
         images
+        price
         bids{
           amount
           date
@@ -187,6 +190,7 @@ export default {
           bathrooms
           sqft
           stories
+          price
         }
       }
     }
