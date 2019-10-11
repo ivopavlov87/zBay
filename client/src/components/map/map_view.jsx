@@ -17,28 +17,30 @@ const token = process.env.REACT_APP_TOKEN
 // };
 
 const homeLocations = [
-  {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
-  {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
-  {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-  {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-  {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+  // {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
+  // {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
+  // {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+  // {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+  // {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
   ]
 
  class TheMap extends React.Component {
    constructor(props){
      super(props)
+     debugger
       this.state = {
         viewport: {
           width: 400,
           height: 400,
-          longitude: this.props.long ? this.props.long : -112.466233,
-          latitude: this.props.lat ? this.props.lat : 37.684638,
-          zoom: 7,
+          longitude: this.props.long,
+          latitude: this.props.lat,
+          zoom: 10,
           },
+          mounted: false,
           searchResultLayer: null,
           homeIconsLayer: new IconLayer({
             id: 'icon-layer',
-            data: homeLocations,//.concat(this.props.homes),
+            data: this.props.homes[0],
             pickable: true,
             // getIcon: return a string
             // iconAtlas: reactIcon,
@@ -61,12 +63,12 @@ const homeLocations = [
               //      http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
               //   */
             },
-            onClick: (home, event) => {
-              console.log(home)
+            onClick: ({object}, event) => {
+              this.props.history.push(`/homes/${object._id}`)
+              console.log(object)
               console.log(event)
             }
-        }),
-        mounted: false
+        })
       }
   };
 

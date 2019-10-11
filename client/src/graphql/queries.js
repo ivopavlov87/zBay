@@ -72,7 +72,7 @@ export default {
         bathrooms
         sqft
         stories
-
+        coordinates
       }
     }
   `,

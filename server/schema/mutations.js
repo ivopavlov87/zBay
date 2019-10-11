@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean, GraphQLList } = graphql;
 const mongoose = require("mongoose");
 
 const CategoryType = require('../schema/types/category_type')
@@ -48,7 +48,8 @@ const mutation = new GraphQLObjectType({
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
         basement: { type: GraphQLBoolean },
-        searchField: { type: GraphQLString }
+        searchField: { type: GraphQLString },
+        coordinates: {type: new GraphQLList(GraphQLFloat)}
       },
       async resolve(_, { name, 
         description,
@@ -63,7 +64,8 @@ const mutation = new GraphQLObjectType({
         garage,
         basement,
         searchField,
-        zipcode }, ctx) {
+        zipcode,
+        coordinates }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
@@ -82,7 +84,8 @@ const mutation = new GraphQLObjectType({
             garage,
             basement,
             searchField,
-            zipcode }).save();
+            zipcode,
+            coordinates }).save();
         } else {
           throw new Error('Sorry, you need to be logged in to create a home.');
         }

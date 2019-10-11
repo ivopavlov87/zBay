@@ -48,7 +48,8 @@ const HomeType = new GraphQLObjectType({
           .then(home => home.bids)
 
         }
-      }
+      },
+    coordinates: {type: new GraphQLList(GraphQLFloat)}
   })
 });
 

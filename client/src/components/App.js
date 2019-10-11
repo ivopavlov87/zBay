@@ -12,10 +12,10 @@ import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
 import MapSerchBar from "./map/map_search";
-import Map from "./map/map_view";
+// import MapSerchBar from "./map/coordinates_assigner";
 import DropdownMenu from './search/DropdownMenu';
-
 require('dotenv').config();
+
 const App = (props) => {
   return (
     <HashRouter>
