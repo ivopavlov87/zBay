@@ -7,9 +7,10 @@ import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
 import { Image } from 'cloudinary-react';
+import AddButtonContainer from "../watchlist/AddButtonContainer";
 
-const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
-const { CREATE_BID } = Mutations;
+const { FETCH_HOME, FETCH_BIDS } = Queries;
+const { CREATE_BID, ADD_HOME } = Mutations;
 
 const token2 = process.env.REACT_APP_TOKEN2
 
@@ -134,18 +135,20 @@ class HomeDetail extends React.Component {
                             <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
-                            <input className="bid-submit" type="submit" value="Add to Watchlist"/>
+                            {/* <input className="bid-submit" type="submit" value="Add to Watchlist"/> */}
                           <div className="bid-success">
                             <h5>{this.state.message}</h5>
                           </div>
                         </div>
                       )}
                     </Mutation>
+                    <AddButtonContainer homeId={data.home._id}/>
                   </div>
                   <div className="show-info-box" key={data.home._id}>
                     <h1 className="show-info-text">{data.home.name}</h1>
                     <h2 className="show-info-text">{data.home.description}</h2>
                     <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
+                    <h5 className="show-info-text">Starting price: {data.home.price}</h5>
                     <h5 className="show-info-text">{data.home.streetAddress}</h5>
                     <h5 className="show-info-text">{data.home.city}</h5>
                     <h5 className="show-info-text">{data.home.state}</h5>

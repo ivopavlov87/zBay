@@ -14,8 +14,8 @@ const User = mongoose.model("user");
 const BidType = require("../schema/types/bid_type");
 const Bid = mongoose.model('bid');
 
-const WatchlistType = require("../schema/types/watchlist_type");
-const Watchlist = mongoose.model("watchlist")
+// const WatchlistType = require("../schema/types/watchlist_type");
+// const Watchlist = mongoose.model("watchlist")
 
 const ImageType = require('./types/image_type');
 const Image = mongoose.model('image');
@@ -51,6 +51,7 @@ const mutation = new GraphQLObjectType({
         state: { type: GraphQLString },
         yearBuilt: { type: GraphQLInt },
         sqft: { type: GraphQLInt },
+        price: { type: GraphQLInt },
         zipcode: { type: GraphQLInt },
         stories: { type: GraphQLInt },
         bedrooms: { type: GraphQLInt },
@@ -76,6 +77,7 @@ const mutation = new GraphQLObjectType({
         images,
         searchField,
         zipcode,
+        price,
         coordinates }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
@@ -98,6 +100,7 @@ const mutation = new GraphQLObjectType({
             images,
             searchField,
             zipcode,
+            price,
             coordinates }).save();
         } else {
           throw new Error("Sorry, you need to be logged in to create a home.");
@@ -213,7 +216,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Bid({
-            user: validUser.userId,
+            user: validUser._id,
             home: args.homeId,
             amount: args.amount
           })
@@ -229,32 +232,19 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
-    createWatchlist: {
-      type: WatchlistType,
-      args: { userId: { type: GraphQLID }},
+    addHomeToWatchlist: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        homeId: { type: GraphQLID }
+      },
       async resolve(_, args, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
-          return new Watchlist({
-            user: args.userId
-          }).save().then(watchlist => {
-            return User.findById(args.userId).then(user => {
-              console.log(args.userId)
-              user.watchlist = watchlist
-              return user.save()
-            })
-          }).then(watchlist => watchlist)
+          return User.addHomeToWatchlist(args.userId, args.homeId)
+        } else {
+          throw new Error("Sorry, you must be logged in to add to watchlist.")
         }
-      }
-    },
-    addHomeToWatchlist: {
-      type: WatchlistType,
-      args: {
-        watchlistId: { type: GraphQLID },
-        homeId: { type: GraphQLID }
-      },
-      resolve(_, { watchlistId, homeId }) {
-        return Watchlist.addHome(watchlistId, homeId)
       }
     }
   }

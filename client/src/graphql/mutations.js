@@ -28,8 +28,8 @@ export default {
     }
   `,
   CREATE_HOME: gql`
-    mutation CreateHome($name: String!, $description: String!, $sqft: Int!, $stories: Int!, $bedrooms: Int!, $bathrooms: Float!, $streetAddress: String!, $city: String!, $state: String!, $zipcode: Int!, $yearBuilt: Int!, $garage: Boolean!, $basement: Boolean!, $searchField: String!, $images: [String], $coordinates: [Float]) {
-      newHome(name: $name, description: $description, sqft: $sqft, stories: $stories, bedrooms: $bedrooms, bathrooms: $bathrooms, streetAddress: $streetAddress, city: $city, state: $state, zipcode: $zipcode, yearBuilt: $yearBuilt, garage: $garage, basement: $basement, searchField: $searchField, , images: $images, coordinates: $coordinates) { 
+    mutation CreateHome($name: String!, $description: String!, $sqft: Int!, $stories: Int!, $bedrooms: Int!, $bathrooms: Float!, $streetAddress: String!, $city: String!, $state: String!, $zipcode: Int!, $yearBuilt: Int!, $garage: Boolean!, $basement: Boolean!, $searchField: String!, $images: [String], $coordinates: [Float], $price: Int!) {
+      newHome(name: $name, description: $description, sqft: $sqft, stories: $stories, bedrooms: $bedrooms, bathrooms: $bathrooms, streetAddress: $streetAddress, city: $city, state: $state, zipcode: $zipcode, yearBuilt: $yearBuilt, garage: $garage, basement: $basement, searchField: $searchField, , images: $images, coordinates: $coordinates, price: $price) { 
         _id
         name
         description
@@ -42,6 +42,7 @@ export default {
         bedrooms
         bathrooms
         garage
+        price
         basement
         images
         yearBuilt
@@ -101,20 +102,12 @@ export default {
       }
     }
   `,
-  CREATE_WATCHLIST: gql`
-    mutation CreateWatchlist($userId: ID) {
-      createWatchlist(userId: $userId){
+  ADD_HOME: gql`
+    mutation AddHome($userId: ID, $homeId: ID) {
+      addHomeToWatchlist(userId: $userId, homeId: $homeId) {
         _id
-        user{
-          _id
-          username
-        }
+        username
       }
     }
   `
-  // OPEN_MODAL: gql`
-  //   mutation openModal {
-  //     openModal @client
-  //   }
-  // `
 };

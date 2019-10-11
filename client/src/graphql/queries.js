@@ -21,6 +21,7 @@ export default {
       bedrooms
       bathrooms
       garage
+      price
       basement
       images
       searchField
@@ -50,6 +51,7 @@ export default {
         bathrooms
         garage
         basement
+        price
         images
         searchField
         date
@@ -98,6 +100,7 @@ export default {
         stories
         coordinates
         images
+        price
         bids{
           amount
           date
@@ -177,10 +180,20 @@ export default {
         email
         watchlist{
           _id
-          homes{
-            name
-            streetAddress
-          }
+          name
+          streetAddress
+          city
+          state
+          zipcode
+          yearBuilt
+          garage
+          basement
+          images
+          bedrooms
+          bathrooms
+          sqft
+          stories
+          price
         }
       }
     }
