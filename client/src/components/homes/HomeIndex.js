@@ -28,7 +28,7 @@ const HomeIndex = ({cache}) => {
   
           return (
             <div className="home-index">
-              <Map homes={data.homes}/>
+              <Map homes={data.results}/>
               <div className="ul-container">
   
                 <ul className="homes-ul">

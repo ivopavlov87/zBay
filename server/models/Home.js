@@ -73,6 +73,9 @@ const HomeSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  coordinates: [{
+    type: Number 
+  }],
   bids: [{
     type: Schema.Types.ObjectId,
     ref: 'bid'
