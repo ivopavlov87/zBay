@@ -25,6 +25,7 @@ class HomeDetail extends React.Component {
   }
 
  
+  // just some useless comments here
 
   update(field){
     return (e) => {
