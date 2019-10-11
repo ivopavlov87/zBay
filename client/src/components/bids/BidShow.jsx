@@ -12,11 +12,14 @@ class BidShow extends React.Component {
         let maxBid = 0;
         let maxBidder = "";
         this.props.bids.forEach(bid => {
-            if (bid.amount > maxBid){
+            if (!bid.user){
+                return
+            }
+            if (bid.amount > maxBid && bid.user){
                 maxBid = bid.amount
                 maxBidder = bid.user.username
             }
-        })
+        });
         if (maxBid === 0){
             return (
                 <div className="show-high-bid">

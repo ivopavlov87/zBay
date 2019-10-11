@@ -7,8 +7,12 @@ const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
 
-const Home = mongoose.model("home")
-const BidType = require('./bid_type')
+const Home = mongoose.model("home");
+const BidType = require('./bid_type');
+// const UserType = require("./user_type");
+const User = mongoose.model("user");
+
+
 
 const HomeType = new GraphQLObjectType({
   name: "HomeType",
@@ -16,25 +20,37 @@ const HomeType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
-    category: { 
-      type: require('./category_type'),
+    user: {
+      type: require("./user_type"),
       resolve(parentValue) {
-        return Category.findById(parentValue.category)
-          // .populate("category")
-          .then(category => {
-            return category
-          });
+        // console.log(parentValue.user)
+        return User.findById(parentValue.user).then(user => {
+          return user;
+        });
       }
-     },
-    description: { type: GraphQLString},
-    streetAddress: { type: GraphQLString},
-    city: { type: GraphQLString},
-    state: { type: GraphQLString},
+    },
+    category: {
+      type: require("./category_type"),
+      resolve(parentValue) {
+        return (
+          Category.findById(parentValue.category)
+            // .populate("category")
+            .then(category => {
+              return category;
+            })
+        );
+      }
+    },
+    description: { type: GraphQLString },
+    streetAddress: { type: GraphQLString },
+    city: { type: GraphQLString },
+    state: { type: GraphQLString },
     yearBuilt: { type: GraphQLInt },
     sqft: { type: GraphQLInt },
     zipcode: { type: GraphQLInt },
     stories: { type: GraphQLInt },
     bedrooms: { type: GraphQLInt },
+    price: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
     images: { type: new GraphQLList(GraphQLString) },
@@ -42,8 +58,7 @@ const HomeType = new GraphQLObjectType({
     searchField: { type: GraphQLString },
     bids: {
       type: new GraphQLList(BidType),
-      resolve(parentValue){
-
+      resolve(parentValue) {
         return Home.findById(parentValue._id)
           .populate("bids")
           .then(home => home.bids)

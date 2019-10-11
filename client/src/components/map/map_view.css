@@ -39,7 +39,9 @@
   font-family: "Ivar Headline","Times New Roman",serif;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 50px;
+  white-space: nowrap;
+  font-weight: 600;
 }
 .landing-page-map-search {
   width: 100%;
@@ -115,4 +117,8 @@ h1.map-search-title {
 .mapboxgl-ctrl-geocoder--suggestion-address {
   color: rgb(10, 10, 20);
   font-size: 22px;
+}
+.mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+  display: flex;
+  align-items: center;
 }

@@ -21,6 +21,7 @@ export default {
       bedrooms
       bathrooms
       garage
+      price
       basement
       images
       searchField
@@ -28,10 +29,30 @@ export default {
         amount
         user{
           username
+          _id
+        }
+        name
+        description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        searchField
+        bids {
+          amount
+          user {
+            username
+          }
         }
       }
     }
-  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
@@ -50,13 +71,14 @@ export default {
         bathrooms
         garage
         basement
+        price
         images
         searchField
         date
         bids {
           amount
           date
-          user{
+          user {
             username
           }
         }
@@ -98,10 +120,11 @@ export default {
         stories
         coordinates
         images
+        price
         bids{
           amount
           date
-          user{
+          user {
             username
           }
         }
@@ -114,12 +137,41 @@ export default {
       viewport @client
     }
   `,
+  FETCH_USER_HOMES: gql`
+    query FetchUserHomes($userId: ID) {
+      userHomes(_userId: $homeId) {
+        _id
+        name
+        description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        searchField
+        date
+        bids {
+          amount
+          date
+          user{
+            username
+          }
+        }
+      }
+    }
+  `,
   FETCH_HOME_BIDS: gql`
     query FetchHomeBids($homeId: ID) {
       homeBids(_homeId: $homeId) {
         _id
         amount
-        user{
+        user {
           username
         }
       }
@@ -146,11 +198,41 @@ export default {
     }
   `,
   ADVANCED_SEARCH: gql`
-    query AdvancedSearch($nameQuery: String, $categoryQuery: String, $descriptionQuery: String, $streetAddressQuery: String, $cityQuery: String, $stateQuery: String, $yearBuiltQuery: Int, $sqftQuery: Int, $zipcodeQuery: Int, $storiesQuery: Int, $bedroomsQuery: Int, $bathroomsQuery: Int, $garageQuery: Boolean, $basementQuery: Boolean){
-      advancedSearch(nameQuery: $nameQuery, categoryQuery: $categoryQuery, descriptionQuery: $descriptionQuery, streetAddressQuery: $streetAddressQuery, cityQuery: $cityQuery, stateQuery: $stateQuery, yearBuiltQuery: $yearBuiltQuery, sqftQuery: $sqftQuery, zipcodeQuery: $zipcodeQuery, storiesQuery: $storiesQuery, bedroomsQuery: $bedroomsQuery, bathroomsQuery: $bathroomsQuery, garageQuery: $garageQuery, basementQuery: $basementQuery){
+    query AdvancedSearch(
+      $nameQuery: String
+      $categoryQuery: String
+      $descriptionQuery: String
+      $streetAddressQuery: String
+      $cityQuery: String
+      $stateQuery: String
+      $yearBuiltQuery: Int
+      $sqftQuery: Int
+      $zipcodeQuery: Int
+      $storiesQuery: Int
+      $bedroomsQuery: Int
+      $bathroomsQuery: Int
+      $garageQuery: Boolean
+      $basementQuery: Boolean
+    ) {
+      advancedSearch(
+        nameQuery: $nameQuery
+        categoryQuery: $categoryQuery
+        descriptionQuery: $descriptionQuery
+        streetAddressQuery: $streetAddressQuery
+        cityQuery: $cityQuery
+        stateQuery: $stateQuery
+        yearBuiltQuery: $yearBuiltQuery
+        sqftQuery: $sqftQuery
+        zipcodeQuery: $zipcodeQuery
+        storiesQuery: $storiesQuery
+        bedroomsQuery: $bedroomsQuery
+        bathroomsQuery: $bathroomsQuery
+        garageQuery: $garageQuery
+        basementQuery: $basementQuery
+      ) {
         _id
         name
-        category{
+        category {
           name
         }
         description
@@ -177,10 +259,20 @@ export default {
         email
         watchlist{
           _id
-          homes{
-            name
-            streetAddress
-          }
+          name
+          streetAddress
+          city
+          state
+          zipcode
+          yearBuilt
+          garage
+          basement
+          images
+          bedrooms
+          bathrooms
+          sqft
+          stories
+          price
         }
       }
     }

@@ -58,9 +58,9 @@ cache.writeData({
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-       <ApolloHooksProvider client={client}>
-          <App />
-       </ApolloHooksProvider>
+      <ApolloHooksProvider client={client}>
+        <App />
+      </ApolloHooksProvider>
     </ApolloProvider>
   );
 };
