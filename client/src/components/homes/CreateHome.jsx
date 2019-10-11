@@ -6,7 +6,6 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
-import CoordinateFinder from "../map/coordinates_assigner";
 const { CREATE_HOME } = Mutations;
 const { FETCH_HOMES } = Queries;
 const mapToken = process.env.REACT_APP_TOKEN
