@@ -38,7 +38,8 @@ class CreateHome extends Component {
       searchField: "",
       coordinates: [],
       viewport: {},
-      pictures: [],
+      price: "",
+      // pictures: [],
       images: []
     };
 
@@ -125,9 +126,9 @@ class CreateHome extends Component {
     await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`)
     .then(response => response.json())
     .then(data => {
-      debugger
+      // debugger
        return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})});
-      debugger
+      // debugger
     this.updateImageURLs().then(images => {
       newHome({
       variables: {
@@ -139,6 +140,7 @@ class CreateHome extends Component {
         description: this.state.description,
         sqft: parseInt(this.state.sqft),
         yearBuilt: parseInt(this.state.yearBuilt),
+        price: parseInt(this.state.price),
         stories: parseInt(this.state.stories),
         bedrooms: parseInt(this.state.bedrooms),
         bathrooms: parseFloat(this.state.bathrooms),
@@ -164,6 +166,7 @@ class CreateHome extends Component {
           garage: false,
           basement: false,
           searchField: "",
+          price: "",
           // pictures: [],
           images: []
         });
@@ -213,7 +216,7 @@ class CreateHome extends Component {
         onCompleted={data => {
           const { name } = data.newHome;
           this.setState({
-            message: `New home ${name} created successfully`
+            message: `New listing: ${name}, created successfully`
           });
         }}
       >
@@ -313,9 +316,16 @@ class CreateHome extends Component {
                   step="1"
                 />
                 <input className="create-input"
+                  type="number"
                   onChange={this.update("sqft")}
                   value={this.state.sqft}
                   placeholder="Square footage"
+                />
+                <input className="create-input"
+                  type="number"
+                  onChange={this.update("price")}
+                  value={this.state.price}
+                  placeholder="Starting price"
                 />
               </div>
               <div className="create-form-right">
