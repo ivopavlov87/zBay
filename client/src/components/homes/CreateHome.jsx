@@ -6,7 +6,6 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
-import CoordinateFinder from "../map/coordinates_assigner";
 const { CREATE_HOME } = Mutations;
 const { FETCH_HOMES } = Queries;
 const mapToken = process.env.REACT_APP_TOKEN
@@ -126,9 +125,8 @@ class CreateHome extends Component {
     await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`)
     .then(response => response.json())
     .then(data => {
-      // debugger
-       return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})});
-      // debugger
+       return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})
+      });
     this.updateImageURLs().then(images => {
       newHome({
       variables: {

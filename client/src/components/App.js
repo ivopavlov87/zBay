@@ -11,6 +11,9 @@ import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
+import UserProfile from "./homes/UserProfile";
+
+
 import MapSearchBar from "./map/map_search";
 import DropdownMenu from './search/DropdownMenu';
 import Watchlist from './watchlist/watchlist'
@@ -31,7 +34,9 @@ const App = (props) => {
         <Switch>
           <Route exact path="/homes/new" component={CreateHome} />
           <Route exact path="/homes/:id" component={HomeDetail} />
-
+              {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
+              {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
+          <Route exact path="/user/:id" component={UserProfile} />
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
           <Route exact path="/" component={() => <MapSearchBar />} />
           <Route exact path="/watchlist" component={Watchlist} />

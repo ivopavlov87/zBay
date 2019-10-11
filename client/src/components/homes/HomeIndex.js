@@ -10,6 +10,7 @@ import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
 import "./home_index.css";
 import DeleteHome from "./DeleteHome";
+import { withRouter } from 'react-router-dom';
 
 import { Image } from 'cloudinary-react';
 
@@ -23,12 +24,12 @@ const HomeIndex = ({cache}) => {
     return (
       <Query query={FETCH_HOMES}>
          {({ loading, error, data }) => {
+           debugger
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-  
           return (
             <div className="home-index">
-              <Map homes={data.results}/>
+              <Map homes={data.homes}/>
               <div className="ul-container">
   
                 <ul className="homes-ul">
