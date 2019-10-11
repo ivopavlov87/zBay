@@ -6,6 +6,7 @@ export default {
   FETCH_HOMES: gql`
   query FetchHomes {
     results @client
+    viewport @client
     homes {
       _id
       name

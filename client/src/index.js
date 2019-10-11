@@ -50,7 +50,8 @@ cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
     _id: null,
-    results: []
+    results: [],
+    viewport: ""
   }
 });
 
@@ -76,7 +77,8 @@ if (token) {
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
           _id: data.verifyUser._id,
-          results: []
+          results: [],
+          viewport: ""
         }
       });
       ReactDOM.render(<Root />, document.getElementById('root'));
