@@ -291,7 +291,7 @@ class CreateHome extends Component {
                     <option value="Texas">TX - Texas</option>
                     <option value="Utah">UT - Utah</option>
                     <option value="Virginia">VA - Virginia</option>
-                    <option value="Virgin Islands">VI - Virgin Islands</option>
+                    <option value="British Virgin Islands">VI - Virgin Islands</option>
                     <option value="Vermont">VT - Vermont</option>
                     <option value="Washington">WA - Washington</option>
                     <option value="Wisconsin">WI - Wisconsin</option>
