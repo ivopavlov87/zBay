@@ -135,13 +135,6 @@ const RootQueryType = new GraphQLObjectType({
       resolve(_, { _homeId }) {
         return Home.findBids(_homeId);
       }
-    },
-    userHomes: {
-      type: new GraphQLList(HomeType),
-      args: { _userId: { type: GraphQLID } },
-      resolve(_, { _userId }) {
-        return Home.find({user: _userId});
-      }
     }
   })
 });
