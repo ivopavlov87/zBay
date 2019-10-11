@@ -26,21 +26,25 @@ class MapSearchBar extends React.Component {
   geocoderContainerRef = React.createRef();
 
   handleOnResult = event => {
-    this.setState({
-    //   searchResultLayer: new GeoJsonLayer({
-    //     id: "search-result",
-    //     data: event.result.geometry,
-    //     getFillColor: [255, 0, 0, 128],
-    //     getRadius: 1000,
-    //     pointRadiusMinPixels: 10,
-    //     pointRadiusMaxPixels: 10}),
-      viewport: event.result
-    })
-    this.finished()
+    let cacheViewport = event.result;
+    if(this){
+      this.setState({
+        viewport: event.result
+      //   searchResultLayer: new GeoJsonLayer({
+      //     id: "search-result",
+      //     data: event.result.geometry,
+      //     getFillColor: [255, 0, 0, 128],
+      //     getRadius: 1000,
+      //     pointRadiusMinPixels: 10,
+      //     pointRadiusMaxPixels: 10}),
+      })
+      cacheViewport = this.state.viewport
+    }
+    this.finished(cacheViewport)
   }
 
-  finished(){
-    this.props.setCache(this.state.viewport)
+  finished(viewport){
+    this.props.setCache(viewport)
     this.props.history.push("/home")
   }
 
@@ -69,6 +73,10 @@ class MapSearchBar extends React.Component {
               containerRef={this.geocoderContainerRef}
               onResult={this.handleOnResult}
               mapboxApiAccessToken={token}
+              placeholder={"Enter a city, state, or zipcode"}
+              // clearAndBlurOnEsc={true}
+              // inputValue={"96792"}
+              // onInit={this.geocoderDidMount}
             />
           </MapGL>
         </div>
