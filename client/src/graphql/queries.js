@@ -174,21 +174,19 @@ export default {
         email
         watchlist{
           _id
-          homes{
-            name
-            streetAddress
-            city
-            state
-            zipcode
-            yearBuilt
-            garage
-            basement
-            images
-            bedrooms
-            bathrooms
-            sqft
-            stories
-          }
+          name
+          streetAddress
+          city
+          state
+          zipcode
+          yearBuilt
+          garage
+          basement
+          images
+          bedrooms
+          bathrooms
+          sqft
+          stories
         }
       }
     }

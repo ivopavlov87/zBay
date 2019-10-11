@@ -101,20 +101,12 @@ export default {
       }
     }
   `,
-  CREATE_WATCHLIST: gql`
-    mutation CreateWatchlist($userId: ID) {
-      createWatchlist(userId: $userId){
+  ADD_HOME: gql`
+    mutation AddHome($userId: ID, $homeId: ID) {
+      addHomeToWatchlist(userId: $userId, homeId: $homeId) {
         _id
-        user{
-          _id
-          username
-        }
+        username
       }
     }
   `
-  // OPEN_MODAL: gql`
-  //   mutation openModal {
-  //     openModal @client
-  //   }
-  // `
 };
