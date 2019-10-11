@@ -35,6 +35,7 @@ const HomeType = new GraphQLObjectType({
     zipcode: { type: GraphQLInt },
     stories: { type: GraphQLInt },
     bedrooms: { type: GraphQLInt },
+    price: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
     images: { type: new GraphQLList(GraphQLString) },

@@ -51,6 +51,7 @@ const mutation = new GraphQLObjectType({
         state: { type: GraphQLString },
         yearBuilt: { type: GraphQLInt },
         sqft: { type: GraphQLInt },
+        price: { type: GraphQLInt },
         zipcode: { type: GraphQLInt },
         stories: { type: GraphQLInt },
         bedrooms: { type: GraphQLInt },
@@ -76,6 +77,7 @@ const mutation = new GraphQLObjectType({
         images,
         searchField,
         zipcode,
+        price,
         coordinates }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
@@ -98,6 +100,7 @@ const mutation = new GraphQLObjectType({
             images,
             searchField,
             zipcode,
+            price,
             coordinates }).save();
         } else {
           throw new Error("Sorry, you need to be logged in to create a home.");

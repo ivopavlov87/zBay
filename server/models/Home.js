@@ -57,6 +57,10 @@ const HomeSchema = new Schema({
     type: Number,
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
   garage: {
     type: Boolean,
     required: true
