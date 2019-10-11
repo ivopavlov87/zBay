@@ -213,7 +213,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Bid({
-            user: validUser.userId,
+            user: validUser._id,
             home: args.homeId,
             amount: args.amount
           })
