@@ -5,6 +5,8 @@ import gql from 'graphql-tag';
 export default {
   FETCH_HOMES: gql`
   query FetchHomes {
+    results @client
+    viewport @client
     homes {
       _id
       name
@@ -132,6 +134,7 @@ export default {
   FETCH_RESULTS: gql`
     query FetchCartItems {
       results @client
+      viewport @client
     }
   `,
   FETCH_USER_HOMES: gql`

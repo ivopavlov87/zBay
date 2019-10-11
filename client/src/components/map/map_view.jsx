@@ -27,6 +27,7 @@ const homeLocations = [
  class TheMap extends React.Component {
    constructor(props){
      super(props);
+     debugger
       this.state = {
         viewport: {
           width: 400,
@@ -39,7 +40,7 @@ const homeLocations = [
           searchResultLayer: null,
           homeIconsLayer: new IconLayer({
             id: 'icon-layer',
-            data: this.props.homes[0],
+            data: this.props.homes,
             pickable: true,
             // getIcon: return a string
             // iconAtlas: reactIcon,
