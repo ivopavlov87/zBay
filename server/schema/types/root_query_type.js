@@ -14,8 +14,8 @@ const Home = mongoose.model("home");
 const BidType = require("./bid_type");
 const Bid = mongoose.model("bid");
 
-const WatchlistType = require("./watchlist_type");
-const Watchlist = mongoose.model("watchlist");
+// const WatchlistType = require("./watchlist_type");
+// const Watchlist = mongoose.model("watchlist");
 
 // defined, never used . . . take out????
 const ImageType = require('./image_type');
@@ -131,13 +131,6 @@ const RootQueryType = new GraphQLObjectType({
 
         return Home.findBids(_homeId);
 
-      }
-    },
-    watchlist: {
-      type: WatchlistType,
-      args: { _id: { type: GraphQLID }},
-      resolve(_, { _id }) {
-        return Watchlist.findById(_id)
       }
     }
   })

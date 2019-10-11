@@ -1,8 +1,8 @@
 // Users have an _id, name, and email
 const mongoose = require("mongoose");
-const Watchlist = mongoose.model("watchlist")
+const User = mongoose.model("user")
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLList } = graphql;
 
 const UserType = new GraphQLObjectType({
   name: "UserType",
@@ -14,10 +14,11 @@ const UserType = new GraphQLObjectType({
     token: { type: GraphQLString },
     loggedIn: { type: GraphQLBoolean },
     watchlist: {
-      type: require("./watchlist_type"),
+      type: new GraphQLList(require("./home_type")),
       resolve(parentValue) {
-        return Watchlist.findById(parentValue.watchlist)
-          .then(watchlist => watchlist)
+        return User.findById(parentValue._id)
+          .populate("watchlist")
+          .then(user => user.watchlist)
       }
     }
   })
