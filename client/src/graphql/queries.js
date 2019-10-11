@@ -176,6 +176,17 @@ export default {
           homes{
             name
             streetAddress
+            city
+            state
+            zipcode
+            yearBuilt
+            garage
+            basement
+            images
+            bedrooms
+            bathrooms
+            sqft
+            stories
           }
         }
       }

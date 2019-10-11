@@ -54,6 +54,17 @@ cache.writeData({
   }
 });
 
+const Root = () => {
+  return (
+    <ApolloProvider client={client}>
+      <ApolloHooksProvider client={client}>
+        <App />
+      </ApolloHooksProvider>
+    </ApolloProvider>
+  );
+};
+
+
 // then if we do have a token we'll go through with our mutation
 if (token) {
   client
@@ -74,15 +85,6 @@ if (token) {
   ReactDOM.render(<Root />, document.getElementById('root'));
 }
 
-const Root = () => {
-  return (
-    <ApolloProvider client={client}>
-       <ApolloHooksProvider client={client}>
-          <App />
-       </ApolloHooksProvider>
-    </ApolloProvider>
-  );
-};
 
 
 
