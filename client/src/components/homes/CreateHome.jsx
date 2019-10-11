@@ -13,8 +13,6 @@ const { FETCH_HOMES } = Queries;
 const token2 = process.env.REACT_APP_TOKEN2
 const token3 = process.env.REACT_APP_TOKEN3
 
-// debugger;
-
 
 class CreateHome extends Component {
   constructor(props) {

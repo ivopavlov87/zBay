@@ -1,5 +1,3 @@
-//  A category simply contains a name and an array of homes.
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

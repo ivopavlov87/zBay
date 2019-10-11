@@ -1,5 +1,3 @@
-// A user has a name, an email address, a date, and a password.
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -21,6 +19,10 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  watchlist: {
+    type: Schema.Types.ObjectId,
+    ref: "watchlist"
   }
 });
 

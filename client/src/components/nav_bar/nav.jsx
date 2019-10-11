@@ -57,13 +57,14 @@ const Nav = props => {
                     </Link>
                   </div>
                   <div className="navbar-right">
-                    <button className="logout-button-nav">Your Watchlist</button>
-                    <button className="logout-button-nav"
+                    <Link to="/watchlist" className="navbar-link logout-button-nav">Watchlist</Link>
+
+                    <button className="nav-links logout-button-nav"
                       onClick={e => {
                         e.preventDefault();
                         localStorage.removeItem("auth-token");
                         client.writeData({ data: { isLoggedIn: false } });
-                        // props.history.push("/");
+ 
                       }}
                     >
                       Logout
@@ -78,8 +79,7 @@ const Nav = props => {
                   <div className="navbar-left">
                     <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Login</button>
                     <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Register</button>
-                    {/* <Link className="navbar-link" to="/login">Login</Link> */}
-                    {/* <Link className="navbar-link" to="/register">Register</Link> */}
+
                   </div>
                   <div className="zbay-icon-main">
                     <img src={zBayIcon} alt="zBay" />
