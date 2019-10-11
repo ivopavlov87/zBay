@@ -148,6 +148,7 @@ class HomeDetail extends React.Component {
                     <h1 className="show-info-text">{data.home.name}</h1>
                     <h2 className="show-info-text">{data.home.description}</h2>
                     <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
+                    <h5 className="show-info-text">Starting price: {data.home.price}</h5>
                     <h5 className="show-info-text">{data.home.streetAddress}</h5>
                     <h5 className="show-info-text">{data.home.city}</h5>
                     <h5 className="show-info-text">{data.home.state}</h5>
