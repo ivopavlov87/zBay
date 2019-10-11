@@ -49,9 +49,21 @@ const client = new ApolloClient({
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
+    _id: null,
     results: []
   }
 });
+
+const Root = () => {
+  return (
+    <ApolloProvider client={client}>
+      <ApolloHooksProvider client={client}>
+        <App />
+      </ApolloHooksProvider>
+    </ApolloProvider>
+  );
+};
+
 
 // then if we do have a token we'll go through with our mutation
 if (token) {
@@ -63,23 +75,18 @@ if (token) {
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
+          _id: data.verifyUser._id,
           results: []
         }
       });
+      ReactDOM.render(<Root />, document.getElementById('root'));
     });
+} else {
+  ReactDOM.render(<Root />, document.getElementById('root'));
 }
 
-const Root = () => {
-  return (
-    <ApolloProvider client={client}>
-       <ApolloHooksProvider client={client}>
-          <App />
-       </ApolloHooksProvider>
-    </ApolloProvider>
-  );
-};
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,12 +1,18 @@
 import React from "react";
+import Slider from 'react-slick';
 import { Query, Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
 import Mutations from "../../graphql/mutations"
 import Queries from "../../graphql/queries";
 import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
-const { FETCH_HOME, FETCH_BIDS, FETCH_HOME_BIDS } = Queries;
-const { CREATE_BID } = Mutations;
+import { Image } from 'cloudinary-react';
+import AddButtonContainer from "../watchlist/AddButtonContainer";
+
+const { FETCH_HOME, FETCH_BIDS } = Queries;
+const { CREATE_BID, ADD_HOME } = Mutations;
+
+const token2 = process.env.REACT_APP_TOKEN2
 
 class HomeDetail extends React.Component {
   constructor(props){
@@ -34,7 +40,7 @@ class HomeDetail extends React.Component {
     } catch (err) {
       return;
     }
-    // if we had previously fetched homes we'll add our new home to our cache
+
     if (bids) {
       let bidsArray = bids.bids;
       let createBid = data.createBid;
@@ -57,37 +63,46 @@ class HomeDetail extends React.Component {
   
   render() {
 
+    const imageSettings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      className: "detail-slider",
+      adaptiveHeight: true,
+    }
+
     return (
       <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
           if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
-          // let allBids = data.home.bids.map(bid => {
-          //   return (
-          //     <div className="show-bid-item">
-          //       <h4>{bid.user.username}:</h4>
-          //       <h3>${bid.amount}</h3>
-          //     </div>
-          //   )
+
           let conditionalTimer = "";
       
           if (data.home.bids.length !== 0){
             let bidTime = data.home.bids[0].date
             conditionalTimer = <div><Timer date={bidTime} /></div>
           }
+
+          const images = data.home.images.map(image => {
+            return <div><Image className='image-slide' cloudName={token2} publicId={image} /></div>
+          });
          
           return (
             <div className="home-show-container">
              
               <div className="home-show">
                 <div className="show-pics-col">
-                  <div className="show-photo">
-                  Photo
+                  <div className="home-detail-slideshow-container">
+
+                    <Slider {...imageSettings}>
+                      {images}
+                      </Slider>
+
                   </div>
                   
-                 {/* <div className="show-high-bid">
-                    {allBids}
-                 </div> */}
+
                 <BidShow bids={data.home.bids} />
                 </div>
                 <div className="show-info-col">
@@ -120,18 +135,20 @@ class HomeDetail extends React.Component {
                             <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
-                            <input className="bid-submit" type="submit" value="Add to Watchlist"/>
+                            {/* <input className="bid-submit" type="submit" value="Add to Watchlist"/> */}
                           <div className="bid-success">
                             <h5>{this.state.message}</h5>
                           </div>
                         </div>
                       )}
                     </Mutation>
+                    <AddButtonContainer homeId={data.home._id}/>
                   </div>
                   <div className="show-info-box" key={data.home._id}>
                     <h1 className="show-info-text">{data.home.name}</h1>
                     <h2 className="show-info-text">{data.home.description}</h2>
                     <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
+                    <h5 className="show-info-text">Starting price: {data.home.price}</h5>
                     <h5 className="show-info-text">{data.home.streetAddress}</h5>
                     <h5 className="show-info-text">{data.home.city}</h5>
                     <h5 className="show-info-text">{data.home.state}</h5>

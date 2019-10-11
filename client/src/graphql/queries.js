@@ -4,10 +4,28 @@ import gql from 'graphql-tag';
 
 export default {
   FETCH_HOMES: gql`
-    query FetchHomes {
-      homes {
-        _id
-        user {
+  query FetchHomes {
+    homes {
+      _id
+      name
+      description
+      yearBuilt
+      streetAddress
+      city
+      state
+      zipcode
+      sqft
+      stories
+      bedrooms
+      bathrooms
+      garage
+      price
+      basement
+      images
+      searchField
+      bids{
+        amount
+        user{
           username
           _id
         }
@@ -51,6 +69,8 @@ export default {
         bathrooms
         garage
         basement
+        price
+        images
         searchField
         date
         bids {
@@ -63,6 +83,24 @@ export default {
       }
     }
   `,
+  FETCH_IMAGE: gql`
+      query FetchImage($id: String!){
+        image(id: $id){
+          id
+          name
+          publicId
+        }
+      }
+    `,
+  FETCH_IMAGES: gql`
+      query FetchImages{
+        images{
+          id
+          name
+          publicId
+        }
+      }
+    `,
   IS_LOGGED_IN: gql`
     query IsUserLoggedIn {
       isLoggedIn @client
@@ -78,7 +116,10 @@ export default {
         bathrooms
         sqft
         stories
-        bids {
+        coordinates
+        images
+        price
+        bids{
           amount
           date
           user {
@@ -199,11 +240,43 @@ export default {
         yearBuilt
         garage
         basement
+        images
         bedrooms
         bathrooms
         sqft
         stories
       }
+    }
+  `,
+  FETCH_USER: gql`
+    query FetchUser($id: ID!) {
+      user(_id: $id){
+        _id
+        username
+        email
+        watchlist{
+          _id
+          name
+          streetAddress
+          city
+          state
+          zipcode
+          yearBuilt
+          garage
+          basement
+          images
+          bedrooms
+          bathrooms
+          sqft
+          stories
+          price
+        }
+      }
+    }
+  `,
+  FETCH_USER_ID: gql`
+    {
+      _id @client
     }
   `
 };

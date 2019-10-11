@@ -37,7 +37,7 @@ class Timer extends React.Component {
 
         return (
             <Countdown 
-                date={timestamp + 259200000}
+                date={timestamp + 777600000}
                 renderer={renderer}
             />
         )

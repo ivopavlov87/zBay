@@ -16,7 +16,7 @@ const User = mongoose.model("user");
 
 const HomeType = new GraphQLObjectType({
   name: "HomeType",
-  // remember we wrap the fields in a thunk to avoid circular dependency issues
+
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
@@ -50,8 +50,10 @@ const HomeType = new GraphQLObjectType({
     zipcode: { type: GraphQLInt },
     stories: { type: GraphQLInt },
     bedrooms: { type: GraphQLInt },
+    price: { type: GraphQLInt },
     bathrooms: { type: GraphQLFloat },
     garage: { type: GraphQLBoolean },
+    images: { type: new GraphQLList(GraphQLString) },
     basement: { type: GraphQLBoolean },
     searchField: { type: GraphQLString },
     bids: {
@@ -59,9 +61,11 @@ const HomeType = new GraphQLObjectType({
       resolve(parentValue) {
         return Home.findById(parentValue._id)
           .populate("bids")
-          .then(home => home.bids);
-      }
-    },
+          .then(home => home.bids)
+
+        }
+      },
+    coordinates: {type: new GraphQLList(GraphQLFloat)},
     date: { type: GraphQLString }
   })
 });

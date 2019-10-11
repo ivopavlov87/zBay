@@ -1,17 +1,26 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLID, GraphQLBoolean, GraphQLList } = graphql;
 const mongoose = require("mongoose");
 
-const CategoryType = require('../schema/types/category_type')
+const CategoryType = require('../schema/types/category_type');
 const Category = mongoose.model("category");
+
 const HomeType = require("../schema/types/home_type");
 const Home = mongoose.model("home");
+
 const UserType = require("../schema/types/user_type");
 const User = mongoose.model("user");
-const Bid = mongoose.model('bid');
-const BidType = require("../schema/types/bid_type")
 
-const AuthService = require("../services/auth")
+const BidType = require("../schema/types/bid_type");
+const Bid = mongoose.model('bid');
+
+// const WatchlistType = require("../schema/types/watchlist_type");
+// const Watchlist = mongoose.model("watchlist")
+
+const ImageType = require('./types/image_type');
+const Image = mongoose.model('image');
+
+const AuthService = require("../services/auth");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -42,15 +51,34 @@ const mutation = new GraphQLObjectType({
         state: { type: GraphQLString },
         yearBuilt: { type: GraphQLInt },
         sqft: { type: GraphQLInt },
+        price: { type: GraphQLInt },
         zipcode: { type: GraphQLInt },
         stories: { type: GraphQLInt },
         bedrooms: { type: GraphQLInt },
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
         basement: { type: GraphQLBoolean },
+        coordinates: {type: new GraphQLList(GraphQLFloat)},
+        images: { type: new GraphQLList(GraphQLString) },
         searchField: { type: GraphQLString }
       },
-      async resolve(_, { name, description, yearBuilt, sqft, bathrooms, bedrooms, stories, streetAddress, city, state, garage, basement, searchField, zipcode }, ctx) {
+      async resolve(_, { name, 
+        description,
+        yearBuilt,
+        sqft, 
+        bathrooms, 
+        bedrooms, 
+        stories, 
+        streetAddress, 
+        city, 
+        state,
+        garage,
+        basement,
+        images,
+        searchField,
+        zipcode,
+        price,
+        coordinates }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
@@ -71,10 +99,11 @@ const mutation = new GraphQLObjectType({
             state,
             garage,
             basement,
+            images,
             searchField,
-            zipcode
-          })
-          .save();
+            zipcode,
+            price,
+            coordinates }).save();
         } else {
           throw new Error("Sorry, you need to be logged in to create a home.");
         }
@@ -125,6 +154,17 @@ const mutation = new GraphQLObjectType({
         return Home.findOneAndUpdate({_id: id}, {$set: updateObj}, {new: true}, (err, home) => {
           return home;
         });
+      }
+    },
+    createImage: {
+      type: ImageType,
+      args: {
+        name: { type: GraphQLString },
+        publicId: { type: GraphQLString },
+        home: { type: GraphQLString }
+      },
+      resolve(_, { name, publicId, home }) {
+        return new Image({ name, publicId, home }).save();
       }
     },
     register: {
@@ -178,7 +218,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: ctx.token });
         if (validUser.loggedIn) {
           return new Bid({
-            user: validUser.userId,
+            user: validUser._id,
             home: args.homeId,
             amount: args.amount
           })
@@ -191,6 +231,21 @@ const mutation = new GraphQLObjectType({
             });
         } else {
           throw new Error("Sorry, you must be logged in to bid on a home.");
+        }
+      }
+    },
+    addHomeToWatchlist: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        homeId: { type: GraphQLID }
+      },
+      async resolve(_, args, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+        if (validUser.loggedIn) {
+          return User.addHomeToWatchlist(args.userId, args.homeId)
+        } else {
+          throw new Error("Sorry, you must be logged in to add to watchlist.")
         }
       }
     }

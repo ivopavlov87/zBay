@@ -6,7 +6,7 @@ const Category = mongoose.model("category");
 
 const CategoryType = new GraphQLObjectType({
   name: "CategoryType",
-  // remember we wrap the fields in a thunk to avoid circular dependency issues
+
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },

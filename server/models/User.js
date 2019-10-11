@@ -1,5 +1,3 @@
-// A user has a name, an email address, a date, and a password.
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -22,18 +20,23 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  // homes: [{
-  //     type: Schema.Types.ObjectId,
-  //     ref: "home"
-  // }]
+  watchlist: [{
+    type: Schema.Types.ObjectId,
+    ref: "home"
+  }]
 });
 
-// UserSchema.statics.findHomes = (_userId) => {
-//   const User = mongoose.model("user");
-//   return User.findById(_userId)
-//     .populate("homes")
-//     .then(user => user.homes);
-// };
+UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
+  const User = mongoose.model("user");
+  const Home = mongoose.model("home");
+
+  return User.findById(userId).then(user => {
+    return Home.findById(homeId).then(home => {
+      user.watchlist.push(home)
+      return user.save().then(user => user.watchlist)
+    })
+  })
+}
 
 
 module.exports = mongoose.model('user', UserSchema);
