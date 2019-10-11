@@ -21,8 +21,19 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  // homes: [{
+  //     type: Schema.Types.ObjectId,
+  //     ref: "home"
+  // }]
 });
+
+// UserSchema.statics.findHomes = (_userId) => {
+//   const User = mongoose.model("user");
+//   return User.findById(_userId)
+//     .populate("homes")
+//     .then(user => user.homes);
+// };
 
 
 module.exports = mongoose.model('user', UserSchema);

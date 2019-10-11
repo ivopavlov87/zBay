@@ -36,15 +36,15 @@ class CreateHome extends Component {
   }
 
   handleOnDrop(files, rejectedFiles) {
-    console.log(files)
-    console.log('rejected files are', rejectedFiles)
+    console.log(files);
+    console.log('rejected files are', rejectedFiles);
 
     files.forEach(file => {
       const imageObj = new FormData();
       imageObj.append('image', file);
       let newPictures = this.state.pictures.slice();
       newPictures.push(imageObj);
-      this.setState({pictures: newPictures})
+      this.setState({pictures: newPictures});
     })
   }
 
@@ -104,13 +104,14 @@ class CreateHome extends Component {
       const newHomeId = payload.data.newHome._id;
 
       this.state.pictures.forEach(image => {
-        image.append('homeId', newHomeId)
+        image.append('homeId', newHomeId);
         uploadImage(image);
-      })
-    })
+      });
+    });
   }
 
   render() {
+    // debugger;
     return (
       <Mutation
         mutation={CREATE_HOME}

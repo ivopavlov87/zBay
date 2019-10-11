@@ -50,32 +50,15 @@ const mutation = new GraphQLObjectType({
         basement: { type: GraphQLBoolean },
         searchField: { type: GraphQLString }
       },
-      async resolve(
-        _,
-        {
-          name,
-          description,
-          yearBuilt,
-          sqft,
-          bathrooms,
-          bedrooms,
-          stories,
-          streetAddress,
-          city,
-          state,
-          garage,
-          basement,
-          searchField,
-          zipcode
-        },
-        ctx
-      ) {
+      async resolve(_, { name, description, yearBuilt, sqft, bathrooms, bedrooms, stories, streetAddress, city, state, garage, basement, searchField, zipcode }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
+          // console.log(validUser)
           return new Home({
+            user: validUser.userId,
             name,
             description,
             yearBuilt,
@@ -90,7 +73,8 @@ const mutation = new GraphQLObjectType({
             basement,
             searchField,
             zipcode
-          }).save();
+          })
+          .save();
         } else {
           throw new Error("Sorry, you need to be logged in to create a home.");
         }
@@ -100,7 +84,7 @@ const mutation = new GraphQLObjectType({
       type: HomeType,
       args: { id: { type: GraphQLID } },
       resolve(parentValue, { id }) {
-        return Home.findByIdAndRemove({ _id: id });
+        return Home.findByIdAndRemove(id);
       }
     },
     updateHome: {
@@ -122,7 +106,7 @@ const mutation = new GraphQLObjectType({
         basement: { type: GraphQLBoolean },
         searchField: { type: GraphQLString }
       },
-      resolve(parentValue, { homeId, name, description, streetAddress, city, state, yearBuilt, sqft, zipcode, stories, bedrooms, bathrooms, garage, basement }) {
+      resolve(parentValue, { id, name, description, streetAddress, city, state, yearBuilt, sqft, zipcode, stories, bedrooms, bathrooms, garage, basement }) {
         const updateObj = {};
         updateObj.id = id;
         if (name) updateObj.name = name;

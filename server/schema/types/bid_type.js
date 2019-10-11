@@ -15,7 +15,7 @@ const BidType = new GraphQLObjectType({
             resolve(parentValue){
                 return User.findById(parentValue.user)
                     // .populate("user")
-                    .then(user => user)
+                    .then(user => user);
             } 
         },
         home: {
@@ -23,7 +23,7 @@ const BidType = new GraphQLObjectType({
             resolve(parentValue){
                 return Home.findById(parentValue.home)
                     // .populate("home")
-                    .then(home => home)
+                    .then(home => home);
             }},
         amount: { type: GraphQLInt },
         date: { type: GraphQLString }

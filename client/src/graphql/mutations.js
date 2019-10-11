@@ -47,8 +47,8 @@ export default {
   `,
   DELETE_HOME: gql`
     mutation DeleteHome($id: ID) {
-      deleteHome(id: $id) {
-        id
+      deleteHome(_id: $id) {
+        _id
       }
     }
   `,
