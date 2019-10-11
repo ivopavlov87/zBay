@@ -78,6 +78,17 @@
   justify-content: space-evenly;
 }
 
+.home-index-detail-slideshow-container {
+  box-sizing: border-box;
+	position: relative;
+  margin: 0 auto;
+  width: 300px;
+  background: #fff;
+	height: 170px;
+	overflow: hidden;
+	margin-bottom: 15px;	
+}
+
 @media all and (min-width: 1600px){
 
   .map-container{
@@ -120,19 +131,18 @@
     max-width: 330px;
     margin: 7px;
   }
-}
-
-
-.home-index-detail-slideshow-container {
+  .home-index-detail-slideshow-container {
   box-sizing: border-box;
 	position: relative;
   margin: 0 auto;
-  width: 300px;
+  width: 250px;
   background: #fff;
 	height: 170px;
 	overflow: hidden;
 	margin-bottom: 15px;	
 }
+}
+
 .index-image-slide img {
   box-sizing: border-box;
 	height: 170px;
