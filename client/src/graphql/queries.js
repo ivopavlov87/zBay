@@ -240,20 +240,22 @@ export default {
         email
         watchlist{
           _id
-          name
-          streetAddress
-          city
-          state
-          zipcode
-          yearBuilt
-          garage
-          basement
-          images
-          bedrooms
-          bathrooms
-          sqft
-          stories
-          price
+          homes{
+            name
+            streetAddress
+            city
+            state
+            zipcode
+            yearBuilt
+            garage
+            basement
+            images
+            bedrooms
+            bathrooms
+            sqft
+            price
+            stories
+          }
         }
       }
     }
