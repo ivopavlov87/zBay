@@ -316,3 +316,11 @@
     width:500px;
     height: 500px;
 }
+
+.detail-slider img {
+	height: 500px;
+}
+
+.index-slider img {
+  height: 170px;
+}

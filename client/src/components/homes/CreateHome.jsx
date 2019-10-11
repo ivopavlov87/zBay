@@ -14,8 +14,6 @@ const token2 = process.env.REACT_APP_TOKEN2
 const token3 = process.env.REACT_APP_TOKEN3
 
 
-
-
 class CreateHome extends Component {
   constructor(props) {
     super(props);
@@ -155,7 +153,7 @@ class CreateHome extends Component {
           images: []
         });
         this.files = [];
-        this.props.history.push(`/homes/${newHome.id}`)
+        this.props.history.push(`/homes/${response.data.newHome._id}`)
       })
     })
   }
