@@ -1,7 +1,7 @@
 // import React, { Component } from "react";
 import gql from 'graphql-tag';
 // import { Query } from "react-apollo";
-
+// comment to change this file 
 export default {
   FETCH_HOMES: gql`
   query FetchHomes {
