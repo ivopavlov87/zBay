@@ -63,19 +63,25 @@ const RootQueryType = new GraphQLObjectType({
         return Home.find({});
       }
     },
+    // userHomes: {
+    //   type: new GraphQLList(),
+    //   resolve() {
+    //     return Home.find({});
+    //   }
+    // },
     searchHomes: {
       type: new GraphQLList(HomeType),
-      args: { searchQuery: { type: GraphQLString }},
+      args: { searchQuery: { type: GraphQLString } },
       resolve(_, { searchQuery }) {
-        if (searchQuery === ""){
+        if (searchQuery === "") {
           return Home.find({});
         }
-        return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
+        return Home.find({ searchField: new RegExp(`${searchQuery}`, "i") });
       }
     },
     advancedSearch: {
       type: new GraphQLList(HomeType),
-      args: { 
+      args: {
         nameQuery: { type: GraphQLString },
         categoryQuery: { type: GraphQLString },
         descriptionQuery: { type: GraphQLString },
@@ -91,46 +97,50 @@ const RootQueryType = new GraphQLObjectType({
         garageQuery: { type: GraphQLBoolean },
         basementQuery: { type: GraphQLBoolean }
       },
-      resolve(_, args){
+      resolve(_, args) {
         return Home.find({
-          name: new RegExp(`${nameQuery}`, 'i'),
-          category: new RegExp(`${categoryQuery}`, 'i'),
-          description: new RegExp(`${descriptionQuery}`, 'i'),
-          streetAddress: new RegExp(`${streetAddressQuery}`, 'i'),
-          city: new RegExp(`${cityQuery}`, 'i'),
-          state: new RegExp(`${stateQuery}`, 'i'),
-          yearBuilt: new RegExp(`${yearBuiltQuery}`, 'i'),
-          sqft: new RegExp(`${sqftQuery}`, 'i'),
-          zipcode: new RegExp(`${zipcodeQuery}`, 'i'),
-          stories: new RegExp(`${storiesQuery}`, 'i'),
-          bedrooms: new RegExp(`${bedroomsQuery}`, 'i'),
-          bathrooms: new RegExp(`${bathroomsQuery}`, 'i'),
-          garage: new RegExp(`${garageQuery}`, 'i'),
-          basement: new RegExp(`${basementQuery}`, 'i')
-        })
+          name: new RegExp(`${nameQuery}`, "i"),
+          category: new RegExp(`${categoryQuery}`, "i"),
+          description: new RegExp(`${descriptionQuery}`, "i"),
+          streetAddress: new RegExp(`${streetAddressQuery}`, "i"),
+          city: new RegExp(`${cityQuery}`, "i"),
+          state: new RegExp(`${stateQuery}`, "i"),
+          yearBuilt: new RegExp(`${yearBuiltQuery}`, "i"),
+          sqft: new RegExp(`${sqftQuery}`, "i"),
+          zipcode: new RegExp(`${zipcodeQuery}`, "i"),
+          stories: new RegExp(`${storiesQuery}`, "i"),
+          bedrooms: new RegExp(`${bedroomsQuery}`, "i"),
+          bathrooms: new RegExp(`${bathroomsQuery}`, "i"),
+          garage: new RegExp(`${garageQuery}`, "i"),
+          basement: new RegExp(`${basementQuery}`, "i")
+        });
       }
     },
     bids: {
       type: new GraphQLList(BidType),
-      resolve(){
+      resolve() {
         return Bid.find({});
       }
-
     },
     bid: {
       type: BidType,
-      args: { _id: { type: GraphQLNonNull(GraphQLID)}},
-      resolve(_, { _id }){
+      args: { _id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(_, { _id }) {
         return Bid.findById(_id);
       }
     },
     homeBids: {
       type: new GraphQLList(BidType),
-      args: { _homeId: { type: GraphQLID }},
-      resolve(_, { _homeId }){
-
+      args: { _homeId: { type: GraphQLID } },
+      resolve(_, { _homeId }) {
         return Home.findBids(_homeId);
-
+      }
+    },
+    userHomes: {
+      type: new GraphQLList(HomeType),
+      args: { _userId: { type: GraphQLID } },
+      resolve(_, { _userId }) {
+        return Home.find({user: _userId});
       }
     }
   })

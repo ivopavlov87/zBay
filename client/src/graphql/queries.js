@@ -27,10 +27,30 @@ export default {
         amount
         user{
           username
+          _id
+        }
+        name
+        description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        searchField
+        bids {
+          amount
+          user {
+            username
+          }
         }
       }
     }
-  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
@@ -56,7 +76,7 @@ export default {
         bids {
           amount
           date
-          user{
+          user {
             username
           }
         }
@@ -102,7 +122,7 @@ export default {
         bids{
           amount
           date
-          user{
+          user {
             username
           }
         }
@@ -114,12 +134,41 @@ export default {
       results @client
     }
   `,
+  FETCH_USER_HOMES: gql`
+    query FetchUserHomes($userId: ID) {
+      userHomes(_userId: $homeId) {
+        _id
+        name
+        description
+        yearBuilt
+        streetAddress
+        city
+        state
+        zipcode
+        sqft
+        stories
+        bedrooms
+        bathrooms
+        garage
+        basement
+        searchField
+        date
+        bids {
+          amount
+          date
+          user{
+            username
+          }
+        }
+      }
+    }
+  `,
   FETCH_HOME_BIDS: gql`
     query FetchHomeBids($homeId: ID) {
       homeBids(_homeId: $homeId) {
         _id
         amount
-        user{
+        user {
           username
         }
       }
@@ -146,11 +195,41 @@ export default {
     }
   `,
   ADVANCED_SEARCH: gql`
-    query AdvancedSearch($nameQuery: String, $categoryQuery: String, $descriptionQuery: String, $streetAddressQuery: String, $cityQuery: String, $stateQuery: String, $yearBuiltQuery: Int, $sqftQuery: Int, $zipcodeQuery: Int, $storiesQuery: Int, $bedroomsQuery: Int, $bathroomsQuery: Int, $garageQuery: Boolean, $basementQuery: Boolean){
-      advancedSearch(nameQuery: $nameQuery, categoryQuery: $categoryQuery, descriptionQuery: $descriptionQuery, streetAddressQuery: $streetAddressQuery, cityQuery: $cityQuery, stateQuery: $stateQuery, yearBuiltQuery: $yearBuiltQuery, sqftQuery: $sqftQuery, zipcodeQuery: $zipcodeQuery, storiesQuery: $storiesQuery, bedroomsQuery: $bedroomsQuery, bathroomsQuery: $bathroomsQuery, garageQuery: $garageQuery, basementQuery: $basementQuery){
+    query AdvancedSearch(
+      $nameQuery: String
+      $categoryQuery: String
+      $descriptionQuery: String
+      $streetAddressQuery: String
+      $cityQuery: String
+      $stateQuery: String
+      $yearBuiltQuery: Int
+      $sqftQuery: Int
+      $zipcodeQuery: Int
+      $storiesQuery: Int
+      $bedroomsQuery: Int
+      $bathroomsQuery: Int
+      $garageQuery: Boolean
+      $basementQuery: Boolean
+    ) {
+      advancedSearch(
+        nameQuery: $nameQuery
+        categoryQuery: $categoryQuery
+        descriptionQuery: $descriptionQuery
+        streetAddressQuery: $streetAddressQuery
+        cityQuery: $cityQuery
+        stateQuery: $stateQuery
+        yearBuiltQuery: $yearBuiltQuery
+        sqftQuery: $sqftQuery
+        zipcodeQuery: $zipcodeQuery
+        storiesQuery: $storiesQuery
+        bedroomsQuery: $bedroomsQuery
+        bathroomsQuery: $bathroomsQuery
+        garageQuery: $garageQuery
+        basementQuery: $basementQuery
+      ) {
         _id
         name
-        category{
+        category {
           name
         }
         description
