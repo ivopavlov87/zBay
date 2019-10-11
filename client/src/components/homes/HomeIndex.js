@@ -21,7 +21,7 @@ const token2 = process.env.REACT_APP_TOKEN2
 const HomeIndex = ({cache}) => {
 
     return (
-      <Query query={FETCH_RESULTS}>
+      <Query query={FETCH_HOMES}>
          {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;

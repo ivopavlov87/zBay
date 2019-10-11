@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 export default {
   FETCH_HOMES: gql`
   query FetchHomes {
+    results @client
     homes {
       _id
       name
