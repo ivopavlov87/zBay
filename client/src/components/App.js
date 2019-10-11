@@ -11,10 +11,7 @@ import Nav from "./nav_bar/nav";
 import HomeDetail from './homes/HomeDetail';
 import CreateHome from './homes/CreateHome';
 import SearchBar from './search/SearchBar';
-
-import MapSearchBar from "./map/map_search";
-
-import Map from "./map/map_view";
+import MapSerchBar from "./map/map_search";
 import DropdownMenu from './search/DropdownMenu';
 import Watchlist from './watchlist/watchlist'
 

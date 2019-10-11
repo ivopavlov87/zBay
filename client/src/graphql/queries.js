@@ -94,6 +94,7 @@ export default {
         bathrooms
         sqft
         stories
+        coordinates
         images
         bids{
           amount

@@ -6,8 +6,11 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
+import CoordinateFinder from "../map/coordinates_assigner";
 const { CREATE_HOME } = Mutations;
 const { FETCH_HOMES } = Queries;
+const mapToken = process.env.REACT_APP_TOKEN
+
 
 
 const token2 = process.env.REACT_APP_TOKEN2
@@ -33,6 +36,8 @@ class CreateHome extends Component {
       garage: false,
       basement: false,
       searchField: "",
+      coordinates: [],
+      viewport: {},
       pictures: [],
       images: []
     };
@@ -70,6 +75,7 @@ class CreateHome extends Component {
   // we need to remember to update our cache directly with our new home
   updateCache(cache, { data }) {
     let homes;
+    let viewport = this.state.viewport
     try {
       // if we've already fetched the homes then we can read the
       // query here
@@ -78,12 +84,13 @@ class CreateHome extends Component {
       return;
     }
     // if we had previously fetched homes we'll add our new home to our cache
+    debugger
     if (homes) {
       let homeArray = homes.homes;
       let newHome = data.newHome;
       cache.writeQuery({
         query: FETCH_HOMES,
-        data: { homes: homeArray.concat(newHome) }
+        data: { homes: homeArray.concat(newHome), viewport: viewport }
       });
     }
   }
@@ -108,12 +115,19 @@ class CreateHome extends Component {
     return publicIdsArray;
   }
 
-  handleSubmit(e, newHome) {
+  async handleSubmit(e, newHome) {
     e.preventDefault();
+    let geocoderResults = [];
 
     const garagePresent = this.state.garage ? "Garage" : "";
     const basementPresent = this.state.basement ? "Basement" : "";
-
+    let inputValue = `${this.state.zipcode} ${this.state.streetAddress}`
+    await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`)
+    .then(response => response.json())
+    .then(data => {
+      debugger
+       return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})});
+      debugger
     this.updateImageURLs().then(images => {
       newHome({
       variables: {
@@ -130,6 +144,7 @@ class CreateHome extends Component {
         bathrooms: parseFloat(this.state.bathrooms),
         garage: this.state.garage,
         basement: this.state.basement,
+        coordinates: this.state.coordinates,
         images: images,
         searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
       }

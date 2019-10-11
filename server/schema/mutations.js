@@ -57,6 +57,7 @@ const mutation = new GraphQLObjectType({
         bathrooms: { type: GraphQLFloat },
         garage: { type: GraphQLBoolean },
         basement: { type: GraphQLBoolean },
+        coordinates: {type: new GraphQLList(GraphQLFloat)},
         images: { type: new GraphQLList(GraphQLString) },
         searchField: { type: GraphQLString }
       },
@@ -74,7 +75,8 @@ const mutation = new GraphQLObjectType({
         basement,
         images,
         searchField,
-        zipcode }, ctx) {
+        zipcode,
+        coordinates }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our home is good to save!
@@ -95,8 +97,8 @@ const mutation = new GraphQLObjectType({
             basement,
             images,
             searchField,
-            zipcode
-          }).save();
+            zipcode,
+            coordinates }).save();
         } else {
           throw new Error("Sorry, you need to be logged in to create a home.");
         }
