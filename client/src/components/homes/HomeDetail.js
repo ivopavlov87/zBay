@@ -25,7 +25,7 @@ class HomeDetail extends React.Component {
   }
 
  
-  // just some useless comments here, some more comments, even more comments to cement head-branch-ivo
+  // just some useless comments here
 
   update(field){
     return (e) => {
