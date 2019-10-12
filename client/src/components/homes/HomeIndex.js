@@ -10,6 +10,7 @@ import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
 import "./home_index.css";
 import DeleteHome from "./DeleteHome";
+import { withRouter } from 'react-router-dom';
 
 import { Image } from 'cloudinary-react';
 
@@ -25,7 +26,6 @@ const HomeIndex = ({cache}) => {
          {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-  
           return (
             <div className="home-index">
               <Map homes={data.homes}/>

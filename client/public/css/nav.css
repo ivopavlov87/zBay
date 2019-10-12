@@ -41,6 +41,10 @@ header{
   align-items: center;
 }
 
+.navbar-right a {
+  margin-right: 5%;
+}
+
 .zbay-icon-main{
   height: 100%;
   width: 20%;

@@ -65,7 +65,6 @@ const Root = () => {
   );
 };
 
-
 // then if we do have a token we'll go through with our mutation
 if (token) {
   client

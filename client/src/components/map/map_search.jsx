@@ -5,6 +5,7 @@ import Geocoder from "react-map-gl-geocoder";
 import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {writeApolloHook} from './with_apollo_hook'
 
+
 const token = process.env.REACT_APP_TOKEN
 
 class MapSearchBar extends React.Component {
@@ -25,18 +26,18 @@ class MapSearchBar extends React.Component {
   mapRef = React.createRef()
   geocoderContainerRef = React.createRef();
 
-  handleOnResult = event => {
+   handleOnResult = event => {
     let cacheViewport = event.result;
     if(this){
       this.setState({
-        viewport: event.result
-      //   searchResultLayer: new GeoJsonLayer({
-      //     id: "search-result",
-      //     data: event.result.geometry,
-      //     getFillColor: [255, 0, 0, 128],
-      //     getRadius: 1000,
-      //     pointRadiusMinPixels: 10,
-      //     pointRadiusMaxPixels: 10}),
+        viewport: event.result,
+        searchResultLayer: new GeoJsonLayer({
+          id: "search-result",
+          data: event.result.geometry,
+          getFillColor: [255, 0, 0, 128],
+          getRadius: 1000,
+          pointRadiusMinPixels: 10,
+          pointRadiusMaxPixels: 10})
       })
       cacheViewport = this.state.viewport
     }
