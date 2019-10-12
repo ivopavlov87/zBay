@@ -63,3 +63,4 @@ UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
 
 
 module.exports = mongoose.model('user', UserSchema);
+// module.exports = mongoose.model('user', UserSchema)

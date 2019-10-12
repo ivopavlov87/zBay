@@ -39,7 +39,9 @@
   font-family: "Ivar Headline","Times New Roman",serif;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 50px;
+  white-space: nowrap;
+  font-weight: 600;
 }
 .landing-page-map-search {
   width: 100%;
