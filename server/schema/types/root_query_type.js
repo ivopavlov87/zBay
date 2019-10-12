@@ -63,25 +63,19 @@ const RootQueryType = new GraphQLObjectType({
         return Home.find({});
       }
     },
-    // userHomes: {
-    //   type: new GraphQLList(),
-    //   resolve() {
-    //     return Home.find({});
-    //   }
-    // },
     searchHomes: {
       type: new GraphQLList(HomeType),
-      args: { searchQuery: { type: GraphQLString } },
+      args: { searchQuery: { type: GraphQLString }},
       resolve(_, { searchQuery }) {
-        if (searchQuery === "") {
+        if (searchQuery === ""){
           return Home.find({});
         }
-        return Home.find({ searchField: new RegExp(`${searchQuery}`, "i") });
+        return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
       }
     },
     advancedSearch: {
       type: new GraphQLList(HomeType),
-      args: {
+      args: { 
         nameQuery: { type: GraphQLString },
         categoryQuery: { type: GraphQLString },
         descriptionQuery: { type: GraphQLString },

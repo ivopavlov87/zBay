@@ -84,7 +84,6 @@ class CreateHome extends Component {
       return;
     }
     // if we had previously fetched homes we'll add our new home to our cache
-    debugger
     if (homes) {
       let homeArray = homes.homes;
       let newHome = data.newHome;
