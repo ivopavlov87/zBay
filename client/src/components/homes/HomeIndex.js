@@ -34,7 +34,7 @@ const HomeIndex = ({cache}) => {
                 <ul className="homes-ul">
                   {data.results.map(home => {
 
-                    
+                    debugger;
                     return home.map(hm => {
 
                       const imageSettings = {
@@ -48,8 +48,8 @@ const HomeIndex = ({cache}) => {
                       
                       let images;
                       if (hm.images && hm.images.length > 0){
-                        images = hm.images.map(image => {
-                        return <div><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                        images = hm.images.map((image, i) => {
+                        return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
                         })
                       } else {
                         images = <div>`there are no images for {hm.name}`</div>

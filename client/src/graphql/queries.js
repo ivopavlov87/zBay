@@ -4,31 +4,9 @@ import gql from 'graphql-tag';
 
 export default {
   FETCH_HOMES: gql`
-  query FetchHomes {
-    homes {
-      _id
-      name
-      description
-      yearBuilt
-      streetAddress
-      city
-      state
-      zipcode
-      sqft
-      stories
-      bedrooms
-      bathrooms
-      garage
-      price
-      basement
-      images
-      searchField
-      bids{
-        amount
-        user{
-          username
-          _id
-        }
+    query FetchHomes {
+      homes {
+        _id
         name
         description
         yearBuilt
@@ -41,12 +19,15 @@ export default {
         bedrooms
         bathrooms
         garage
+        price
         basement
+        images
         searchField
-        bids {
+        bids{
           amount
-          user {
+          user{
             username
+            _id
           }
         }
       }
@@ -135,8 +116,8 @@ export default {
     }
   `,
   FETCH_USER_HOMES: gql`
-    query FetchUserHomes($userId: ID) {
-      userHomes(_userId: $homeId) {
+    query FetchUserHomes($id: ID!) {
+      userHomes(_userId: $id) {
         _id
         name
         description
