@@ -39,7 +39,6 @@ class MapSearchBar extends React.Component {
           pointRadiusMinPixels: 10,
           pointRadiusMaxPixels: 10})
       })
-      debugger
       cacheViewport = this.state.viewport
     }
     this.finished(cacheViewport)
