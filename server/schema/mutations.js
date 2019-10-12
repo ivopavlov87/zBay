@@ -246,6 +246,21 @@ const mutation = new GraphQLObjectType({
           throw new Error("Sorry, you must be logged in to add to watchlist.")
         }
       }
+    },
+    removeHomeFromWatchlist: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        homeId: { type: GraphQLID }
+      },
+      async resolve(_, args, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+        if (validUser.loggedIn) {
+          return User.removeHomeFromWatchlist(args.userId, args.homeId)
+        } else {
+          throw new Error("Sorry, you must be logged in to edit your watchlist.")
+        }
+      }
     }
   }
 });

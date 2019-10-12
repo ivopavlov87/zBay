@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Queries from '../../graphql/queries'
 import Mutations from "../../graphql/mutations";
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { useApolloClient } from 'react-apollo-hooks'
+import RemoveButton from './RemoveButton';
 const { FETCH_USER, FETCH_USER_ID } = Queries;
+
 
 
 const Watchlist = () => {
@@ -20,11 +22,11 @@ const Watchlist = () => {
             {({ loading, error, data }) => {
                 if (loading) return <div className="loading">Loading...</div>
                 if (error) return `Error! ${error.message}`
-
+                // console.log(data.user)
                 if (data.user.watchlist.length === 0){
                     return (
                         <div className="watchlist-container">
-                            <h1>You havent added any listings yet...</h1>
+                            <h1 className="watchlist-header">You havent added any listings yet...</h1>
                             <h3>Click 'Add to Watchlist' on a listing to save it here!</h3>
                         </div>
                     )
@@ -36,7 +38,7 @@ const Watchlist = () => {
                                     <h3>{home.name}</h3>
                                     <h3>{home.streetAddress},&nbsp;{home.city},&nbsp;{home.state}</h3>
                                 </Link>
-                                <button className="remove-wl-button">Remove Listing</button>
+                                <RemoveButton id={idPostSearch} homeId={home._id} />
                             </li>
                         )
                     })

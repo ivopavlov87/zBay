@@ -29,9 +29,12 @@ const UserSchema = new Schema({
 UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
   const User = mongoose.model("user");
   const Home = mongoose.model("home");
+  
 
   return User.findById(userId).then(user => {
+    
     return Home.findById(homeId).then(home => {
+      
       if (user.watchlist.includes(home)){
         return 
       } else {
@@ -42,6 +45,21 @@ UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
   })
 }
 
+UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
+  const User = mongoose.model("user");
+  const Home = mongoose.model("home");
+
+  return User.findById(userId).then(user => {
+    return Home.findById(homeId).then(home => {
+      if (user.watchlist.includes(home)) {
+        user.watchlist.pull(home)
+        return user.save().then(user => user.watchlist)
+      } else {
+        return;
+      }
+    })
+  })
+}
+
 
 module.exports = mongoose.model('user', UserSchema);
-// module.exports = mongoose.model('user', UserSchema)
