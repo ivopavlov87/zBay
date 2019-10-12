@@ -1,37 +1,40 @@
 // import React, { Component } from "react";
 import gql from 'graphql-tag';
 // import { Query } from "react-apollo";
-
+// comment to change this file 
 export default {
   FETCH_HOMES: gql`
-    query FetchHomes {
-      homes {
-        _id
-        name
-        description
-        yearBuilt
-        streetAddress
-        city
-        state
-        zipcode
-        sqft
-        stories
-        bedrooms
-        bathrooms
-        garage
-        price
-        basement
-        images
-        searchField
-        bids{
-          amount
-          user{
-            username
-            _id
-          }
+  query FetchHomes {
+    results @client
+    viewport @client
+    homes {
+      _id
+      name
+      description
+      yearBuilt
+      streetAddress
+      city
+      state
+      zipcode
+      sqft
+      stories
+      bedrooms
+      bathrooms
+      garage
+      price
+      basement
+      images
+      coordinates
+      searchField
+      bids{
+        amount
+        user{
+          username
+          _id
         }
       }
     }
+  }
   `,
   FETCH_HOME: gql`
     query FetchHome($id: ID!) {
@@ -177,36 +180,36 @@ export default {
   `,
   ADVANCED_SEARCH: gql`
     query AdvancedSearch(
-      $nameQuery: String
-      $categoryQuery: String
-      $descriptionQuery: String
-      $streetAddressQuery: String
-      $cityQuery: String
-      $stateQuery: String
-      $yearBuiltQuery: Int
-      $sqftQuery: Int
-      $zipcodeQuery: Int
-      $storiesQuery: Int
-      $bedroomsQuery: Int
-      $bathroomsQuery: Int
-      $garageQuery: Boolean
-      $basementQuery: Boolean
+      $nameQuery: String,
+      $categoryQuery: String,
+      $descriptionQuery: String,
+      $streetAddressQuery: String,
+      $cityQuery: String,
+      $stateQuery: String,
+      $yearBuiltQuery: Int,
+      $sqftQuery: Int,
+      $zipcodeQuery: Int,
+      $storiesQuery: Int,
+      $bedroomsQuery: Int,
+      $bathroomsQuery: Int,
+      $garageQuery: Boolean,
+      $basementQuery: Boolean,
     ) {
       advancedSearch(
-        nameQuery: $nameQuery
-        categoryQuery: $categoryQuery
-        descriptionQuery: $descriptionQuery
-        streetAddressQuery: $streetAddressQuery
-        cityQuery: $cityQuery
-        stateQuery: $stateQuery
-        yearBuiltQuery: $yearBuiltQuery
-        sqftQuery: $sqftQuery
-        zipcodeQuery: $zipcodeQuery
-        storiesQuery: $storiesQuery
-        bedroomsQuery: $bedroomsQuery
-        bathroomsQuery: $bathroomsQuery
-        garageQuery: $garageQuery
-        basementQuery: $basementQuery
+        nameQuery: $nameQuery,
+        categoryQuery: $categoryQuery,
+        descriptionQuery: $descriptionQuery,
+        streetAddressQuery: $streetAddressQuery,
+        cityQuery: $cityQuery,
+        stateQuery: $stateQuery,
+        yearBuiltQuery: $yearBuiltQuery,
+        sqftQuery: $sqftQuery,
+        zipcodeQuery: $zipcodeQuery,
+        storiesQuery: $storiesQuery,
+        bedroomsQuery: $bedroomsQuery,
+        bathroomsQuery: $bathroomsQuery,
+        garageQuery: $garageQuery,
+        basementQuery: $basementQuery,
       ) {
         _id
         name
