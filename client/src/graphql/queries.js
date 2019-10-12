@@ -115,7 +115,6 @@ export default {
   FETCH_RESULTS: gql`
     query FetchCartItems {
       results @client
-      viewport @client
     }
   `,
   FETCH_USER_HOMES: gql`
