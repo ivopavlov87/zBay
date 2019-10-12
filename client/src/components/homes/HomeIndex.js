@@ -24,7 +24,6 @@ const HomeIndex = ({cache}) => {
     return (
       <Query query={FETCH_HOMES}>
          {({ loading, error, data }) => {
-           debugger
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
           return (

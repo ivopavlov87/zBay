@@ -27,7 +27,6 @@ const homeLocations = [
  class TheMap extends React.Component {
    constructor(props){
      super(props);
-     debugger
       this.state = {
         viewport: {
           width: 400,
