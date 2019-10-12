@@ -19,7 +19,7 @@ class BidShow extends React.Component {
                 maxBid = bid.amount
                 maxBidder = bid.user.username
             }
-        })
+        });
         if (maxBid === 0){
             return (
                 <div className="show-high-bid">
