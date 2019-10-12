@@ -119,8 +119,8 @@ export default {
     }
   `,
   FETCH_USER_HOMES: gql`
-    query FetchUserHomes($userId: ID) {
-      userHomes(_userId: $homeId) {
+    query FetchUserHomes($id: ID!) {
+      userHomes(_userId: $id) {
         _id
         name
         description

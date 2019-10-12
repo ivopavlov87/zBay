@@ -29,11 +29,34 @@ const UserSchema = new Schema({
 UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
   const User = mongoose.model("user");
   const Home = mongoose.model("home");
+  
+
+  return User.findById(userId).then(user => {
+    
+    return Home.findById(homeId).then(home => {
+      
+      if (user.watchlist.includes(home)){
+        return 
+      } else {
+        user.watchlist.push(home)
+        return user.save().then(user => user.watchlist)
+      }
+    })
+  })
+}
+
+UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
+  const User = mongoose.model("user");
+  const Home = mongoose.model("home");
 
   return User.findById(userId).then(user => {
     return Home.findById(homeId).then(home => {
-      user.watchlist.push(home)
-      return user.save().then(user => user.watchlist)
+      if (user.watchlist.includes(home)) {
+        user.watchlist.pull(home)
+        return user.save().then(user => user.watchlist)
+      } else {
+        return;
+      }
     })
   })
 }
