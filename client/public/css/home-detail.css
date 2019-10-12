@@ -18,6 +18,11 @@
     font-weight: 700;
 }
 
+.added-success-link{
+    color: rgb(108, 204, 108);
+    font-weight: 700;
+}
+
 .home-show{
     width: 100%;
     height: 100%;
