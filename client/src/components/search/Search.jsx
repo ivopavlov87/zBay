@@ -48,6 +48,7 @@ class Search extends React.Component {
                                 <Query query={SEARCH_HOMES} 
                                     variables={{ searchQuery: this.state.searchQuery }}
                                     update={(cache, { data: { results }}) => {
+                                        debugger
                                         const data = cache.readQuery({ query: FETCH_RESULTS })
                                         data.results = [...data.results, ...results]
                                         cache.writeQuery({ query: FETCH_RESULTS, data })
