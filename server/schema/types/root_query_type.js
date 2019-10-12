@@ -71,8 +71,8 @@ const RootQueryType = new GraphQLObjectType({
     // },
     searchHomes: {
       type: new GraphQLList(HomeType),
-      args: { searchQuery: { type: GraphQLString } },
-      resolve(_, { searchQuery }) {
+      args: { searchQuery: { type: GraphQLString }},
+      resolve(_, { searchQuery }){
         if (searchQuery === "") {
           return Home.find({});
         }
