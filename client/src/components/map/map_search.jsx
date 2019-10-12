@@ -11,6 +11,7 @@ const token = process.env.REACT_APP_TOKEN
 class MapSearchBar extends React.Component {
   constructor(props){
     super(props)
+    debugger
     this.state = {
       viewport: {
         width: 1,

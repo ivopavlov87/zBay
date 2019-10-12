@@ -125,8 +125,10 @@ class CreateHome extends Component {
     await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`)
     .then(response => response.json())
     .then(data => {
+      debugger
        return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates})
       });
+      debugger
     this.updateImageURLs().then(images => {
       newHome({
       variables: {

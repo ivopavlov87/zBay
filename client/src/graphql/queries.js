@@ -24,6 +24,7 @@ export default {
       price
       basement
       images
+      coordinates
       searchField
       bids{
         amount
