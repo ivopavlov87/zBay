@@ -86,7 +86,7 @@ const mutation = new GraphQLObjectType({
         if (validUser.loggedIn) {
           // console.log(validUser)
           return new Home({
-            user: validUser.userId,
+            user: validUser._id,
             name,
             description,
             yearBuilt,
@@ -111,51 +111,57 @@ const mutation = new GraphQLObjectType({
     },
     deleteHome: {
       type: HomeType,
-      args: { id: { type: GraphQLID } },
-      resolve(parentValue, { id }) {
-        return Home.findByIdAndRemove(id);
+      args: { _id: { type: GraphQLID } },
+      resolve(parentValue, { _id }) {
+        return Home.findByIdAndRemove(_id);
       }
     },
-    updateHome: {
-      type: HomeType,
-      args: {
-        id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        description: { type: GraphQLString },
-        streetAddress: { type: GraphQLString },
-        city: { type: GraphQLString },
-        state: { type: GraphQLString },
-        yearBuilt: { type: GraphQLInt },
-        sqft: { type: GraphQLInt },
-        zipcode: { type: GraphQLInt },
-        stories: { type: GraphQLInt },
-        bedrooms: { type: GraphQLInt },
-        bathrooms: { type: GraphQLFloat },
-        garage: { type: GraphQLBoolean },
-        basement: { type: GraphQLBoolean },
-        searchField: { type: GraphQLString }
-      },
-      resolve(parentValue, { id, name, description, streetAddress, city, state, yearBuilt, sqft, zipcode, stories, bedrooms, bathrooms, garage, basement }) {
-        const updateObj = {};
-        updateObj.id = id;
-        if (name) updateObj.name = name;
-        if (description) updateObj.description = description;
-        if (streetAddress) updateObj.streetAddress = streetAddress;
-        if (city) updateObj.city = city;
-        if (state) updateObj.state = state;
-        if (yearBuilt) updateObj.yearBuilt = yearBuilt;
-        if (sqft) updateObj.sqft = sqft;
-        if (zipcode) updateObj.zipcode = zipcode;
-        if (stories) updateObj.stories = stories;
-        if (bedrooms) updateObj.bedrooms = bedrooms;
-        if (bathrooms) updateObj.bathrooms = bathrooms;
-        if (garage) updateObj.garage = garage;
-        if (basement) updateObj.basement = basement;
-        return Home.findOneAndUpdate({_id: id}, {$set: updateObj}, {new: true}, (err, home) => {
-          return home;
-        });
-      }
-    },
+    // updateHome: {
+    //   type: HomeType,
+    //   args: {
+    //     _id: { type: GraphQLID },
+    //     name: { type: GraphQLString },
+    //     description: { type: GraphQLString },
+    //     streetAddress: { type: GraphQLString },
+    //     city: { type: GraphQLString },
+    //     state: { type: GraphQLString },
+    //     yearBuilt: { type: GraphQLInt },
+    //     sqft: { type: GraphQLInt },
+    //     zipcode: { type: GraphQLInt },
+    //     stories: { type: GraphQLInt },
+    //     bedrooms: { type: GraphQLInt },
+    //     bathrooms: { type: GraphQLFloat },
+    //     garage: { type: GraphQLBoolean },
+    //     basement: { type: GraphQLBoolean },
+    //     price: { type: GraphQLInt },
+    //     coordinates: {type: new GraphQLList(GraphQLFloat)},
+    //     images: { type: new GraphQLList(GraphQLString) },
+    //     searchField: { type: GraphQLString }
+    //   },
+    //   resolve(parentValue, { _id, name, description, streetAddress, city, state, yearBuilt, sqft, zipcode, stories, bedrooms, bathrooms, garage, basement, price, coordinates, images }) {
+    //     const updateObj = {};
+    //     updateObj._id = _id;
+    //     if (name) updateObj.name = name;
+    //     if (description) updateObj.description = description;
+    //     if (streetAddress) updateObj.streetAddress = streetAddress;
+    //     if (city) updateObj.city = city;
+    //     if (state) updateObj.state = state;
+    //     if (yearBuilt) updateObj.yearBuilt = yearBuilt;
+    //     if (sqft) updateObj.sqft = sqft;
+    //     if (zipcode) updateObj.zipcode = zipcode;
+    //     if (stories) updateObj.stories = stories;
+    //     if (bedrooms) updateObj.bedrooms = bedrooms;
+    //     if (bathrooms) updateObj.bathrooms = bathrooms;
+    //     if (garage) updateObj.garage = garage;
+    //     if (basement) updateObj.basement = basement;
+    //     if (price) updateObj.price = price;
+    //     if (coordinates) updateObj.coordinates = coordinates;
+    //     if (images) updateObj.images = images;
+    //     return Home.findOneAndUpdate({_id: id}, {$set: updateObj}, {new: true}, (err, home) => {
+    //       return home;
+    //     });
+    //   }
+    // },
     createImage: {
       type: ImageType,
       args: {

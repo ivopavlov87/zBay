@@ -26,6 +26,7 @@ const HomeIndex = ({cache}) => {
          {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+          // debugger;
           return (
             <div className="home-index">
               <Map homes={data.homes}/>
@@ -36,7 +37,7 @@ const HomeIndex = ({cache}) => {
 
                     debugger;
                     return home.map(hm => {
-
+ 
                       const imageSettings = {
                         infinite: true,
                         speed: 500,
@@ -77,7 +78,6 @@ const HomeIndex = ({cache}) => {
                         </li>
                       </ Link>
                     })}
-
                   )}
                 </ul>
               </div>

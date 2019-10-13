@@ -48,7 +48,9 @@ const Nav = props => {
               return (
                 <div className="nav-items">
                   <div className="navbar-left">
-                    <Link className="navbar-link logout-button-nav" to="/user">User Profile</Link>
+
+                    <Link className="navbar-link logout-button-nav" to="/user">Your Homes</Link>
+
                     <Link className="navbar-link logout-button-nav" to="/homes/new">Create a Home</Link>
                   </div>
                   <div className="zbay-icon-main">
@@ -64,7 +66,6 @@ const Nav = props => {
                         e.preventDefault();
                         localStorage.removeItem("auth-token");
                         client.writeData({ data: { isLoggedIn: false } });
- 
                       }}
                     >
                       Logout

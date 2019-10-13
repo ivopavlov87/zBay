@@ -49,7 +49,7 @@ const client = new ApolloClient({
 cache.writeData({
   data: {
     isLoggedIn: Boolean(token),
-    _id: null,
+    _id: "",
     results: [],
     viewport: ""
   }
