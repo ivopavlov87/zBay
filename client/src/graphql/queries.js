@@ -93,6 +93,7 @@ export default {
   SEARCH_HOMES: gql`
     query SearchHomes($searchQuery: String) {
       searchHomes(searchQuery: $searchQuery) {
+        _id
         name
         description
         bedrooms
@@ -118,9 +119,7 @@ export default {
     }
   `,
   FETCH_USER_HOMES: gql`
-    query FetchUserHomes($id: ID) {
-      results @client
-      viewport @client
+    query FetchUserHomes($id: ID!) {
       userHomes(_userId: $id) {
         _id
         name

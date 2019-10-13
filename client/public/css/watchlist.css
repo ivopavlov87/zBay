@@ -1,6 +1,62 @@
 .watchlist-container{
+    margin: 0 auto;
     width: 90%;
     height: 88vh;
-    background-color: pink;
+    /* background-color: pink; */
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.watchlist-header{
+    font-size: 30px;
+    text-decoration: underline;
+    margin: 15px 0 30px 0;
+    
+}
+
+.watchlist-ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+    height: auto;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.watchlist-li{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: lightblue; */
+}
+
+.watchlist-li a{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.remove-wl-button{
+    height: 95%;
+    width: 120px;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.watchlist-li:hover{
+    background-color: rgb(110, 176, 238);
+}
+
+.remove-wl-button:hover{
+    background-color: rgba(226, 33, 33, 0.8);
 }

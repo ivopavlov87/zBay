@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 
+
 import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
 
@@ -101,6 +102,7 @@ const UserProfile = () => {
     </Query>
       
   );
+
     
 };
 

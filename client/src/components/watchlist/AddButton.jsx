@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Queries from '../../graphql/queries';
 import Mutations from '../../graphql/mutations';
-import { Mutation } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo';
 const { FETCH_USER } = Queries;
 const { ADD_HOME } = Mutations;
 
@@ -9,7 +10,7 @@ class AddButton extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            message: ""
+            message: "Add to Watchlist"
         }
     }
 
@@ -25,32 +26,53 @@ class AddButton extends React.Component {
 
     render(){
         return (
-            <Mutation
-                mutation={ADD_HOME}
-                onError={err => this.setState({ message: err.message })}
-                refetchQueries={() => {
-                    return [
-                        {
-                            query: FETCH_USER,
-                            variables: { id: this.props.id }
+            <Query query={FETCH_USER} variables={{ id: this.props.id }}>
+                {({ loading, data, error }) => {
+                    if (loading) return <div className="loading">Loading...</div>
+                    if (error) return `Error! ${error.message}`;
+                    let alreadyAdded;
+    
+                    data.user.watchlist.forEach(home => {
+                        if (home._id === this.props.homeId){
+                            alreadyAdded = true;
+                            return
                         }
-                    ];
-                }}
-                // update={(cache, data) => this.updateCache(cache, data)}
+                    })
+                    if (alreadyAdded){
+                        return <Link className="added-success-link" to="/watchlist">Added to Watchlist!</Link>
+                    } else {
+                        return (
+                            <Mutation
+                                mutation={ADD_HOME}
+                                onError={err => this.setState({ message: err.message })}
+                                refetchQueries={() => {
+                                    return [
+                                        {
+                                            query: FETCH_USER,
+                                            variables: { id: this.props.id }
+                                        }
+                                    ];
+                                }}
+                                // update={(cache, data) => this.updateCache(cache, data)}
 
-                onCompleted={data => {
+                                onCompleted={data => {
 
-                    this.setState({
-                        message: 'Home added successfully'
-                    });
+                                    this.setState({
+                                        message: 'Home added successfully'
+                                    });
+                                }}
+                            >
+                                {(addHomeToWatchlist, { data }) => (
+                                    <button className="bid-submit" onClick={(e) => this.handleSubmit(e, addHomeToWatchlist)}>
+                                        {this.state.message}
+                                    </button>
+                                )}
+                            </Mutation>
+                        )
+                    }
                 }}
-            >
-                {(addHomeToWatchlist, { data }) => (
-                    <button className="bid-submit" onClick={(e) => this.handleSubmit(e, addHomeToWatchlist)}>
-                        Add to Watchlist
-                    </button>
-                )}
-            </Mutation>
+            
+            </Query>
         )
     }
 }

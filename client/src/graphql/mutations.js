@@ -110,5 +110,13 @@ export default {
         username
       }
     }
+  `,
+  REMOVE_HOME: gql`
+    mutation RemoveHome($userId: ID, $homeId: ID) {
+      removeHomeFromWatchlist(userId: $userId, homeId: $homeId) {
+        _id
+        username
+      }
+    }
   `
 };

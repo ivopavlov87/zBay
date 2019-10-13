@@ -38,7 +38,9 @@ const App = (props) => {
           <Route exact path="/homes/:id" component={HomeDetail} />
               {/* <AuthRoute exact path="/register" component={Register} routeType="auth" /> */}
               {/* <AuthRoute exact path="/login" component={Login} routeType="auth" /> */}
+
           <AuthRoute exact path="/user" component={UserProfile} routeType="protected" />
+
           <Route exact path="/home" component={() => <HomeIndex cache={cache} />} />
           <Route exact path="/" component={() => <MapSearchBar />} />
           <Route exact path="/watchlist" component={Watchlist} />
