@@ -86,8 +86,8 @@ class HomeDetail extends React.Component {
             conditionalTimer = <div><Timer date={bidTime} /></div>
           }
 
-          const images = data.home.images.map(image => {
-            return <div><Image className='image-slide' cloudName={token2} publicId={image} /></div>
+          const images = data.home.images.map((image, i) => {
+            return <div key={i}><Image className='image-slide' cloudName={token2} publicId={image} /></div>
           });
          
           return (

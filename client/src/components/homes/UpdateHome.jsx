@@ -1,10 +1,18 @@
 // import React, { Component } from "react";
 // import { Mutation } from "react-apollo";
 
+// import axios from 'axios';
+// import { withRouter } from 'react-router-dom';
+
 // import Mutations from "../../graphql/mutations";
 // import Queries from "../../graphql/queries";
 // const { UPDATE_HOME } = Mutations;
 // const { FETCH_HOMES } = Queries;
+
+// const mapToken = process.env.REACT_APP_TOKEN
+
+// const token2 = process.env.REACT_APP_TOKEN2
+// const token3 = process.env.REACT_APP_TOKEN3
 
 // class UpdateHome extends Component {
 //   constructor(props) {
@@ -26,10 +34,17 @@
 //       yearBuilt: this.props.yearBuilt || "",
 //       garage: this.props.garage || false,
 //       basement: this.props.basement || false,
-//       searchField: ""
+//       images: this.props.images || [],
+//       coordinates: this.props.coordinates || [],
+//       price: this.props.price || "",
+//       viewport: this.props.viewport || {},
+//       searchField: this.props.searchField || ""
 //     };
 
+//     this.files = [];
+//     // this.handleOnDrop = this.handleOnDrop(this);
 //     this.handleEdit = this.handleEdit.bind(this);
+//     // this.handleSubmit = this.handleSubmit.bind(this);
 //   }
 
 //   handleEdit(e) {
@@ -37,13 +52,22 @@
 //     this.setState({ editing: true });
 //   }
 
-//   fieldUpdate(field) {
+//   // handleOnDrop(e) {
+//   //   e.preventDefault();
+//   //   const files = Array.from(e.target.files);
+//   //   for (let i = 0; i < files.length; i++) {
+//   //     this.files.push(files[i]);
+//   //   }
+//   // }
+
+//   update(field) {
 //     return e => this.setState({ [field]: e.target.value });
 //   }
 
 //   // we need to remember to update our cache directly with our home
 //   updateCache(cache, { data }) {
 //     let homes;
+//     let viewport = this.state.viewport
 //     try {
 //       // if we've already fetched the homes then we can read the
 //       // query here
@@ -54,10 +78,10 @@
 //     // if we had previously fetched homes we'll add our home to our cache
 //     if (homes) {
 //       let homeArray = homes.homes;
-//       let updatedHome = data.updatedHome;
+//       let updateHome = data.updateHome;
 //       cache.writeQuery({
 //         query: FETCH_HOMES,
-//         data: { homes: homeArray.concat(updatedHome) }
+//         data: { homes: homeArray.concat(updateHome), viewport: viewport }
 //       });
 //     }
 //   }
@@ -66,31 +90,79 @@
 //     console.log(files);
 //   }
 
-//   handleSubmit(e, updatedHome) {
-//     e.preventDefault();
-
-//     const garagePresent = this.state.garage ? "Garage" : "";
-//     const basementPresent = this.state.basement ? "Basement" : "";
-
-//     updatedHome({
-//       variables: {
-//         name: this.state.name,
-//         streetAddress: this.state.streetAddress,
-//         city: this.state.city,
-//         state: this.state.state,
-//         zipcode: parseInt(this.state.zipcode),
-//         description: this.state.description,
-//         sqft: parseInt(this.state.sqft),
-//         yearBuilt: parseInt(this.state.yearBuilt),
-//         stories: parseInt(this.state.stories),
-//         bedrooms: parseInt(this.state.bedrooms),
-//         bathrooms: parseFloat(this.state.bathrooms),
-//         garage: this.state.garage,
-//         basement: this.state.basement,
-//         searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
-//       }
-//     });
+//   async updateImageURLs() {
+//     const publicIdsArray = [];
+//     for (let i = 0; i < this.files.length; i++) {
+//       const formData = new FormData();
+//       formData.append('file', this.files[i]);
+//       formData.append('upload_preset', token3);
+//       const image = await axios.post(
+//         `https://api.cloudinary.com/v1_1/${token2}/image/upload`,
+//         formData
+//       )
+//       publicIdsArray.push(image.data.public_id);
+//     }
+//     return publicIdsArray;
 //   }
+
+//   // async handleSubmit(e, updatedHome) {
+//   //   e.preventDefault();
+//   //   let geocoderResults = [];
+
+//   //   const garagePresent = this.state.garage ? "Garage" : "";
+//   //   const basementPresent = this.state.basement ? "Basement" : "";
+//   //   let inputValue = `${this.state.zipcode} ${this.state.streetAddress}`
+//   //   await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${inputValue}.json?access_token=${mapToken}`)
+//   //     .then(response => response.json())
+//   //     .then(data => {
+//   //       return this.setState({ viewport: data.features[0], coordinates: data.features[0].geometry.coordinates })
+//   //     });
+//   //   this.updateImageURLs().then(images => {
+//   //     updatedHome({
+//   //       variables: {
+//   //         name: this.state.name,
+//   //         streetAddress: this.state.streetAddress,
+//   //         city: this.state.city,
+//   //         state: this.state.state,
+//   //         zipcode: parseInt(this.state.zipcode),
+//   //         description: this.state.description,
+//   //         sqft: parseInt(this.state.sqft),
+//   //         yearBuilt: parseInt(this.state.yearBuilt),
+//   //         price: parseInt(this.state.price),
+//   //         stories: parseInt(this.state.stories),
+//   //         bedrooms: parseInt(this.state.bedrooms),
+//   //         bathrooms: parseFloat(this.state.bathrooms),
+//   //         garage: this.state.garage,
+//   //         basement: this.state.basement,
+//   //         coordinates: this.state.coordinates,
+//   //         images: images,
+//   //         searchField: `${this.state.name} ${this.state.streetAddress} ${this.state.city} ${this.state.state} ${this.state.zipcode} ${this.state.description} ${this.state.sqft}sqft ${this.state.yearBuilt} ${this.state.stories}stories ${this.state.bedrooms}bedrooms ${this.state.bathrooms}bathrooms ${garagePresent} ${basementPresent}`
+//   //       }
+//   //     }).then(response => {
+//   //       this.setState({
+//   //         name: "",
+//   //         streetAddress: "",
+//   //         city: "",
+//   //         state: "",
+//   //         zipcode: "",
+//   //         sqft: "",
+//   //         stories: "",
+//   //         description: "",
+//   //         bathrooms: "",
+//   //         bedrooms: "",
+//   //         yearBuilt: "",
+//   //         garage: false,
+//   //         basement: false,
+//   //         searchField: "",
+//   //         price: "",
+//   //         // pictures: [],
+//   //         images: []
+//   //       });
+//   //       this.files = [];
+//   //       this.props.history.push(`/homes/${response.data.newHome._id}`)
+//   //     })
+//   //   })
+//   // }
 
 //   render() {
 //     return (
@@ -102,20 +174,20 @@
 //         update={(cache, data) => this.updateCache(cache, data)}
 //         // when our query is complete we'll display a success message
 //         onCompleted={data => {
-//           const { name } = data.updatedHome;
+//           const { name } = data.updateHome;
 //           this.setState({
 //             message: `Home ${name} updated successfully`
 //           });
 //         }}
 //       >
-//         {(updatedHome, { data }) => (
+//         {(updateHome, { data }) => (
 //           <div className="create-form-container">
 //             <h1 className="create-form-header">
 //               Enter the details to update your listing:
 //             </h1>
 //             <form
 //               className="create-form"
-//               onSubmit={e => this.handleSubmit(e, updatedHome)}
+//               onSubmit={e => this.handleEdit(e, updateHome)}
 //             >
 //               <div className="create-form-left">
 //                 <input
@@ -217,6 +289,12 @@
 //                   value={this.state.sqft}
 //                   placeholder="Square footage"
 //                 />
+//                 <input className="create-input"
+//                   type="number"
+//                   onChange={this.update("price")}
+//                   value={this.state.price}
+//                   placeholder="Starting price"
+//                 />
 //               </div>
 //               <div className="create-form-right">
 //                 <textarea
@@ -269,13 +347,8 @@
 //                   <label>Basement</label>
 //                 </div>
 //                 <div>
-//                   Add images:
-//                   <br />
-//                   <input
-//                     type="file"
-//                     onChange={this.handleFileSelect}
-//                     multiple
-//                   />
+//                   Add images:  &nbsp;
+//                   <input type="file" multiple onChange={this.handleOnDrop} />
 //                 </div>
 //                 <button className="create-submit" type="submit">
 //                   Update Home
@@ -290,4 +363,4 @@
 //   }
 // }
 
-// export default UpdateHome;
+// export default withRouter(UpdateHome);

@@ -26,6 +26,7 @@ const HomeIndex = ({cache}) => {
          {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+          // debugger;
           return (
             <div className="home-index">
               <Map homes={data.homes}/>
@@ -36,7 +37,7 @@ const HomeIndex = ({cache}) => {
 
                     
                     return home.map(hm => {
-
+ 
                       const imageSettings = {
                         infinite: true,
                         speed: 500,
@@ -48,8 +49,8 @@ const HomeIndex = ({cache}) => {
                       
                       let images;
                       if (hm.images && hm.images.length > 0){
-                        images = hm.images.map(image => {
-                        return <div><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                        images = hm.images.map((image, i) => {
+                        return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
                         })
                       } else {
                         images = <div>`there are no images for {hm.name}`</div>
@@ -77,7 +78,6 @@ const HomeIndex = ({cache}) => {
                         </li>
                       </ Link>
                     })}
-
                   )}
                 </ul>
               </div>

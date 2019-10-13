@@ -1,57 +1,107 @@
-// import React from "react";
-// import { Query } from "react-apollo";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { Query } from "react-apollo";
+import { Link } from "react-router-dom";
 
-// import Timer from '../timer/timer';
-// import Queries from "../../graphql/queries";
+import Timer from '../timer/timer';
+import Queries from "../../graphql/queries";
+
+import { useApolloClient } from "react-apollo-hooks";
+
+import { Image } from "cloudinary-react";
+import Slider from "react-slick";
+import DeleteHome from "./DeleteHome";
+
+
+const { FETCH_USER_HOMES, FETCH_USER_ID } = Queries;
+
+const token2 = process.env.REACT_APP_TOKEN2;
+
 // import "./home_index.css";
-// import DeleteHome from "./DeleteHome";
 
 
-// const { FETCH_USER_HOMES } = Queries;
 
-// const UserProfile = ({cache}) => {
-//         return (
-//       <Query query={FETCH_USER_HOMES}>
-//          {({ loading, error, data }) => {
-//           if (loading) return "Loading...";
-//           if (error) return `Error! ${error.message}`;
-// Anis debug branch
-//           return (
-//             <div className="home-index">
-//               <div className="ul-container">
-  
-//                 <ul className="homes-ul">
-//                   {data.results.map(home => {
-//                     return home.map(hm => {
-//                       let maybeTimer;
-//                       if (hm.bids.length > 0){
-//                         maybeTimer = <Timer date={hm.bids[0].date} />
-//                       }
-//                       return <Link key={hm._id} to={`/homes/${hm._id}`}>
-//                         <li>
-//                           <div className="top-info">
-//                             {/* house.photo it will be a backround*/}
-//                             {/* button that addToWatchList this will probably be a function  */}
-//                             {maybeTimer}
-//                           </div>
-//                           <div className="bottom-info">
-//                             <h2>{hm.name}</h2>
-//                             <h3>Click to See Listing</h3>
-//                           </div>
-//                         </li>
-//                       </ Link>
-//                     })}
+const UserProfile = () => {
+  const client = useApolloClient();
+  const idPreSearch = client.readQuery({ query: FETCH_USER_ID });
+  const idPostSearch = idPreSearch._id;
+  if (idPostSearch === null) {
+    return null;
+  }
 
-//                   )}
-//                 </ul>
-//               </div>
-//             </div>
-//           );
-//         }}
-//       </Query>
-//     )
-//   // }
-// };
+  // debugger;
+  return (
+    <Query query={FETCH_USER_HOMES} variables={{ id: idPostSearch }}>
+      {({ loading, error, data }) => {
+        if (loading) return "Loading...";
+        if (error) return `Error! ${error.message}`;
+        // debugger;
+        if (data.userHomes.length === 0){
+          return (
+            <div className="profile-container">
+              <h1>You haven't listed any homes for auction yet</h1>
+              <h3>Click 'Create a Home' to list your home and view it here!</h3>
+            </div>
+          );
+        } else {
+          return (
+            <div className="profile-container">
+              <div className="user-ul-container">
+                <ul className="profile-ul">
+                  {data.userHomes.map((hm, i) => {
+                    // debugger;
+                    // return home.map(hm => {
+                      const imageSettings = {
+                        infinite: true,
+                        speed: 500,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        className: "index-slider",
+                        adaptiveHeight: true
+                      };
 
-// export default UserProfile;
+                      let images;
+                      if (hm.images && hm.images.length > 0){
+                          images = hm.images.map((image, i) => {
+                          return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                          })
+                        } else {
+                          images = <div>`there are no images for {hm.name}`</div>
+                        }
+
+                    let maybeTimer;
+                    if (hm.bids.length > 0) {
+                      maybeTimer = <Timer date={hm.bids[0].date} />;
+                    }
+                    return <div key={i}>
+                        <Link key={hm._id} to={`/homes/${hm._id}`}>
+                          <li>
+                            <div className="profile-top">
+                              {/* house.photo it will be a backround*/}
+                              {/* button that addToWatchList this will probably be a function  */}
+                              {maybeTimer}
+                              <div className="profile-slideshow">
+                                <Slider {...imageSettings}>{images}</Slider>
+                              </div>
+                            </div>
+                            <div className="profile-bottom">
+                              <h2>{hm.name}</h2>
+                              <h3>Click to See Listing</h3>
+                            </div>
+                          </li>
+                        </Link>
+                          <DeleteHome id={hm._id} />                        
+                      </div>
+                  })}
+                </ul>
+              </div>
+            </div>
+          );
+        }
+      }}
+    </Query>
+      
+  );
+    
+};
+
+export default UserProfile;
