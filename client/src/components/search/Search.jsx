@@ -53,7 +53,7 @@ class Search extends React.Component {
                                         cache.writeQuery({ query: FETCH_RESULTS, data })
                                     }}>
                                     {({ loading, error, data }) => {
-                                        debugger;
+                                        // debugger;
                                         if (loading) return <p></p>;
                                         // if (error) return `E! ${error.message}`
                                         if (error) return <p>Error</p>;
