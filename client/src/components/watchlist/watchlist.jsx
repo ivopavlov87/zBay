@@ -23,7 +23,7 @@ const Watchlist = () => {
             {({ loading, error, data }) => {
                 if (loading) return <div className="loading">Loading...</div>
                 if (error) return `Error! ${error.message}`
-                // console.log(data.user)
+    
                 if (data.user.watchlist.length === 0){
                     return (
                         <div className="watchlist-container">

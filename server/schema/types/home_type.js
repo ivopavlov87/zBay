@@ -23,7 +23,7 @@ const HomeType = new GraphQLObjectType({
     user: {
       type: require("./user_type"),
       resolve(parentValue) {
-        // console.log(parentValue.user)
+
         return User.findById(parentValue.user).then(user => {
           return user;
         });

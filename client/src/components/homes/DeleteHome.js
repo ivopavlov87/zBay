@@ -37,7 +37,7 @@ const client = useApolloClient();
       }}
     >
       {(deleteHome, { data }) => (
-        <a
+        <button
           style={linkStyle}
           onClick={e => {
             e.preventDefault();
@@ -45,7 +45,7 @@ const client = useApolloClient();
           }}
         >
           <p>Delete</p>
-        </a>
+        </button>
       )}
     </Mutation>
   );
