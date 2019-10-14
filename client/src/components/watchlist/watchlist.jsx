@@ -6,6 +6,7 @@ import { useApolloClient } from 'react-apollo-hooks'
 import RemoveButton from './RemoveButton';
 import Slider from 'react-slick';
 import { Image } from 'cloudinary-react';
+import Loading from "../loading/loading"
 const { FETCH_USER, FETCH_USER_ID } = Queries;
 const token2 = process.env.REACT_APP_TOKEN2
 
@@ -22,7 +23,7 @@ const Watchlist = () => {
     return (
         <Query query={FETCH_USER} variables={{ id: idPostSearch }}>
             {({ loading, error, data }) => {
-                if (loading) return <div className="loading">Loading...</div>
+                if (loading) return <Loading/>;
                 if (error) return `Error! ${error.message}`
                 
                 const imageSettings = {
