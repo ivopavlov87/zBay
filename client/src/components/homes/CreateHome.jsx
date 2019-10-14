@@ -72,18 +72,17 @@ class CreateHome extends Component {
     return e => this.setState({ [field]: e.target.value });
   }
 
-  // we need to remember to update our cache directly with our new home
+
   updateCache(cache, { data }) {
     let homes;
     let viewport = this.state.viewport
     try {
-      // if we've already fetched the homes then we can read the
-      // query here
+
       homes = cache.readQuery({ query: FETCH_HOMES });
     } catch (err) {
       return;
     }
-    // if we had previously fetched homes we'll add our new home to our cache
+
     if (homes) {
       let homeArray = homes.homes;
       let newHome = data.newHome;
@@ -116,7 +115,6 @@ class CreateHome extends Component {
 
   async handleSubmit(e, newHome) {
     e.preventDefault();
-    let geocoderResults = [];
 
     const garagePresent = this.state.garage ? "Garage" : "";
     const basementPresent = this.state.basement ? "Basement" : "";

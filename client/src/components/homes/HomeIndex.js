@@ -1,22 +1,14 @@
 import React from "react";
 import Slider from 'react-slick';
-// import React, { Component } from "react";
-// import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
-
 import Map from "../map/map_view";
 import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
 import "./home_index.css";
-// import DeleteHome from "./DeleteHome";
-// import { withRouter } from 'react-router-dom';
-
 import { Image } from 'cloudinary-react';
 
-
 const { FETCH_HOMES } = Queries;
-// const { FETCH_HOMES, FETCH_RESULTS } = Queries;
 
 const token2 = process.env.REACT_APP_TOKEN2
 

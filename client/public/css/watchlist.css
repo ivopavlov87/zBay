@@ -34,7 +34,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 700px;
+    width: 800px;
     height: auto;
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -55,8 +55,9 @@
     height: 50px;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 15px;
 }
 
 .remove-wl-button{
@@ -69,6 +70,48 @@
 
 .watchlist-li:hover{
     background-color: rgb(110, 176, 238);
+}
+
+.watchlist-li-headers{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.watchlist-li-headers:hover{
+    background-color: none;
+}
+
+.wl-hover-image{
+    position: relative;
+    display: inline-block;
+    width: 1005;
+    height: 500px;
+}
+
+.hover-image-content{
+    display: none;
+    position: absolute;
+    min-width: 400px;
+    width: 600px;
+    /* height: 500px; */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px;
+    z-index: 4;
+    right: 50px;
+    top: 270px;
+}
+
+.watchlist-slider img{
+    height: 100%;
+}
+
+.watchlist-li:hover .hover-image-content{
+    display: block;
+    /* width: 100%;
+    height: auto; */
 }
 
 .remove-wl-button:hover{
@@ -95,3 +138,4 @@
       background-position: 0% 50%;
   }
 }
+
