@@ -33,7 +33,7 @@ const UserProfile = () => {
   return (
     <Query query={FETCH_USER_HOMES} variables={{ id: idPostSearch }}>
       {({ loading, error, data }) => {
-        if (loading) return "Loading...";
+        if (loading) return <div className="loading">Loading...</div>;
         if (error) return `Error! ${error.message}`;
 
         if (data.userHomes.length === 0){
