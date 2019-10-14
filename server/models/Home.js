@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 
-
+// some useless comments for current times2
 
 const HomeSchema = new Schema({
   user: {

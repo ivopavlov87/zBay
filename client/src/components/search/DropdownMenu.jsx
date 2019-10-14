@@ -1,7 +1,7 @@
 import React from 'react';
-import Queries from '../../graphql/queries';
-import { Query } from 'react-apollo';
-const { ADVANCED_SEARCH } = Queries;
+// import Queries from '../../graphql/queries';
+// import { Query } from 'react-apollo';
+// const { ADVANCED_SEARCH } = Queries;
 
 class DropdownMenu extends React.Component {
     constructor(props){

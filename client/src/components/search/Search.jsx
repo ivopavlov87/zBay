@@ -26,6 +26,7 @@ class Search extends React.Component {
         this.setState(this.state)
     }
 
+
     render(){
 
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
@@ -54,12 +55,11 @@ class Search extends React.Component {
                                     }}>
                                     {({ loading, error, data }) => {
                                         if (loading) return <p></p>;
-                                        if (error) return <p>Error</p>;
-                                        const searchResults = { results: data.searchHomes }
-
+                                        if (error) return <p></p>;
+                                
                                         cache.cache.data.data.ROOT_QUERY.results.json = [];
                                         cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
-                               
+                                
                                         return ""
                                     }}
                                 </Query>

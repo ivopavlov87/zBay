@@ -30,7 +30,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .show-pics-col{
@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: space-evenly;
     /* background-color: purple; */
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .show-photo{
@@ -108,19 +108,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    border: 1px solid blue;
+    /* justify-content: space-evenly; */
+    /* border: 1px solid blue; */
     /* background-color: pink; */
 }
 
 .show-bidding-box{
-    height: 59%;
+    height: 22%;
     width: 99%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .enter-bid-header{
@@ -128,15 +128,15 @@
 }
 
 .show-info-box{
-    height: 39%;
+    height: 60%;
     width: 99%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     overflow: hidden;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .show-info-box::-webkit-scroll{
@@ -160,7 +160,7 @@
     height: 80%;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: space-evenly;
 }
@@ -181,6 +181,7 @@
     border-radius: 2px;
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 15px;
 }
 
 .bid-success{
@@ -328,4 +329,34 @@
 
 .index-slider img {
   height: 170px;
+}
+.show-home-location > h5{
+    margin-left: 10px;
+}
+.show-home-location{
+    display: flex;
+}
+.show-home-info{
+    display: flex;
+    width: 100%;
+    height: 59%;
+}
+.show-home-info > h5{
+    margin: 0 10px;
+}
+.show-home-bio > h1{
+    text-align: center;
+}
+.show-home-wrapper{
+    height: 18%;
+    padding: 20px 0;
+}
+.show-home-bio{
+    padding: 20px;
+}
+.show-info-title{
+    font-family: "Ivar Headline","Times New Roman",serif;
+    font-size: 42px;
+    text-decoration: underline;
+    margin: 15px 0 30px 0;
 }
