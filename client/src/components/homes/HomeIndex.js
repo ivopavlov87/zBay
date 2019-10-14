@@ -17,7 +17,7 @@ const HomeIndex = ({cache}) => {
     return (
       <Query query={FETCH_HOMES}>
          {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <div className="loading">Loading...</div>;
           if (error) return `Error! ${error.message}`;
 
           return (

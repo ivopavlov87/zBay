@@ -54,7 +54,7 @@ class Search extends React.Component {
                                         cache.writeQuery({ query: FETCH_RESULTS, data })
                                     }}>
                                     {({ loading, error, data }) => {
-                                        if (loading) return <p></p>;
+                                        if (loading) return <div className="loading">Loading...</div>;
                                         if (error) return <p></p>;
                                 
                                         cache.cache.data.data.ROOT_QUERY.results.json = [];
