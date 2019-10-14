@@ -39,13 +39,14 @@ const UserProfile = () => {
         if (data.userHomes.length === 0){
           return (
             <div className="profile-container">
-              <h1>You haven't listed any homes for auction yet</h1>
+              <h1 className="profile-header">You haven't listed any homes for auction yet</h1>
               <h3>Click 'Create a Home' to list your home and view it here!</h3>
             </div>
           );
         } else {
           return (
             <div className="profile-container">
+              <h1 className="profile-header">Your Homes</h1>
               <div className="user-ul-container">
                 <ul className="profile-ul">
                   {data.userHomes.map((hm, i) => {
@@ -70,10 +71,11 @@ const UserProfile = () => {
                         }
 
                     let maybeTimer;
+                    // debugger;
                     if (hm.bids.length > 0) {
                       maybeTimer = <Timer date={hm.bids[0].date} />;
                     }
-                    return <div key={i}>
+                    return <div className="profile-card" key={i}>
                         <Link key={hm._id} to={`/homes/${hm._id}`}>
                           <li>
                             <div className="profile-top">

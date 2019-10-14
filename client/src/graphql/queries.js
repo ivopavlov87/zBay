@@ -24,6 +24,7 @@ export default {
         price
         basement
         images
+        date
         coordinates
         searchField
         bids {
@@ -106,9 +107,6 @@ export default {
         bids {
           amount
           date
-          user {
-            username
-          }
         }
       }
     }
@@ -141,6 +139,7 @@ export default {
         searchField
         bids {
           amount
+          date
           user {
             username
             _id

@@ -18,11 +18,11 @@ const client = useApolloClient();
 }
 
 
-    const linkStyle = {
-      cursor: "pointer",
+    // const linkStyle = {
+      // cursor: "pointer",
     //   fontSize: "10px",
     //   color: "red"
-    };
+    // };
     
   return (
     <Mutation
@@ -37,15 +37,16 @@ const client = useApolloClient();
       }}
     >
       {(deleteHome, { data }) => (
-        <a
-          style={linkStyle}
+        <button
+          className="delete-hm-btn"
+          // style={linkStyle}
           onClick={e => {
             e.preventDefault();
             deleteHome({ variables: { id: props.id } });
           }}
         >
           <p>Delete</p>
-        </a>
+        </button>
       )}
     </Mutation>
   );

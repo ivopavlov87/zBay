@@ -56,7 +56,7 @@ class Search extends React.Component {
                                         // debugger;
                                         if (loading) return <p></p>;
                                         // if (error) return `E! ${error.message}`
-                                        if (error) return <p>Error</p>;
+                                        if (error) return <p>""</p>;
                                         const searchResults = { results: data.searchHomes }
 
                                         cache.cache.data.data.ROOT_QUERY.results.json = [];
