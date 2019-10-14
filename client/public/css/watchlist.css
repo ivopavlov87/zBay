@@ -11,22 +11,34 @@
 }
 
 .watchlist-header{
+    color: whitesmoke;
+    font-weight: 800;
     font-size: 30px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    margin: 35px 0 30px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.watchlist-subheader{
+    color: whitesmoke;
+    font-weight: 500;
+    font-size: 20px;
+    /* text-decoration: underline; */
     margin: 15px 0 30px 0;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .watchlist-ul{
-    list-style: none;
+    /* list-style: bullet; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 90%;
+    width: 800px;
     height: auto;
     border: 1px solid lightgray;
     border-radius: 3px;
+    background-color: rgba(207, 204, 204, 0.3);
 }
 
 .watchlist-li{
@@ -35,10 +47,32 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* background-color: lightblue; */
+    /* background: inherit; */
 }
 
 .watchlist-li a{
+    font-weight: 200;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.remove-wl-button{
+    height: 60%;
+    width: 30px;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: rgba(207, 204, 204, 0.3);
+}
+
+.watchlist-li:hover{
+    background-color: rgb(110, 176, 238);
+}
+
+.watchlist-li-headers{
     height: 50px;
     width: 100%;
     display: flex;
@@ -46,17 +80,62 @@
     align-items: center;
 }
 
-.remove-wl-button{
-    height: 95%;
-    width: 120px;
-    border-radius: 2px;
-    margin-right: 10px;
+.watchlist-li-headers:hover{
+    background-color: none;
 }
 
-.watchlist-li:hover{
-    background-color: rgb(110, 176, 238);
+.wl-hover-image{
+    position: relative;
+    display: inline-block;
+    width: 1005;
+    height: 500px;
+}
+
+.hover-image-content{
+    display: none;
+    position: absolute;
+    min-width: 400px;
+    width: 600px;
+    /* height: 500px; */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px;
+    z-index: 4;
+    right: 50px;
+    top: 270px;
+}
+
+.watchlist-slider img{
+    height: 100%;
+}
+
+.watchlist-li:hover .hover-image-content{
+    display: block;
+    /* width: 100%;
+    height: auto; */
 }
 
 .remove-wl-button:hover{
     background-color: rgba(226, 33, 33, 0.8);
 }
+
+.watchlist-container{
+  height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  position: absolute;
+  width: 100%;
+
+  background-size: 400% 400%;
+  animation: gradientBG 13s ease infinite;
+}
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+

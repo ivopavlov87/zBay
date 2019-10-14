@@ -84,7 +84,7 @@ const mutation = new GraphQLObjectType({
         // if our service returns true then our home is good to save!
         // anything else and we'll throw an error
         if (validUser.loggedIn) {
-          // console.log(validUser)
+
           return new Home({
             user: validUser._id,
             name,

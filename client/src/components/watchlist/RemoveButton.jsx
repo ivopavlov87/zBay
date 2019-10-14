@@ -1,7 +1,7 @@
 import React from 'react';
 import Queries from '../../graphql/queries'
 import Mutations from "../../graphql/mutations";
-import { Query, Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 const { FETCH_USER } = Queries;
 const { REMOVE_HOME } = Mutations;
 
@@ -53,7 +53,7 @@ class RemoveButton extends React.Component {
                             removeHomeFromWatchlist({
                                 variables: { userId: this.props.id, homeId: this.props.homeId }
                             })
-                        }}>Remove Listing
+                        }}>&times;
                     </button>
                 )}
             </Mutation>
