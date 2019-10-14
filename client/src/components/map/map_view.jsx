@@ -62,6 +62,7 @@ const token = process.env.REACT_APP_TOKEN
               //   /* Update tooltip
               //      http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
               //   */
+              // return <div>{object.images[0]}</div>
             },
             onClick: ({object}, event) => {
               this.props.history.push(`/homes/${object._id}`)
