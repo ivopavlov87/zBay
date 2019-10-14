@@ -10,7 +10,8 @@ import { Image } from 'cloudinary-react';
 import AddButtonContainer from "../watchlist/AddButtonContainer";
 
 const { FETCH_HOME, FETCH_BIDS } = Queries;
-const { CREATE_BID, ADD_HOME } = Mutations;
+const { CREATE_BID } = Mutations;
+// const { CREATE_BID, ADD_HOME } = Mutations;
 
 const token2 = process.env.REACT_APP_TOKEN2
 

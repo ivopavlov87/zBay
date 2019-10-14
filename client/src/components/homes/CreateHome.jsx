@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-import Dropzone from 'react-dropzone'
-import { uploadImage } from "../../util/image_api_util";
+// import Dropzone from 'react-dropzone'
+// import { uploadImage } from "../../util/image_api_util";
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Mutations from "../../graphql/mutations";

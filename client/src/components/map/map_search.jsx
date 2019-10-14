@@ -2,7 +2,8 @@ import React from 'react';
 import MapGL from 'react-map-gl';
 import { withRouter } from 'react-router-dom';
 import Geocoder from "react-map-gl-geocoder";
-import DeckGL, { GeoJsonLayer} from "deck.gl";
+import { GeoJsonLayer } from "deck.gl";
+// import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {writeApolloHook} from './with_apollo_hook'
 
 

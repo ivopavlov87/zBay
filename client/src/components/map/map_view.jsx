@@ -1,12 +1,13 @@
 import React from 'react';
 import MapGL from 'react-map-gl';
-import DeckGL, { GeoJsonLayer} from "deck.gl";
+import DeckGL from "deck.gl";
+// import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
-import { useQuery, useApolloClient } from 'react-apollo-hooks';
+// import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import {withApolloHook} from './with_apollo_hook';
 import { withRouter } from 'react-router-dom';
 import zBayIcon from "./test1.ico"
-import reactIcon from "./test1.ico"
+// import reactIcon from "./test1.ico"
 
 import "./map_view.css"
 
@@ -16,13 +17,13 @@ const token = process.env.REACT_APP_TOKEN
 //   marker: {x: 0, y: 0, width: 32, height: 32, mask: true}
 // };
 
-const homeLocations = [
-  // {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
-  // {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
-  // {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-  // {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-  // {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
-  ]
+// const homeLocations = [
+//   {name: 'Colma', passengers: 4214, coordinates: [-122.466233, 37.684638], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
+//   {name: 'Civic Center', passengers: 24798, coordinates: [-122.413756,37.779528], icon:zBayIcon, description:"these are hardcodded placeholders", state:"PH"},
+//   {name: 'icon1', coordinates: [-112.466233, 37.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+//   {name: 'icon2', coordinates: [-92.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+//   {name: 'icon3', coordinates: [-133.466233, 22.684638], icon:reactIcon, description:"these are hardcodded placeholders", state:"PH"},
+//   ]
 
  class TheMap extends React.Component {
    constructor(props){

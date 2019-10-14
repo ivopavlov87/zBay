@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Queries from '../../graphql/queries'
-import Mutations from "../../graphql/mutations";
-import { Query, Mutation } from 'react-apollo';
+// import Mutations from "../../graphql/mutations";
+import { Query } from 'react-apollo';
+// import { Query, Mutation } from 'react-apollo';
 import { useApolloClient } from 'react-apollo-hooks'
 import RemoveButton from './RemoveButton';
 const { FETCH_USER, FETCH_USER_ID } = Queries;
@@ -27,7 +28,7 @@ const Watchlist = () => {
                     return (
                         <div className="watchlist-container">
                             <h1 className="watchlist-header">You havent added any listings yet...</h1>
-                            <h3>Click 'Add to Watchlist' on a listing to save it here!</h3>
+                            <h3 className="watchlist-subheader">Click 'Add to Watchlist' on a listing to save it here!</h3>
                         </div>
                     )
                 } else {
@@ -44,7 +45,7 @@ const Watchlist = () => {
                     })
                     return (
                         <div className="watchlist-container">
-                            <h1 className="watchlist-header">Your watched listings</h1>
+                            <h1 className="watchlist-header">Your Watched Listings</h1>
                             <ul className="watchlist-ul">
                                 {watchlistItems}
                             </ul>
