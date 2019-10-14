@@ -166,7 +166,12 @@ class CreateHome extends Component {
           images: []
         });
         this.files = [];
+        // debugger;
+        // if (response && response.data) {
         this.props.history.push(`/homes/${response.data.newHome._id}`)
+        // } else {
+          // console.log("response was undefined")
+        // }
       })
     })
   }

@@ -5,6 +5,7 @@
 @import "modal.css";
 @import "dropdown-menu.css";
 @import "watchlist.css";
+@import "profile.css";
 
 *{
     font-family: Open Sans, Gotham, gotham, Tahoma, Geneva, sans-serif

@@ -28,7 +28,6 @@ const HomeIndex = ({cache}) => {
                 <ul className="homes-ul">
                   {data.results.map(home => {
 
- 
                     return home.map(hm => {
  
                       const imageSettings = {
