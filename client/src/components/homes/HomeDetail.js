@@ -94,6 +94,7 @@ class HomeDetail extends React.Component {
          
           return (
             <div className="home-show-container">
+                <h1 className="show-info-title">{data.home.name}</h1>
              
               <div className="home-show">
                 <div className="show-pics-col">
@@ -132,6 +133,7 @@ class HomeDetail extends React.Component {
                       }}
                     >
                       {(createBid, { data }) => (
+                        
                         <div className="bid-form-container">
                           <form className="bid-form" onSubmit={e => this.handleSubmit(e, createBid)}>
                             <h3 className="enter-bid-header">Enter a bid for this home:</h3>
@@ -144,24 +146,32 @@ class HomeDetail extends React.Component {
                         </div>
                       )}
                     </Mutation>
-                    <AddButtonContainer homeId={data.home._id} />
                     
                   </div>
-                  <div className="show-info-box" key={data.home._id}>
-                    <h1 className="show-info-text">{data.home.name}</h1>
-                    <h2 className="show-info-text">{data.home.description}</h2>
-                    <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
-                    <h5 className="show-info-text">Starting price: {data.home.price}</h5>
-                    <h5 className="show-info-text">{data.home.streetAddress}</h5>
-                    <h5 className="show-info-text">{data.home.city}</h5>
-                    <h5 className="show-info-text">{data.home.state}</h5>
-                    <h5 className="show-info-text">{data.home.zipcode}</h5>
-                    <h5 className="show-info-text">{data.home.sqft} sqft.</h5>
-                    <h5 className="show-info-text">{data.home.stories} stories</h5>
-                    <h5 className="show-info-text">{data.home.bathrooms}  bathrooms</h5>
-                    <h5 className="show-info-text">{data.home.bedrooms} bedrooms</h5>
-                  
+                  <div className="show-home-wrapper">
+                    <div className="show-home-location">
+                      <h5 className="show-info-text">{data.home.streetAddress},</h5>
+                      <h5 className="show-info-text">{data.home.city},</h5>
+                      <h5 className="show-info-text">{data.home.state}, </h5>
+                      <h5 className="show-info-text">{data.home.zipcode}</h5>
+                    </div>
+                    <div className="show-home-info">
+                      <h5 className="show-info-text">Year built: {data.home.yearBuilt}</h5>
+                      <h5 className="show-info-text">House price: {data.home.price}</h5>
+                      <h5 className="show-info-text">{data.home.sqft} sqft.</h5>
+                      <h5 className="show-info-text">{data.home.stories} stories</h5>
+                      <h5 className="show-info-text">{data.home.bathrooms}  bathrooms</h5>
+                      <h5 className="show-info-text">{data.home.bedrooms} bedrooms</h5>
+                    </div>
                   </div>
+                  <div className="show-info-box" key={data.home._id}>
+                    <div className="show-home-bio">
+                      
+                      <h2 className="show-info-text">{data.home.description}</h2>
+                    </div>
+                  </div>
+                  <AddButtonContainer homeId={data.home._id} />
+
                 </div>
               </div>
                <Link className="back-to-home-link" to="/">Back to Home</Link>
