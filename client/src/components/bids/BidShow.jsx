@@ -1,12 +1,12 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-import Queries from '../../graphql/queries';
-const { FETCH_HOME } = Queries;
+// import { Query } from 'react-apollo';
+// import Queries from '../../graphql/queries';
+// const { FETCH_HOME } = Queries;
 
 class BidShow extends React.Component {
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
     render(){
         let maxBid = 0;

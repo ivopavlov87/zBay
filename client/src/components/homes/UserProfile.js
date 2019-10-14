@@ -17,7 +17,7 @@ const { FETCH_USER_HOMES, FETCH_USER_ID } = Queries;
 
 const token2 = process.env.REACT_APP_TOKEN2;
 
-// import "./home_index.css";
+
 
 
 
@@ -29,13 +29,13 @@ const UserProfile = () => {
     return null;
   }
 
-  // debugger;
+
   return (
     <Query query={FETCH_USER_HOMES} variables={{ id: idPostSearch }}>
       {({ loading, error, data }) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
-        // debugger;
+
         if (data.userHomes.length === 0){
           return (
             <div className="profile-container">
@@ -50,7 +50,7 @@ const UserProfile = () => {
               <div className="user-ul-container">
                 <ul className="profile-ul">
                   {data.userHomes.map((hm, i) => {
-                    // debugger;
+     
                     // return home.map(hm => {
                       const imageSettings = {
                         infinite: true,
