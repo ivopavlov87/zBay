@@ -7,7 +7,7 @@ import Timer from '../timer/timer';
 import Queries from "../../graphql/queries";
 import "./home_index.css";
 import { Image } from 'cloudinary-react';
-
+import Loading from "../loading/loading"
 const { FETCH_HOMES } = Queries;
 
 const token2 = process.env.REACT_APP_TOKEN2
@@ -17,7 +17,7 @@ const HomeIndex = ({cache}) => {
     return (
       <Query query={FETCH_HOMES}>
          {({ loading, error, data }) => {
-          if (loading) return <div className="loading">Loading...</div>;
+          if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
 
           return (

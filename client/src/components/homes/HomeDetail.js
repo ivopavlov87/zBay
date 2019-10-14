@@ -8,6 +8,7 @@ import BidShow from '../bids/BidShow';
 import Timer from '../timer/timer';
 import { Image } from 'cloudinary-react';
 import AddButtonContainer from "../watchlist/AddButtonContainer";
+import Loading from "../loading/loading"
 import SearchClear from '../search/SearchClear'
 const { FETCH_HOME, FETCH_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
@@ -78,7 +79,7 @@ class HomeDetail extends React.Component {
       <div>
       <Query query={FETCH_HOME} variables={{ id: this.props.match.params.id }}>
         {({ loading, error, data }) => {
-          if (loading) return <div className="loading">Loading...</div>;
+          if (loading) return <Loading/>;
           if (error) return `Error! ${error.message}`;
 
           let conditionalTimer = "";
