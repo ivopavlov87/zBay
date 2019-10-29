@@ -2,9 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-  },
   "dependencies": {
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
