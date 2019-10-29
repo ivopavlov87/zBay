@@ -28,7 +28,8 @@ class Login extends Component {
 
   render() {
 
-    const errors = this.state.errors ? (
+    // possibly need to remove/edit " && this.state.errors.graphQLErrors"
+    const errors = (this.state.errors && this.state.errors.graphQLErrors) ? (
       <li className="modal-li-errors">
         {this.state.errors.graphQLErrors[0].message}
       </li>
