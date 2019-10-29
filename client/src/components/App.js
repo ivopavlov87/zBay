@@ -21,6 +21,7 @@ import Watchlist from './watchlist/watchlist'
 
 require('dotenv').config();
 
+
 const App = (props) => {
   return (
     <HashRouter>
