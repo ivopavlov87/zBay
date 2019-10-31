@@ -22,7 +22,7 @@ const cache = new InMemoryCache({
 });
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: "https://the-zbay.herokuapp.com/graphql",
   headers: {
     // pass our token into the header of each request
     authorization: localStorage.getItem("auth-token")

@@ -161,6 +161,7 @@ export default {
         amount
         user {
           username
+          _id
         }
       }
     }
