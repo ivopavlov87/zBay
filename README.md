@@ -6,7 +6,6 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 
 ## Architecture and Technology
 
-<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
 
 ### Technologies used: 
 * [MongoDB](https://www.mongodb.com/)
@@ -17,6 +16,8 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 * [Node.js](https://nodejs.org/)
 * [Cloudinary API](https://cloudinary.com/)
 * [Mapbox API](https://www.mapbox.com/)
+
+<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
 
 The backend is a Node.js runtime and Express framework used for processing requests and querying the application database. Using the Express framework allowed for quick setup with well tested and established design patterns along with well documented troubleshooting whenever any bugs happened to appear. The database was setup on MongoDB for user, and home data. The frontend is tied together using React, which kept the look and feel of the site to remain universal. Apollo client was state managment and GraphQL was used to query for complex relational data.
 
