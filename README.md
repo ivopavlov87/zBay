@@ -12,7 +12,7 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 * [Express](https://expressjs.com/)
 * [React](https://reactjs.org/)
 * [Apollo](https://www.apollographql.com/docs/react/)
-* [GraphQL] (https://graphql.org/)
+* [GraphQL](https://graphql.org/)
 * [Node.js](https://nodejs.org/)
 * [Cloudinary API](https://cloudinary.com/)
 * [Mapbox API](https://www.mapbox.com/)
