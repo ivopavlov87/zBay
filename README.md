@@ -6,7 +6,7 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 
 ## Architecture and Technology
 
-<div><img src="https://github.com/ivopavlov87/zbay/blob/master/ModalGif.gif" alt="Demo login" /></div>
+<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
 
 ### Technologies used: 
 * [MongoDB](https://www.mongodb.com/)
