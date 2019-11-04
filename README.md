@@ -209,3 +209,8 @@ UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
 ```
 
 ## Future Updates
+* Open up to countries outside USA
+* Implement additional info for each home, examples include: walk-score, near by ammenities (highway access, malls, parks, etc.), last sold, and more
+* Virtual tour of home
+* Additional listings for renting properties vs. selling
+* Payment/Mortage calculator; can you afford this home?
