@@ -17,7 +17,7 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 * [Cloudinary API](https://cloudinary.com/)
 * [Mapbox API](https://www.mapbox.com/)
 
-<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/MapBidWatchlistGif.gif" alt="Watchlist" /></div>
+<div><img src="https://github.com/ivopavlov87/zBay/blob/master/MapBidWatchlistGif.gif" alt="Watchlist" /></div>
 
 The backend is a Node.js runtime and Express framework used for processing requests and querying the application database. Using the Express framework allowed for quick setup with well tested and established design patterns along with well documented troubleshooting whenever any bugs happened to appear. The database was setup on MongoDB for user, and home data. The frontend is tied together using React, which kept the look and feel of the site to remain universal. Apollo client was used for state managment, and handle/manage client cache. GraphQL was used to query for complex relational data; replacing the traditional RESTful API into a single endpoint.
 
@@ -93,6 +93,8 @@ module.exports = mongoose.model('user', UserSchema);
 ### Authentication
 
 <div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
+
+* Automated login enabled for a demo account
 
 ### Search
 
