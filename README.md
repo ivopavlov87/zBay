@@ -59,6 +59,81 @@ module.exports = mongoose.model('user', UserSchema);
 
 ## Features
 
+### User Homes
+
+<div><img src="https://github.com/ivopavlov87/zBay/blob/master/UserHomesGif.gif" alt="Watchlist" /></div>
+
+* Users are able to see all listings they have created and can browse all image uploads for each home utilising carousel image slider and can delete any auctions that are no longer needed/wanted with the push of a button.
+
+```javascript
+<Query query={FETCH_USER_HOMES} variables={{ id: idPostSearch }}>
+  {({ loading, error, data }) => {
+    if (loading) return <Loading/>;
+    if (error) return `Error! ${error.message}`;
+
+    if (data.userHomes.length === 0){
+      return (
+        <div className="profile-container">
+          <h1 className="profile-header">You haven't listed any homes for auction yet</h1>
+          <h3>Click 'Create a Home' to list your home and view it here!</h3>
+        </div>
+      );
+    } else {
+      return (
+        <div className="profile-container">
+          <h1 className="profile-header">Your Homes</h1>
+          <div className="user-ul-container">
+            <ul className="profile-ul">
+              {data.userHomes.map((hm, i) => {
+                const imageSettings = {
+                  infinite: true,
+                  speed: 500,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  className: "index-slider",
+                  adaptiveHeight: true
+                };
+
+                let images;
+                if (hm.images && hm.images.length > 0){
+                    images = hm.images.map((image, i) => {
+                    return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                    })
+                  } else {
+                    images = <div>`there are no images for {hm.name}`</div>
+                  }
+
+                let maybeTimer;
+                if (hm.bids.length > 0) {
+                  maybeTimer = <Timer date={hm.bids[0].date} />;
+                }
+                return <div className="profile-card" key={i}>
+                  <Link key={hm._id} to={`/homes/${hm._id}`}>
+                    <li>
+                      <div className="profile-top">
+                        {maybeTimer}
+                        <div className="profile-slideshow">
+                          <Slider {...imageSettings}>{images}</Slider>
+                        </div>
+                      </div>
+                      <div className="profile-bottom">
+                        <h2>{hm.name}</h2>
+                        <h3>Click to See Listing</h3>
+                      </div>
+                    </li>
+                  </Link>
+                    <DeleteHome id={hm._id} />                        
+                </div>
+              })}
+            </ul>
+          </div>
+        </div>
+      );
+    }
+  }}
+</Query>
+```
+
 ### Watchlist
 
 * Users are able to create a watchlist of homes they want to keep track of
@@ -132,3 +207,5 @@ UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
   )}
 </ApolloConsumer>
 ```
+
+## Future Updates
