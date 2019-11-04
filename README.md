@@ -4,6 +4,8 @@
 
 A group effort combination of eBay and Zillow; users are able to create auctions and bid on luxury homes.
 
+<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
+
 ## Architecture and Technology
 
 
@@ -89,12 +91,6 @@ module.exports = mongoose.model('user', UserSchema);
 ```
 
 ## Features
-
-### Authentication
-
-<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
-
-* Automated login enabled for a demo account
 
 ### Search
 
