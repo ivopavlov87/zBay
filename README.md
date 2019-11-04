@@ -4,7 +4,7 @@
 
 A group effort combination of eBay and Zillow; users are able to create auctions and bid on luxury homes.
 
-<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
+
 
 ## Architecture and Technology
 
@@ -19,7 +19,7 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 * [Cloudinary API](https://cloudinary.com/)
 * [Mapbox API](https://www.mapbox.com/)
 
-<div><img src="https://github.com/ivopavlov87/zBay/blob/master/MapBidWatchlistGif.gif" alt="Watchlist" /></div>
+<div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
 
 The backend is a Node.js runtime and Express framework used for processing requests and querying the application database. Using the Express framework allowed for quick setup with well tested and established design patterns along with well documented troubleshooting whenever any bugs happened to appear. The database was setup on MongoDB for user, and home data. The frontend is tied together using React, which kept the look and feel of the site to remain universal. Apollo client was used for state managment, and handle/manage client cache. GraphQL was used to query for complex relational data; replacing the traditional RESTful API into a single endpoint.
 
@@ -52,6 +52,20 @@ const UserSchema = new Schema({
   }]
 });
 
+//....
+
+module.exports = mongoose.model('user', UserSchema);
+```
+
+## Features
+
+### Watchlist
+
+* Users are able to create a watchlist of homes they want to keep track of
+
+<div><img src="https://github.com/ivopavlov87/zBay/blob/master/MapBidWatchlistGif.gif" alt="Watchlist" /></div>
+
+```javascript
 UserSchema.statics.addHomeToWatchlist = (userId, homeId) => {
   const User = mongoose.model("user");
   const Home = mongoose.model("home");
@@ -86,11 +100,7 @@ UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
     })
   })
 }
-
-module.exports = mongoose.model('user', UserSchema);
 ```
-
-## Features
 
 ### Search
 
