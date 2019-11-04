@@ -21,7 +21,7 @@ A group effort combination of eBay and Zillow; users are able to create auctions
 
 <div><img src="https://github.com/ivopavlov87/zBay/blob/heroku-deployment/ModalGif.gif" alt="Demo login" /></div>
 
-The backend is a Node.js runtime and Express framework used for processing requests and querying the application database. Using the Express framework allowed for quick setup with well tested and established design patterns along with well documented troubleshooting whenever any bugs happened to appear. The database was setup on MongoDB for user, and home data. The frontend is tied together using React, which kept the look and feel of the site to remain universal. Apollo client was used for state managment, and handle/manage client cache. GraphQL was used to query for complex relational data; replacing the traditional RESTful API into a single endpoint.
+The backend is a Node.js runtime and Express framework used for processing requests and querying the application database. Using the Express framework allowed for quick setup with well tested and established design patterns along with well documented troubleshooting whenever any bugs happened to appear. The database was setup on MongoDB for user, home, and auction bidding data. The frontend is tied together using React, which kept the look and feel of the site ubiquitous. Apollo client was used for state managment, and to handle/manage client cache. GraphQL was used to query for complex relational data; replacing the traditional RESTful API into a single endpoint.
 
 ```javascript
 const mongoose = require('mongoose');
@@ -63,7 +63,7 @@ module.exports = mongoose.model('user', UserSchema);
 
 <div><img src="https://github.com/ivopavlov87/zBay/blob/master/UserHomesGif.gif" alt="Watchlist" /></div>
 
-* Users are able to see all listings they have created and can browse all image uploads for each home utilising carousel image slider and can delete any auctions that are no longer needed/wanted with the push of a button.
+* Users are able to see all listings they have created and can browse all image uploads for each home utilising a carousel image slider and can delete any auctions that are no longer needed/wanted with the push of a button.
 
 ```javascript
 <Query query={FETCH_USER_HOMES} variables={{ id: idPostSearch }}>
@@ -136,7 +136,7 @@ module.exports = mongoose.model('user', UserSchema);
 
 ### Watchlist
 
-* Users are able to create a watchlist of homes they want to keep track of
+* Users are able to create a watchlist of homes they want to keep track of, and can access it anytime via the navigation bar.
 
 <div><img src="https://github.com/ivopavlov87/zBay/blob/master/MapBidWatchlistGif.gif" alt="Watchlist" /></div>
 
@@ -179,8 +179,8 @@ UserSchema.statics.removeHomeFromWatchlist = (userId, homeId) => {
 
 ### Search
 
-* Users can search the entire database of listings for specific keywords and types of homes
-* Search can be done from landing splash page to show area or state with homes for sale
+* Users can search the entire database of listings for specific keywords and types of homes.
+* Search can also be done from landing splash page to show area or state with homes for sale and click on map markers to access auction listing.
 
 <div><img src="https://github.com/ivopavlov87/zBay/blob/master/SplashSearchGif.gif" alt="Splash search" /></div>
 
