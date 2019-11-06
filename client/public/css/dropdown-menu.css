@@ -5,6 +5,7 @@
 
 .main{
     transition: all 0.3s ease-in-out;
+    background: #fafafa;
 }
 
 .dropdown-container{
