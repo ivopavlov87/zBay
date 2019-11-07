@@ -63,7 +63,7 @@ class AddButton extends React.Component {
                                 }}
                             >
                                 {(addHomeToWatchlist, { data }) => (
-                                    <button className="bid-submit" onClick={(e) => this.handleSubmit(e, addHomeToWatchlist)}>
+                                    <button className="add-watchlist" onClick={(e) => this.handleSubmit(e, addHomeToWatchlist)}>
                                         {this.state.message}
                                     </button>
                                 )}

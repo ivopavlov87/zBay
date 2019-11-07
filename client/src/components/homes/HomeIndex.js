@@ -90,7 +90,7 @@ class HomeIndex extends React.Component {
       <div className="home-index">
         <Map homes={homes}/>
         <div className="ul-container">
-          <ul>{homesList}</ul>
+          <ul className="homes-ul">{homesList}</ul>
         </div>
       </div>
     )

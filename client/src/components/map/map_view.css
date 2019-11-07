@@ -45,11 +45,6 @@
   padding-top: 20px;
   white-space: nowrap;
   font-weight: 600;
-  text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
   margin-top: 100px;
 }
 .landing-page-map-search {
@@ -90,6 +85,8 @@ input.mapboxgl-ctrl-geocoder--input {
 ul.suggestions {
   list-style: none;
   padding: 22px;
+  font-family: sans-serif;
+  font-weight: 100;
 }
 li.active {
   background-color: #F1F1F4;
@@ -107,6 +104,11 @@ li.active {
 .map-search-title{
   margin: 15px 0;
   color: #eee;
+  text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 h1.map-search-title {
   font-size: 70px
@@ -126,4 +128,8 @@ h1.map-search-title {
 .mapboxgl-ctrl-geocoder--suggestion-address {
   color: rgb(10, 10, 20);
   font-size: 22px;
+}
+.map-nav-control{
+  position: absolute;
+  right: 20px;
 }
