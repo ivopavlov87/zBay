@@ -221,171 +221,173 @@ class CreateHome extends Component {
         }}
       >
         {(newHome, { data }) => (
-          <div className="create-form-container">
-            <h1 className="create-form-header">Enter the details for your new listing:</h1>
-            <form className="create-form" onSubmit={e => this.handleSubmit(e, newHome)}>
-              <div className="create-form-left">
-                <input className="create-input"
-                  onChange={this.update("name")}
-                  value={this.state.name}
-                  placeholder="Name"
-                />
-                <input className="create-input"
-                  onChange={this.update("streetAddress")}
-                  value={this.state.streetAddress}
-                  placeholder="Street Address"
-                />
-                <input className="create-input"
-                  onChange={this.update("city")}
-                  value={this.state.city}
-                  placeholder="City"
-                />
-                <select className="create-input-state"
-                  // className="state-select-dropdown"
-                  value={this.state.state}
-                  onChange={this.update("state")}>
-                    <option defaultValue>State</option>
-                    <option value="Alaska">AK - Alaska</option>
-                    <option value="Alabama">AL - Alabama</option>
-                    <option value="Arkansas">AR - Arkansas</option>
-                    <option value="Somoa">AS - Somoa</option>
-                    <option value="Arizona">AZ - Arizona</option>
-                    <option value="California">CA - California</option>
-                    <option value="Colorado">CO - Colorado</option>
-                    <option value="Connecticut">CT - Connecticut</option>
-                    <option value="District of Columbia">DC - District of Columbia</option>
-                    <option value="Delaware">DE - Delaware</option>
-                    <option value="Florida">FL - Florida</option>
-                    <option value="Georgia">GA - Georgia</option>
-                    <option value="Guam">GU - Guam</option>
-                    <option value="Hawaii">HI - Hawaii</option>
-                    <option value="Iowa">IA - Iowa</option>
-                    <option value="Idaho">ID - Idaho</option>
-                    <option value="Illinois">IL - Illinois</option>
-                    <option value="Indiana">IN - Indiana</option>
-                    <option value="Kansas">KS - Kansas</option>
-                    <option value="Kentucky">KY - Kentucky</option>
-                    <option value="Louisiana">LA - Louisiana</option>
-                    <option value="Massachusetts">MA - Massachusetts</option>
-                    <option value="Maryland">MD - Maryland</option>
-                    <option value="Maine">ME - Maine</option>
-                    <option value="Michigan">MI - Michigan</option>
-                    <option value="Minnesota">MN - Minnesota</option>
-                    <option value="Missouri">MO - Missouri</option>
-                    <option value="Mississippi">MS - Mississippi</option>
-                    <option value="Montana">MT - Montana</option>
-                    <option value="North Carolina">NC - North Carolina</option>
-                    <option value="North Dakota">ND - North Dakota</option>
-                    <option value="Nebraska">NE - Nebraska</option>
-                    <option value="New Hampshire">NH - New Hampshire</option>
-                    <option value="New Jerey">NJ - New Jerey</option>
-                    <option value="New Mexico">NM - New Mexico</option>
-                    <option value="Nevada">NV - Nevada</option>
-                    <option value="New York">NY - New York</option>
-                    <option value="Ohio">OH - Ohio</option>
-                    <option value="Oklahoma">OK - Oklahoma</option>
-                    <option value="Oregon">OR - Oregon</option>
-                    <option value="Pennsylvania">PA - Pennsylvania</option>
-                    <option value="Puerto Rico">PR - Puerto Rico</option>
-                    <option value="Rhode Island">RI - Rhode Island</option>
-                    <option value="South Carolina">SC - South Carolina</option>
-                    <option value="South Dakota">SD - South Dakota</option>
-                    <option value="Tennessee">TN - Tennessee</option>
-                    <option value="Texas">TX - Texas</option>
-                    <option value="Utah">UT - Utah</option>
-                    <option value="Virginia">VA - Virginia</option>
-                    <option value="British Virgin Islands">VI - Virgin Islands</option>
-                    <option value="Vermont">VT - Vermont</option>
-                    <option value="Washington">WA - Washington</option>
-                    <option value="Wisconsin">WI - Wisconsin</option>
-                    <option value="West Virginia">WV - West Virginia</option>
-                    <option value="Wyoming">WY - Wyoming</option>
-                </select>
-                <input className="create-input"
-                  onChange={this.update("zipcode")}
-                  value={this.state.zipcode}
-                  placeholder="Zipcode"
-                />
-                <input className="create-input"
-                  type="number"
-                  onChange={this.update("yearBuilt")}
-                  value={this.state.yearBuilt}
-                  placeholder="Year built"
-                  min="1901"
-                  max="2019"
-                  step="1"
-                />
-                <input className="create-input"
-                  type="number"
-                  onChange={this.update("sqft")}
-                  value={this.state.sqft}
-                  placeholder="Square footage"
-                />
-                <input className="create-input"
-                  type="number"
-                  onChange={this.update("price")}
-                  value={this.state.price}
-                  placeholder="Starting price"
-                />
-              </div>
-              <div className="create-form-right">
-                <textarea className="create-input"
-                  onChange={this.update("description")}
-                  value={this.state.description}
-                  placeholder="Description"
-                />
-                
-                <input className="create-input"
-                  type="number"
-                  min="1"
-                  step="0.5"
-                  onChange={this.update("bathrooms")}
-                  value={this.state.bathrooms}
-                  placeholder="Number of bathrooms"
-                />
-                <input className="create-input"
-                  onChange={this.update("stories")}
-                  value={this.state.stories}
-                  placeholder="Number of stories"
-                />
-                <input className="create-input"
-                  type="number"
-                  min="0"
-                  step="1"
-                  onChange={this.update("bedrooms")}
-                  value={this.state.bedrooms}
-                  placeholder="Number of bedrooms"
-                />
-                <div className="create-checkbox">
-                  <input  type="checkbox" value="garage" onChange={() => this.setState(prevState => ({garage: !prevState.garage}))}/>
-                  <label>Garage</label>
+          <div className="create-form-wrapper">
+            <div className="create-form-container">
+              <h1 className="create-form-header">Enter the details for your new listing:</h1>
+              <form className="create-form" onSubmit={e => this.handleSubmit(e, newHome)}>
+                <div className="create-form-left">
+                  <input className="create-input"
+                    onChange={this.update("name")}
+                    value={this.state.name}
+                    placeholder="Name"
+                  />
+                  <input className="create-input"
+                    onChange={this.update("streetAddress")}
+                    value={this.state.streetAddress}
+                    placeholder="Street Address"
+                  />
+                  <input className="create-input"
+                    onChange={this.update("city")}
+                    value={this.state.city}
+                    placeholder="City"
+                  />
+                  <select className="create-input-state"
+                    // className="state-select-dropdown"
+                    value={this.state.state}
+                    onChange={this.update("state")}>
+                      <option defaultValue>State</option>
+                      <option value="Alaska">AK - Alaska</option>
+                      <option value="Alabama">AL - Alabama</option>
+                      <option value="Arkansas">AR - Arkansas</option>
+                      <option value="Somoa">AS - Somoa</option>
+                      <option value="Arizona">AZ - Arizona</option>
+                      <option value="California">CA - California</option>
+                      <option value="Colorado">CO - Colorado</option>
+                      <option value="Connecticut">CT - Connecticut</option>
+                      <option value="District of Columbia">DC - District of Columbia</option>
+                      <option value="Delaware">DE - Delaware</option>
+                      <option value="Florida">FL - Florida</option>
+                      <option value="Georgia">GA - Georgia</option>
+                      <option value="Guam">GU - Guam</option>
+                      <option value="Hawaii">HI - Hawaii</option>
+                      <option value="Iowa">IA - Iowa</option>
+                      <option value="Idaho">ID - Idaho</option>
+                      <option value="Illinois">IL - Illinois</option>
+                      <option value="Indiana">IN - Indiana</option>
+                      <option value="Kansas">KS - Kansas</option>
+                      <option value="Kentucky">KY - Kentucky</option>
+                      <option value="Louisiana">LA - Louisiana</option>
+                      <option value="Massachusetts">MA - Massachusetts</option>
+                      <option value="Maryland">MD - Maryland</option>
+                      <option value="Maine">ME - Maine</option>
+                      <option value="Michigan">MI - Michigan</option>
+                      <option value="Minnesota">MN - Minnesota</option>
+                      <option value="Missouri">MO - Missouri</option>
+                      <option value="Mississippi">MS - Mississippi</option>
+                      <option value="Montana">MT - Montana</option>
+                      <option value="North Carolina">NC - North Carolina</option>
+                      <option value="North Dakota">ND - North Dakota</option>
+                      <option value="Nebraska">NE - Nebraska</option>
+                      <option value="New Hampshire">NH - New Hampshire</option>
+                      <option value="New Jerey">NJ - New Jerey</option>
+                      <option value="New Mexico">NM - New Mexico</option>
+                      <option value="Nevada">NV - Nevada</option>
+                      <option value="New York">NY - New York</option>
+                      <option value="Ohio">OH - Ohio</option>
+                      <option value="Oklahoma">OK - Oklahoma</option>
+                      <option value="Oregon">OR - Oregon</option>
+                      <option value="Pennsylvania">PA - Pennsylvania</option>
+                      <option value="Puerto Rico">PR - Puerto Rico</option>
+                      <option value="Rhode Island">RI - Rhode Island</option>
+                      <option value="South Carolina">SC - South Carolina</option>
+                      <option value="South Dakota">SD - South Dakota</option>
+                      <option value="Tennessee">TN - Tennessee</option>
+                      <option value="Texas">TX - Texas</option>
+                      <option value="Utah">UT - Utah</option>
+                      <option value="Virginia">VA - Virginia</option>
+                      <option value="British Virgin Islands">VI - Virgin Islands</option>
+                      <option value="Vermont">VT - Vermont</option>
+                      <option value="Washington">WA - Washington</option>
+                      <option value="Wisconsin">WI - Wisconsin</option>
+                      <option value="West Virginia">WV - West Virginia</option>
+                      <option value="Wyoming">WY - Wyoming</option>
+                  </select>
+                  <input className="create-input"
+                    onChange={this.update("zipcode")}
+                    value={this.state.zipcode}
+                    placeholder="Zipcode"
+                  />
+                  <input className="create-input"
+                    type="number"
+                    onChange={this.update("yearBuilt")}
+                    value={this.state.yearBuilt}
+                    placeholder="Year built"
+                    min="1901"
+                    max="2019"
+                    step="1"
+                  />
+                  <input className="create-input"
+                    type="number"
+                    onChange={this.update("sqft")}
+                    value={this.state.sqft}
+                    placeholder="Square footage"
+                  />
+                  <input className="create-input"
+                    type="number"
+                    onChange={this.update("price")}
+                    value={this.state.price}
+                    placeholder="Starting price"
+                  />
                 </div>
-                <div className="create-checkbox">
-                  <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
-                  <label>Basement</label>
+                <div className="create-form-right">
+                  <textarea className="create-input"
+                    onChange={this.update("description")}
+                    value={this.state.description}
+                    placeholder="Description"
+                  />
+                  
+                  <input className="create-input"
+                    type="number"
+                    min="1"
+                    step="0.5"
+                    onChange={this.update("bathrooms")}
+                    value={this.state.bathrooms}
+                    placeholder="Number of bathrooms"
+                  />
+                  <input className="create-input"
+                    onChange={this.update("stories")}
+                    value={this.state.stories}
+                    placeholder="Number of stories"
+                  />
+                  <input className="create-input"
+                    type="number"
+                    min="0"
+                    step="1"
+                    onChange={this.update("bedrooms")}
+                    value={this.state.bedrooms}
+                    placeholder="Number of bedrooms"
+                  />
+                  <div className="create-checkbox">
+                    <input  type="checkbox" value="garage" onChange={() => this.setState(prevState => ({garage: !prevState.garage}))}/>
+                    <label>Garage</label>
+                  </div>
+                  <div className="create-checkbox">
+                    <input type="checkbox" value="basement" onChange={() => this.setState(prevState => ({basement: !prevState.basement}))}/>
+                    <label>Basement</label>
+                  </div>
+                {/* <div>
+                  <Dropzone onDrop={this.handleOnDrop}>
+                    {({ getRootProps, getInputProps }) => (
+                      <section>
+                        <div {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <p>Drag 'n' drop some files here, or click to select files</p>
+                        </div>
+                      </section>
+                    )}
+                  </Dropzone>
+                </div> */}
+                  <div>
+                  <label>
+                    Add Images: &nbsp;
+                    <input type="file" multiple onChange={this.handleOnDrop} />
+                  </label>
                 </div>
-              {/* <div>
-                <Dropzone onDrop={this.handleOnDrop}>
-                  {({ getRootProps, getInputProps }) => (
-                    <section>
-                      <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>Drag 'n' drop some files here, or click to select files</p>
-                      </div>
-                    </section>
-                  )}
-                </Dropzone>
-              </div> */}
-                <div>
-                <label>
-                  Add Images: &nbsp;
-                  <input type="file" multiple onChange={this.handleOnDrop} />
-                </label>
-              </div>
-                <button className="create-submit" type="submit">Create Home</button>
-              </div>
-            </form>
-            <p>{this.state.message}</p>
+                  <button className="create-submit" type="submit">Create Home</button>
+                </div>
+              </form>
+              <p>{this.state.message}</p>
+            </div>
           </div>
         )}
       </Mutation>
