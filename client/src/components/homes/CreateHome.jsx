@@ -240,7 +240,7 @@ class CreateHome extends Component {
                   value={this.state.city}
                   placeholder="City"
                 />
-                <select className="create-input"
+                <select className="create-input-state"
                   // className="state-select-dropdown"
                   value={this.state.state}
                   onChange={this.update("state")}>
