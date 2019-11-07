@@ -145,14 +145,16 @@
 .index-image-slide img {
   box-sizing: border-box;
 	height: 170px;
-	width: auto;
+  width: auto;
+  /* margin-left: -20px; */
+  
 }
 
 .slick-list {
 	height: 100%;
 }
 
-.slick-prev {
+/* .slick-prev {
     visibility: hidden;
   	display: block;
 
@@ -235,7 +237,7 @@
 	right: 30px;
 	padding: 0;
 	z-index:100
-}
+} */
 
 .slick-slide {
 	margin: 0px 2px;
@@ -257,4 +259,5 @@
 
 .index-slider img {
   height: 170px;
+  /* margin-left: -20px; */
 }

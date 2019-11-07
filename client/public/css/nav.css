@@ -79,3 +79,13 @@ header{
   padding: 0 15px;
   font-weight: 800;
 }
+
+.navbar-link:hover {
+  background: #d8f3fe;
+  font-weight: bold;
+}
+
+.nav-links:hover {
+  background: #ffcccb;
+  /* background: rgb(255, 182, 182); */
+}
