@@ -379,7 +379,7 @@ class CreateHome extends Component {
                 </div> */}
                   <div>
                   <label>
-                    Add Images: &nbsp;
+                    Add Images: <br/>
                     <input type="file" multiple onChange={this.handleOnDrop} />
                   </label>
                 </div>

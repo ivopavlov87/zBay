@@ -140,7 +140,7 @@ class HomeDetail extends React.Component {
                         <div className="bid-form-container">
                           <form className="bid-form" onSubmit={e => this.handleSubmit(e, createBid)}>
                             <h3 className="enter-bid-header">Enter a bid for this home:</h3>
-                            <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>
+                            <input className="bid-input" type="number" value={this.state.amount} onChange={this.update('amount')}/>&nbsp;&nbsp;
                             <input className="bid-submit" type="submit" value="Bid Now"/>
                           </form>
                           <div className="bid-success">
