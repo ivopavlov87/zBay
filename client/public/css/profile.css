@@ -127,3 +127,8 @@
   font-size: 15px;
   font-weight: bolder;
 }
+
+.timer-container{
+  height: 35px;
+  width: 100%;
+}
