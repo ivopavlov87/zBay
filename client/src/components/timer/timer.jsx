@@ -4,7 +4,7 @@ import Countdown from 'react-countdown-now';
 const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
         return (
-            <div>
+            <div className="timer-container">
                 <h1 className="auction-alert-text">This auction has ended</h1>
             </div>
         )
@@ -18,7 +18,7 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
             secondsShown = `0${seconds}`
         }
         return (
-            <div>
+            <div className="timer-container">
                 <h1 className="auction-alert-text">Auction ends in:&nbsp;{hours}:{minsShown}:{secondsShown}</h1>
             </div>
         )
