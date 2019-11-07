@@ -1,5 +1,5 @@
 import React from 'react';
-import MapGL from 'react-map-gl';
+import MapGL, {NavigationControl} from 'react-map-gl';
 import DeckGL from "deck.gl";
 // import DeckGL, { GeoJsonLayer} from "deck.gl";
 import {IconLayer} from '@deck.gl/layers';
@@ -109,10 +109,13 @@ const token = process.env.REACT_APP_TOKEN
           attributionControl={false}
         >
           <DeckGL 
-            viewState={viewport}
+            viewState={{...viewport, controller: true }}
             layers={[homeIconsLayer]}
           >
           </DeckGL>
+          <div classname="map-nav-control" style={{position: 'absolute', right: 10, top: 10}}>
+            <NavigationControl />
+          </div>
         </MapGL>
       </div>
     );
