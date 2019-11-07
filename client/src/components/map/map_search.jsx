@@ -58,10 +58,10 @@ class MapSearchBar extends React.Component {
           <div className="map-search-header">
             <h1 className="map-search-title">Reimagine home</h1>
             <h4 className="map-search-title subtext">We’ll help you find a place you’ll love.</h4>
-          </div>
-          <div className="landing-page-map-search"
-            ref={this.geocoderContainerRef}
+            <div className="landing-page-map-search"
+              ref={this.geocoderContainerRef}
             />
+          </div>
           <MapGL className="the-display-none-map"
             ref={this.mapRef}
             {...viewport}
