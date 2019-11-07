@@ -1,8 +1,8 @@
 import React from 'react';
-
 import Queries from '../../graphql/queries';
-
 import { Query, ApolloConsumer } from 'react-apollo';
+import { connect } from 'react-redux';
+import { receiveHomes } from '../../actions/home_actions';
 
 const { SEARCH_HOMES, FETCH_RESULTS } = Queries;
 
@@ -26,6 +26,7 @@ class Search extends React.Component {
         this.setState(this.state)
     }
 
+   
 
     render(){
 
@@ -37,8 +38,6 @@ class Search extends React.Component {
                 </div>
             )
         } else {
-      
-           
             return (
                 <div className="searchbar-inputs">
                     <input className="searchbar-input-field" type="text" placeholder="Search zBay Listings" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
@@ -57,9 +56,12 @@ class Search extends React.Component {
                                         if (loading) return <div className="loading">Loading...</div>;
                                         if (error) return <p></p>;
                                 
-                                        cache.cache.data.data.ROOT_QUERY.results.json = [];
-                                        cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
+                                        // cache.cache.data.data.ROOT_QUERY.results.json = [];
+                                        // cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
                                 
+                                        // return ""
+                                        
+                                        this.props.receiveHomes(data.searchHomes)
                                         return ""
                                     }}
                                 </Query>
@@ -72,5 +74,17 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+const msp = state => {
+    return ({
+        homes: state.homes
+    })
+}
+
+const mdp = dispatch => {
+    return ({
+        receiveHomes: homes => dispatch(receiveHomes(homes))
+    })
+}
+
+export default connect(msp, mdp)(Search);
 

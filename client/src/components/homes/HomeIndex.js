@@ -8,81 +8,157 @@ import Queries from "../../graphql/queries";
 import "./home_index.css";
 import { Image } from 'cloudinary-react';
 import Loading from "../loading/loading"
+import { connect } from 'react-redux'
 const { FETCH_HOMES } = Queries;
 
 const token2 = process.env.REACT_APP_TOKEN2
 
-const HomeIndex = ({cache}) => {
+const msp = state => {
+  return ({
+    homes: Object.keys(state.homes).map(id => state.homes[id])
+  })
+}
 
-    return (
-      <Query query={FETCH_HOMES}>
-         {({ loading, error, data }) => {
-          if (loading) return <Loading />;
-          if (error) return `Error! ${error.message}`;
+class HomeIndex extends React.Component {
 
-          return (
-            <div className="home-index">
-              <Map homes={data.homes}/>
-              <div className="ul-container">
-  
-                <ul className="homes-ul">
-                  {data.results.map(home => {
 
-                    return home.map(hm => {
+
+  render(){
+    if (this.props.homes.length === 0) {
+      return(
+        <div className="home-index">
+          <Map homes={[]} />
+          <div className="ul-container">
+          <ul></ul>
+          </div>
+        </div>
+      )
+    }
+
+    let { homes } = this.props;
  
-                      const imageSettings = {
-                        // dots: true,
-                        infinite: true,
-                        speed: 500,
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        className: "index-slider",
-                        adaptiveHeight: true,
-                        fade: true,
-                        cssEase: 'linear'
-                      }
-                      
-                      let images;
-                      if (hm.images && hm.images.length > 0){
-                        images = hm.images.map((image, i) => {
-                        return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
-                        })
-                      } else {
-                        images = <div>`there are no images for {hm.name}`</div>
-                      }
+    let homesList = homes.map(home => {
+      const imageSettings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        className: "index-slider",
+        adaptiveHeight: true,
+        fade: true,
+        cssEase: 'linear'
+      }
+  
+      let images;
+      if (home.images && home.images.length > 0) {
+        images = home.images.map((image, i) => {
+          return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+        })
+      } else {
+        images = <div>`there are no images for {home.name}`</div>
+      }
+  
+      let maybeTimer;
+      if (home.bids.length > 0) {
+        maybeTimer = <Timer date={home.bids[0].date} />
+      } else {
+        maybeTimer = <div className="timer-container" />
+      }
+      return <Link key={home._id} to={`/homes/${home._id}`}>
+        <li>
+          <div className="top-info">
 
-                      let maybeTimer;
-                      if (hm.bids.length > 0){
-                        maybeTimer = <Timer date={hm.bids[0].date} />
-                      } else {
-                        maybeTimer = <div className="timer-container"/>
-                      }
-                      return <Link key={hm._id} to={`/homes/${hm._id}`}>
-                        <li>
-                          <div className="top-info">
-                            {maybeTimer}
-                            <div className="home-index-detail-slideshow-container">
-                            <Slider {...imageSettings}>
-                              {images}
-                            </Slider>
-                            </div>
-                          </div>
-                          <div className="bottom-info">
-                            <h2>{hm.name}</h2>
-                            {/* <h3>Click to See Listing</h3> */}
-                          </div>
-                        </li>
-                      </ Link>
-                    })}
-                  )}
-                </ul>
-              </div>
+            {maybeTimer}
+            <div className="home-index-detail-slideshow-container">
+              <Slider {...imageSettings}>
+                {images}
+              </Slider>
             </div>
-          );
-        }}
-      </Query>
+          </div>
+          <div className="bottom-info">
+            <h2>{home.name}</h2>
+            {/* <h3>Click to See Listing</h3> */}
+          </div>
+        </li>
+      </ Link>
+
+    })
+
+
+    
+    return (
+      <div className="home-index">
+        <Map homes={homes}/>
+        <div className="ul-container">
+          <ul className="homes-ul">{homesList}</ul>
+        </div>
+      </div>
     )
-  // }
+  }
+    
+
+    //       return (
+    //         <div className="home-index">
+    //           <Map homes={data.homes}/>
+    //           <div className="ul-container">
+  
+    //             <ul className="homes-ul">
+    //               {data.results.map(home => {
+
+    //                 return home.map(hm => {
+ 
+                      // const imageSettings = {
+                      //   infinite: true,
+                      //   speed: 500,
+                      //   slidesToShow: 1,
+                      //   slidesToScroll: 1,
+                      //   className: "index-slider",
+                      //   adaptiveHeight: true,
+                      //   fade: true,
+                      //   cssEase: 'linear'
+                      // }
+                      
+                      // let images;
+                      // if (hm.images && hm.images.length > 0){
+                      //   images = hm.images.map((image, i) => {
+                      //   return <div key={i}><Image className='index-image-slide' cloudName={token2} publicId={image} /></div>
+                      //   })
+                      // } else {
+                      //   images = <div>`there are no images for {hm.name}`</div>
+                      // }
+
+                      // let maybeTimer;
+                      // if (hm.bids.length > 0){
+                      //   maybeTimer = <Timer date={hm.bids[0].date} />
+                      // } else {
+                      //   maybeTimer = <div className="timer-container"/>
+                      // }
+                      // return <Link key={hm._id} to={`/homes/${hm._id}`}>
+                      //   <li>
+                      //     <div className="top-info">
+
+                      //       {maybeTimer}
+                      //       <div className="home-index-detail-slideshow-container">
+                      //       <Slider {...imageSettings}>
+                      //         {images}
+                      //       </Slider>
+                      //       </div>
+                      //     </div>
+                      //     <div className="bottom-info">
+                      //       <h2>{hm.name}</h2>
+                      //       <h3>Click to See Listing</h3>
+                      //     </div>
+                      //   </li>
+                      // </ Link>
+    //                 })}
+    //               )}
+    //             </ul>
+    //           </div>
+    //         </div>
+    //       );
+     
+    // )
+
 };
 
-export default HomeIndex;
+export default connect(msp)(HomeIndex);
