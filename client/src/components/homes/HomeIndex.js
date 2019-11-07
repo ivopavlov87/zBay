@@ -54,6 +54,8 @@ const HomeIndex = ({cache}) => {
                       let maybeTimer;
                       if (hm.bids.length > 0){
                         maybeTimer = <Timer date={hm.bids[0].date} />
+                      } else {
+                        maybeTimer = <div className="timer-container"/>
                       }
                       return <Link key={hm._id} to={`/homes/${hm._id}`}>
                         <li>
