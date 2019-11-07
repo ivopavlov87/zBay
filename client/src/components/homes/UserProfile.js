@@ -60,7 +60,9 @@ const UserProfile = () => {
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         className: "index-slider",
-                        adaptiveHeight: true
+                        adaptiveHeight: true,
+                        fade: true,
+                        cssEase: 'linear'
                       };
 
                       let images;
