@@ -13,7 +13,12 @@
     align-items: center;
 }
 
-
+.create-form-wrapper{
+    height: 92%;
+    position: absolute;
+    width: 100%;
+    background: #fafafa;
+}
 
 .create-form{
     /* border: 1px solid blue; */
@@ -45,6 +50,14 @@
 
 .create-input{
     width: 200px;
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.create-input-state{
+    width: 214px;
     height: 30px;
     padding: 0 5px;
     border-radius: 2px;

@@ -1,4 +1,5 @@
-module.exports = {
-    MONGO_URI: "mongodb+srv://dev:gFMz1U7pq4lCjewG@yipp-i3qmh.mongodb.net/zBay?retryWrites=true&w=majority",
-    secretOrKey: "zBayDreamTeam"
-};
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./keys_prod');
+} else {
+  module.exports = require('./keys_dev');
+}

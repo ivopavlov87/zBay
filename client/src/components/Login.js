@@ -20,15 +20,15 @@ class Login extends Component {
   }
 
   updateCache(client, { data }) {
-
+    // debugger;
     client.writeData({
-      data: { isLoggedIn: data.login.loggedIn }
+      data: { isLoggedIn: data.login.loggedIn, _id: data.login._id }
     });
   }
 
   render() {
 
-    const errors = this.state.errors ? (
+    const errors = (this.state.errors && this.state.errors.graphQLErrors[0]) ? (
       <li className="modal-li-errors">
         {this.state.errors.graphQLErrors[0].message}
       </li>
