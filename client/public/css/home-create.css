@@ -13,7 +13,12 @@
     align-items: center;
 }
 
-
+.create-form-wrapper{
+    height: 92%;
+    position: absolute;
+    width: 100%;
+    background: #fafafa;
+}
 
 .create-form{
     /* border: 1px solid blue; */
