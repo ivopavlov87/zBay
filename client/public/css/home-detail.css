@@ -145,6 +145,7 @@
 
 .show-info-text{
     margin: 15px 0;
+    /* font-family: 'Poiret One', cursive; */
 }
 
 .bid-form-container{
@@ -177,11 +178,34 @@
     width: 200px;
     height: 50px;
     color: whitesmoke;
-    background-color: rgb(11, 70, 230);
+    background-color: rgb(55, 99, 219);
     border-radius: 2px;
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 15px;
+    /* border-radius: 35px; */
+}
+
+.bid-submit:hover {
+    cursor: pointer;
+    background-color: rgb(11, 70, 230);
+}
+
+.add-watchlist{
+    width: 200px;
+    height: 50px;
+    color: whitesmoke;
+    background-color: rgb(55, 99, 219);
+    border-radius: 2px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-radius: 35px;
+}
+
+.add-watchlist:hover {
+    cursor: pointer;
+    background-color: rgb(11, 70, 230);
 }
 
 .bid-success{
@@ -200,7 +224,7 @@
 
 .auction-alert-text{
     color: red;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 2px;
     padding: 8px 10px;
     font-weight: 700;
@@ -268,7 +292,7 @@
 
 
 .slick-arrow.slick-prev:after {
-	content: '❮'; 
+	content: url('../icons8-back-arrow-30.png');
 	visibility: visible;
 	display: block;
 
@@ -290,7 +314,7 @@
 }
 
 .slick-arrow.slick-next:after {
-	content:'❯'; 
+	content: url('../icons8-forward-button-30.png'); 
 	visibility: visible;
 	display: block;
 
@@ -355,7 +379,8 @@
     padding: 20px;
 }
 .show-info-title{
-    font-family: sans-serif;
+    font-family: 'Poiret One', cursive;
+    /* font-family: sans-serif; */
     font-size: 42px;
     text-decoration: underline;
     margin: 15px 0 30px 0;

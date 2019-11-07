@@ -31,6 +31,7 @@ const HomeIndex = ({cache}) => {
                     return home.map(hm => {
  
                       const imageSettings = {
+                        // dots: true,
                         infinite: true,
                         speed: 500,
                         slidesToShow: 1,
@@ -59,7 +60,6 @@ const HomeIndex = ({cache}) => {
                       return <Link key={hm._id} to={`/homes/${hm._id}`}>
                         <li>
                           <div className="top-info">
-
                             {maybeTimer}
                             <div className="home-index-detail-slideshow-container">
                             <Slider {...imageSettings}>
@@ -69,7 +69,7 @@ const HomeIndex = ({cache}) => {
                           </div>
                           <div className="bottom-info">
                             <h2>{hm.name}</h2>
-                            <h3>Click to See Listing</h3>
+                            {/* <h3>Click to See Listing</h3> */}
                           </div>
                         </li>
                       </ Link>

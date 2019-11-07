@@ -55,6 +55,7 @@ const UserProfile = () => {
      
                     // return home.map(hm => {
                       const imageSettings = {
+                        // centerMode: true,
                         infinite: true,
                         speed: 500,
                         slidesToShow: 1,
@@ -94,7 +95,7 @@ const UserProfile = () => {
                             </div>
                             <div className="profile-bottom">
                               <h2>{hm.name}</h2>
-                              <h3>Click to See Listing</h3>
+                              {/* <h3>Click to See Listing</h3> */}
                             </div>
                           </li>
                         </Link>
