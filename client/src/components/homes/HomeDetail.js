@@ -73,6 +73,8 @@ class HomeDetail extends React.Component {
       slidesToScroll: 1,
       className: "detail-slider",
       adaptiveHeight: true,
+      fade: true,
+      cssEase: 'linear'
     }
 
     return (
