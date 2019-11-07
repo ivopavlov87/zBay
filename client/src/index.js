@@ -11,7 +11,10 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import Mutations from "./graphql/mutations";
+import configureStore from './store/store';
+import { Provider } from 'react-redux';
 
+const store = configureStore();
 
 const { VERIFY_USER } = Mutations;
 
@@ -55,13 +58,15 @@ cache.writeData({
   }
 });
 
-const Root = () => {
+const Root = ({ store }) => {
   return (
+    <Provider store={store}>
     <ApolloProvider client={client}>
       <ApolloHooksProvider client={client}>
         <App />
       </ApolloHooksProvider>
     </ApolloProvider>
+    </Provider>
   );
 };
 
@@ -80,10 +85,10 @@ if (token) {
           viewport: ""
         }
       });
-      ReactDOM.render(<Root />, document.getElementById('root'));
+      ReactDOM.render(<Root store={store} />, document.getElementById('root'));
     });
 } else {
-  ReactDOM.render(<Root />, document.getElementById('root'));
+  ReactDOM.render(<Root store={store} />, document.getElementById('root'));
 }
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 // import React, { Component } from "react";
 // import gql from "graphql-tag";
+// import { Provider } from 'react-redux';
 import { ApolloConsumer } from "react-apollo";
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import HomeIndex from "./homes/HomeIndex";
@@ -24,6 +25,7 @@ require('dotenv').config();
 
 const App = (props) => {
   return (
+    
     <HashRouter>
       <ApolloConsumer >
       {(cache) => (
@@ -51,6 +53,7 @@ const App = (props) => {
       )}
       </ApolloConsumer>
     </HashRouter>
+  
   );
 };
 
