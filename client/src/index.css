@@ -20,6 +20,7 @@ time, mark, audio, video {
   text-decoration: none;
   color: black;
   box-sizing: border-box;
+  /* background-color: #fafafa; */
 }
 
 body {
@@ -29,6 +30,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
 }
 
 code {
