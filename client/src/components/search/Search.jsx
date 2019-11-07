@@ -32,7 +32,7 @@ class Search extends React.Component {
         if (this.state.searchQuery.length === 0 && this.state.results.length === 0){
             return (
                 <div className="searchbar-inputs">
-                    <input className="searchbar-input-field" type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <input className="searchbar-input-field" type="text" placeholder="Search zBay Listings" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
                     <button className="searchbar-input-button" onClick={(e) => this.handleSearch(e)}>Search</button>
                 </div>
             )
@@ -41,7 +41,7 @@ class Search extends React.Component {
            
             return (
                 <div className="searchbar-inputs">
-                    <input className="searchbar-input-field" type="text" placeholder="Search zBay" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
+                    <input className="searchbar-input-field" type="text" placeholder="Search zBay Listings" value={this.state.searchQuery} onChange={this.update('searchQuery')} />
                     <button className="searchbar-input-button" onClick={(e) => this.handleSearch(e)}>Search</button>
                     <ul>
                         <ApolloConsumer>
