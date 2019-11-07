@@ -38,6 +38,8 @@ const HomeIndex = ({cache}) => {
                         slidesToScroll: 1,
                         className: "index-slider",
                         adaptiveHeight: true,
+                        fade: true,
+                        cssEase: 'linear'
                       }
                       
                       let images;
