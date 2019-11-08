@@ -46,7 +46,7 @@
 .profile-slideshow {
   box-sizing: border-box;
 	position: relative;
-  margin: 0 auto;
+  margin: 0 2px 0 0;
   width: 300px;
   background: #fff;
 	height: 170px;
