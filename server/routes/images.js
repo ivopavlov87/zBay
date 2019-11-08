@@ -1,42 +1,42 @@
 
-const express = require("express");
-const router = express.Router();
-const mongoose = require('mongoose');
-const keys = require('../../config/keys');
+// const express = require("express");
+// const router = express.Router();
+// const mongoose = require('mongoose');
+// const keys = require('../../config/keys');
 
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const fs = require("fs");
+// const multer = require('multer');
+// const GridFsStorage = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream');
+// const fs = require("fs");
 
 
-// DB SETUP
-const mongoURI = keys.MONGO_URI;
+// // DB SETUP
+// const mongoURI = keys.MONGO_URI;
 
-const storage = new GridFsStorage({
-  url: mongoURI,
-  file: (req, file) => {
-    return {
-      bucketName: 'images',
-      filename: file.originalname,
-      metadata: req.body
-    }
-  }
-});
-const upload = multer({ storage });
+// const storage = new GridFsStorage({
+//   url: mongoURI,
+//   file: (req, file) => {
+//     return {
+//       bucketName: 'images',
+//       filename: file.originalname,
+//       metadata: req.body
+//     }
+//   }
+// });
+// const upload = multer({ storage });
 
-const conn = mongoose.createConnection(mongoURI);
-let gfs;
+// const conn = mongoose.createConnection(mongoURI);
+// let gfs;
 
-conn.once('open', () => {
-  // Init stream
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('images');
-});
+// conn.once('open', () => {
+//   // Init stream
+//   gfs = Grid(conn.db, mongoose.mongo);
+//   gfs.collection('images');
+// });
 
 
 //IMAGES ROUTES
-router.post('/', upload.single('image'), (req, res) => {
+// router.post('/', upload.single('image'), (req, res) => {
 
   // console.log('req file is', req.file);
 
@@ -53,33 +53,33 @@ router.post('/', upload.single('image'), (req, res) => {
   //     if (err) return console.log(err)
   //     console.log('saved to database')
   // })
-  res.redirect('/')
-});
+//   res.redirect('/')
+// });
 
 
-router.get("/:homeId", (req, res) => {
-  gfs.files.findOne({ "metadata.homeId": req.params.homeId }, (err, files) => {
-    // Check if file
-    if (!files || files.length === 0) {
-      return res.status(404).json({
-        err: "No file exists"
-      });
-    }
+// router.get("/:homeId", (req, res) => {
+//   gfs.files.findOne({ "metadata.homeId": req.params.homeId }, (err, files) => {
+//     // Check if file
+//     if (!files || files.length === 0) {
+//       return res.status(404).json({
+//         err: "No file exists"
+//       });
+//     }
 
-    if (!files || files.length === 0) {
-      return res.status(404).json({
-        responseCode: 1,
-        responseMessage: 'error'
-      });
-    }
+//     if (!files || files.length === 0) {
+//       return res.status(404).json({
+//         responseCode: 1,
+//         responseMessage: 'error'
+//       });
+//     }
 
-    var readstream = gfs.createReadStream({
-      filename: files.filename
-    });
+//     var readstream = gfs.createReadStream({
+//       filename: files.filename
+//     });
     // set the proper content type
-    res.set('Content-Type', files.contentType);
+    // res.set('Content-Type', files.contentType);
     // Return response
-    return readstream.pipe(res);
+    // return readstream.pipe(res);
 
     // Array.from(files).forEach(file => {
     //   const readstream = gfs.createReadStream(file.filename);
@@ -96,22 +96,22 @@ router.get("/:homeId", (req, res) => {
     //     err: "Not an image"
     //   });
     // }
-  });
-});
+//   });
+// });
 
-router.get('/', (req, res) => {
-  gfs.files.find().toArray((err, files) => {
-    // Check if files
-    if (!files || files.length === 0) {
-      return res.status(404).json({
-        err: 'No files exist'
-      });
-    }
+// router.get('/', (req, res) => {
+//   gfs.files.find().toArray((err, files) => {
+//     // Check if files
+//     if (!files || files.length === 0) {
+//       return res.status(404).json({
+//         err: 'No files exist'
+//       });
+//     }
 
-    // Files exist
-    return res.json(files);
-  });
-});
+//     // Files exist
+//     return res.json(files);
+//   });
+// });
 
 
-module.exports = router;
+// module.exports = router;
