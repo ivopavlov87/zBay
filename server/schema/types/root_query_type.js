@@ -63,7 +63,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve(_, { searchQuery }) {
         if (searchQuery === ""){
           return Home.find({});
-          // return []
+
         }
         return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
       }

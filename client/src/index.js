@@ -70,11 +70,10 @@ const Root = ({ store }) => {
   );
 };
 
-// then if we do have a token we'll go through with our mutation
+// if we do have a token we'll go through with our mutation
 if (token) {
   client
-    // use the VERIFY_USER mutation directly use the returned data to know if the returned
-    // user is loggedIn
+
     .mutate({ mutation: VERIFY_USER, variables: { token } })
     .then(({ data }) => {
       cache.writeData({

@@ -12,7 +12,7 @@ import UserProfile from "./homes/UserProfile";
 import MainPage from './homes/MainPage'
 
 import MapSearchBar from "./map/map_search";
-import DropdownMenu from './search/DropdownMenu';
+
 import Watchlist from './watchlist/watchlist'
 
 
@@ -27,7 +27,6 @@ const App = (props) => {
       <div className="main">
           <Nav />
           <Route exact path="/home" component={SearchBar}/>
-        <DropdownMenu />
         <Switch>
           <AuthRoute exact path="/homes/new" component={CreateHome} routeType="protected"/>
           <Route exact path="/homes/:id" component={HomeDetail} />

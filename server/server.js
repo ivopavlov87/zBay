@@ -7,11 +7,11 @@ const User = require("../server/models/User");
 const Category = require("../server/models/Category");
 const Home = require("../server/models/Home");
 const Bid = require("../server/models/Bid");
-const Image = require('../server/models/Image');
+
 const schema = require("./schema/schema");
 const cors = require("cors");
 const app = express();
-const images = require('./routes/images');
+
 
 if (!db) {
   throw new Error("You must provide a string to connect to MongoDB Atlas");
@@ -27,7 +27,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/images", images);
 
 app.use(
   "/graphql", expressGraphQL(req => {

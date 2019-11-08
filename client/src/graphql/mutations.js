@@ -71,15 +71,6 @@ export default {
       }
     }
   `,
-  CREATE_IMAGE: gql`
-    mutation CreateImage($name: String!, $publicId: String!){
-      createImage(name: $name, publicId: $publicId){
-        id
-        name
-        publicId
-      }
-    }
-  `,
   ADD_HOME: gql`
     mutation AddHome($userId: ID, $homeId: ID) {
       addHomeToWatchlist(userId: $userId, homeId: $homeId) {
