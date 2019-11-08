@@ -14,12 +14,6 @@ const Home = mongoose.model("home");
 const BidType = require("./bid_type");
 const Bid = mongoose.model("bid");
 
-// const WatchlistType = require("./watchlist_type");
-// const Watchlist = mongoose.model("watchlist");
-
-// defined, never used . . . take out????
-const ImageType = require('./image_type');
-const Image = mongoose.model('image');
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -69,46 +63,9 @@ const RootQueryType = new GraphQLObjectType({
       resolve(_, { searchQuery }) {
         if (searchQuery === ""){
           return Home.find({});
-          // return []
+
         }
         return Home.find({ searchField: new RegExp(`${searchQuery}`, 'i')})
-      }
-    },
-    advancedSearch: {
-      type: new GraphQLList(HomeType),
-      args: { 
-        nameQuery: { type: GraphQLString },
-        categoryQuery: { type: GraphQLString },
-        descriptionQuery: { type: GraphQLString },
-        streetAddressQuery: { type: GraphQLString },
-        cityQuery: { type: GraphQLString },
-        stateQuery: { type: GraphQLString },
-        yearBuiltQuery: { type: GraphQLInt },
-        sqftQuery: { type: GraphQLInt },
-        zipcodeQuery: { type: GraphQLInt },
-        storiesQuery: { type: GraphQLInt },
-        bedroomsQuery: { type: GraphQLInt },
-        bathroomsQuery: { type: GraphQLFloat },
-        garageQuery: { type: GraphQLBoolean },
-        basementQuery: { type: GraphQLBoolean }
-      },
-      resolve(_, args) {
-        return Home.find({
-          name: new RegExp(`${nameQuery}`, "i"),
-          category: new RegExp(`${categoryQuery}`, "i"),
-          description: new RegExp(`${descriptionQuery}`, "i"),
-          streetAddress: new RegExp(`${streetAddressQuery}`, "i"),
-          city: new RegExp(`${cityQuery}`, "i"),
-          state: new RegExp(`${stateQuery}`, "i"),
-          yearBuilt: new RegExp(`${yearBuiltQuery}`, "i"),
-          sqft: new RegExp(`${sqftQuery}`, "i"),
-          zipcode: new RegExp(`${zipcodeQuery}`, "i"),
-          stories: new RegExp(`${storiesQuery}`, "i"),
-          bedrooms: new RegExp(`${bedroomsQuery}`, "i"),
-          bathrooms: new RegExp(`${bathroomsQuery}`, "i"),
-          garage: new RegExp(`${garageQuery}`, "i"),
-          basement: new RegExp(`${basementQuery}`, "i")
-        });
       }
     },
     bids: {

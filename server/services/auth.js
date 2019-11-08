@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const keys = require("../../config/keys");
 
-// here is our validator function
+
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -14,10 +14,10 @@ const register = async data => {
     if (!isValid) {
       throw new Error(message);
     }
-    // deconstruct our data
+
     const { username, email, password } = data;
 
-    // we want to wait until our model can tell us whether a user exists with that email
+
     const existingEmail = await User.findOne({ email });
 
     if (existingEmail) {
@@ -30,10 +30,10 @@ const register = async data => {
       throw new Error("This username is taken");
     }
 
-    // hash our password
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // create a new user with all our arguments
+
     const user = new User(
       {
         username,
@@ -45,9 +45,9 @@ const register = async data => {
       }
     );
 
-    // save our user
+
     user.save();
-    // we'll create a token for the user
+
     const token = jwt.sign({ id: user._id }, keys.secretOrKey);
 
     // then return our created token, set loggedIn to be true, null their password, and send the rest of the user
@@ -60,7 +60,7 @@ const register = async data => {
 
 const login = async data => {
   try {
-    // use our other validator we wrote to validate this data
+
     const { message, isValid } = validateLoginInput(data);
 
     if (!isValid) {
@@ -103,15 +103,13 @@ const logout = async data => {
 
 const verifyUser = async data => {
   try {
-    // we take in the token from our mutation
+
     const { token } = data;
-    // we decode the token using our secret password to get the
-    // user's id
+
     const decoded = jwt.verify(token, keys.secretOrKey);
     const { id } = decoded;
 
-    // then we try to use the User with the id we just decoded
-    // making sure we await the response
+
     let currentUser;
     const loggedIn = await User.findById(id).then(user => {
       currentUser = user ? user : null;

@@ -26,11 +26,7 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
 }
 
 class Timer extends React.Component {
-    // constructor(props){
-    //     super(props);
-
-    // }
-
+   
     render(){
         let { date } = this.props
         let timestamp = parseInt(date);

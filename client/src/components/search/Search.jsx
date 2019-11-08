@@ -55,12 +55,7 @@ class Search extends React.Component {
                                     {({ loading, error, data }) => {
                                         if (loading) return <div className="loading">Loading...</div>;
                                         if (error) return <p></p>;
-                                
-                                        // cache.cache.data.data.ROOT_QUERY.results.json = [];
-                                        // cache.cache.data.data.ROOT_QUERY.results.json.push(data.searchHomes);
-                                
-                                        // return ""
-                                        
+                           
                                         this.props.receiveHomes(data.searchHomes)
                                         return ""
                                     }}

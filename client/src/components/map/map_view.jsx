@@ -113,7 +113,7 @@ const token = process.env.REACT_APP_TOKEN
             layers={[homeIconsLayer]}
           >
           </DeckGL>
-          <div classname="map-nav-control" style={{position: 'absolute', right: 10, top: 10}}>
+          <div className="map-nav-control" style={{position: 'absolute', right: 10, top: 10}}>
             <NavigationControl />
           </div>
         </MapGL>
