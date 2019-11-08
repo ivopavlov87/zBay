@@ -186,60 +186,6 @@ export default {
       }
     }
   `,
-  ADVANCED_SEARCH: gql`
-    query AdvancedSearch(
-      $nameQuery: String
-      $categoryQuery: String
-      $descriptionQuery: String
-      $streetAddressQuery: String
-      $cityQuery: String
-      $stateQuery: String
-      $yearBuiltQuery: Int
-      $sqftQuery: Int
-      $zipcodeQuery: Int
-      $storiesQuery: Int
-      $bedroomsQuery: Int
-      $bathroomsQuery: Int
-      $garageQuery: Boolean
-      $basementQuery: Boolean
-    ) {
-      advancedSearch(
-        nameQuery: $nameQuery
-        categoryQuery: $categoryQuery
-        descriptionQuery: $descriptionQuery
-        streetAddressQuery: $streetAddressQuery
-        cityQuery: $cityQuery
-        stateQuery: $stateQuery
-        yearBuiltQuery: $yearBuiltQuery
-        sqftQuery: $sqftQuery
-        zipcodeQuery: $zipcodeQuery
-        storiesQuery: $storiesQuery
-        bedroomsQuery: $bedroomsQuery
-        bathroomsQuery: $bathroomsQuery
-        garageQuery: $garageQuery
-        basementQuery: $basementQuery
-      ) {
-        _id
-        name
-        category {
-          name
-        }
-        description
-        streetAddress
-        city
-        state
-        zipcode
-        yearBuilt
-        garage
-        basement
-        images
-        bedrooms
-        bathrooms
-        sqft
-        stories
-      }
-    }
-  `,
   FETCH_USER: gql`
     query FetchUser($id: ID!) {
       user(_id: $id) {

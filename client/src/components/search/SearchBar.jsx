@@ -8,13 +8,11 @@ class SearchBar extends React.Component{
         
     }
 
-
     handleOpen(e, field){
         const ddMenu = document.getElementById("top-dropdown-menu");
         ddMenu.classList.toggle("hidden")
  
     }
-
 
     render(){
         return (

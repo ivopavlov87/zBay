@@ -9,10 +9,10 @@ import Timer from '../timer/timer';
 import { Image } from 'cloudinary-react';
 import AddButtonContainer from "../watchlist/AddButtonContainer";
 import Loading from "../loading/loading"
-import SearchClear from '../search/SearchClear'
+
 const { FETCH_HOME, FETCH_BIDS } = Queries;
 const { CREATE_BID } = Mutations;
-// const { CREATE_BID, ADD_HOME } = Mutations;
+
 
 const token2 = process.env.REACT_APP_TOKEN2
 
@@ -184,7 +184,7 @@ class HomeDetail extends React.Component {
           );
         }}
       </Query>
-      {/* <SearchClear /> */}
+    
       </div>
     );
   };

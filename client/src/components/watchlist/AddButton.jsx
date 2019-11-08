@@ -53,8 +53,7 @@ class AddButton extends React.Component {
                                         }
                                     ];
                                 }}
-                                // update={(cache, data) => this.updateCache(cache, data)}
-
+                               
                                 onCompleted={data => {
 
                                     this.setState({
