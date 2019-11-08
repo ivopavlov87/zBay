@@ -10,11 +10,11 @@ import { Image } from 'cloudinary-react';
 import AddButtonContainer from "../watchlist/AddButtonContainer";
 import Loading from "../loading/loading"
 
-const { FETCH_HOME, FETCH_BIDS } = Queries;
+
+const { FETCH_HOME, FETCH_BIDS, IS_LOGGED_IN } = Queries;
 const { CREATE_BID } = Mutations;
-
-
 const token2 = process.env.REACT_APP_TOKEN2
+
 
 class HomeDetail extends React.Component {
   constructor(props){
@@ -26,8 +26,6 @@ class HomeDetail extends React.Component {
     }
   }
 
- 
-  // just some useless comments here
 
   update(field){
     return (e) => {
@@ -173,8 +171,19 @@ class HomeDetail extends React.Component {
                       <h2 className="show-info-text">{data.home.description}</h2>
                     </div>
                   </div>
-                  <AddButtonContainer homeId={data.home._id} />
-
+                  <Query query={IS_LOGGED_IN}>
+                    {(response) => {
+                      if (response.data.isLoggedIn) {
+                        return (
+                          <AddButtonContainer homeId={data.home._id} />
+                        )
+                      } else {
+                        return (
+                          <button className="add-watchlist">Log in to use Watchlist</button>
+                        )
+                      }
+                    }}
+                  </Query>
                 </div>
               </div>
                <Link className="back-to-home-link" to="/">Back to Home</Link>
