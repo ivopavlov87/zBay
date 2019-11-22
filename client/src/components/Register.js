@@ -23,7 +23,7 @@ class Register extends Component {
   updateCache(client, { data }) {
 
     client.writeData({
-      data: { isLoggedIn: data.register.loggedIn, _id: data.login._id  }
+      data: { isLoggedIn: data.register.loggedIn, _id: data.login._id, modalOpen: data.login.loggedIn ? false : true  }
     });
   }
 

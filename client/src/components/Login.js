@@ -14,7 +14,7 @@ class Login extends Component {
       errors: ""
     };
   }
-
+ 
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
@@ -22,7 +22,7 @@ class Login extends Component {
   updateCache(client, { data }) {
     // debugger;
     client.writeData({
-      data: { isLoggedIn: data.login.loggedIn, _id: data.login._id }
+      data: { isLoggedIn: data.login.loggedIn, _id: data.login._id, modalOpen: data.login.loggedIn ? false : true }
     });
   }
 

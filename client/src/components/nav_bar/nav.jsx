@@ -8,6 +8,7 @@ import { useQuery, useApolloClient } from 'react-apollo-hooks';
 import Modal from 'react-modal';
 import LoginContainer from "../Login";
 import SignupContainer from "../Register";
+import Social from "../Social";
 import gql from 'graphql-tag';
 
 
@@ -36,7 +37,7 @@ const Nav = props => {
     });
   };
 
-  const sessionForm = data.sessionForm === "Login" ? <LoginContainer /> : <SignupContainer />
+  const sessionForm = data.sessionForm === "Login" ? <LoginContainer /> : data.sessionForm === "Register" ? <SignupContainer /> : <Social />
 
 
   return (
@@ -47,6 +48,7 @@ const Nav = props => {
             if (response.data.isLoggedIn) {
               return (
                 <div className="nav-items">
+                  <Modal className="nav-modal" isOpen={data.modalOpen} onRequestClose={(e) => changeState(e, false)}>{sessionForm}</Modal>
                   <div className="navbar-left">
 
                     <Link className="navbar-link logout-button-nav" to="/user">Your Homes</Link>
@@ -60,7 +62,7 @@ const Nav = props => {
                   </div>
                   <div className="navbar-right">
                     <Link to="/watchlist" className="navbar-link logout-button-nav">Watchlist</Link>
-
+                    <button className="social-link logout-button-nav" onClick={(e) => changeState(e, true)}>Creators</button>
                     <button className="nav-links logout-button-nav"
                       onClick={e => {
                         e.preventDefault();
@@ -78,15 +80,17 @@ const Nav = props => {
                 <div className="nav-items">
                   <Modal className="nav-modal" isOpen={data.modalOpen} onRequestClose={(e) => changeState(e, false)}>{sessionForm}</Modal>
                   <div className="navbar-left">
-                    <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Login</button>
-                    <button className="logout-button-nav" onClick={(e) => changeState(e, true)}>Register</button>
+                    <button className="navbar-link logout-button-nav" onClick={(e) => changeState(e, true)}>Login</button>
+                    <button className="navbar-link logout-button-nav" onClick={(e) => changeState(e, true)}>Register</button>
 
                   </div>
                   <div className="zbay-icon-main">
-                    <img src={zBayIcon} alt="zBay" />
+                    <Link className="zbay-icon-main" to="/">
+                      <img src={zBayIcon} alt="zBay" />
+                    </Link>
                   </div>
                   <div className="navbar-right">
-                    <Link to="/">Homes Index</Link>
+                    <button className="navbar-link logout-button-nav" onClick={(e) => changeState(e, true)}>Creators</button>
                   </div>
                 </div>
               );
