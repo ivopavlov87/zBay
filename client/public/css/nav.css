@@ -90,3 +90,70 @@ header{
   background: #ffcccb;
   /* background: rgb(255, 182, 182); */
 }
+
+.social-link:hover {
+  background: #d8f3fe;
+}
+
+.social-container {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  padding: 40px;
+  height: auto;
+  width: auto;
+  border-radius: 8px;
+  background-size: 1000% 400%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	animation: Gradient 10s ease infinite;
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.social-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  white-space: nowrap;
+}
+
+.social-name {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.social-name:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.fa-linkedin:hover, .fa-github:hover {
+  color: white;
+}
+
+.social-linkedin {
+  content: url("../icons8-linkedin-50.png");
+}
+
+.social-linkedin:hover {
+  content: url("../icons8-linkedin-50-1.png");
+}
+
+.social-github {
+  content: url("../icons8-github-50.png");
+}
+
+.social-github:hover {
+  content: url("../icons8-github-50-1.png");
+}
