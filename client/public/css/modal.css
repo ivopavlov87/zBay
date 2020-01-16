@@ -9,7 +9,7 @@
 }
 
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
-  z-index: 4;
+  z-index: 100;
 }
 
 .ReactModal__Content.ReactModal__Content--after-open.nav-modal {
