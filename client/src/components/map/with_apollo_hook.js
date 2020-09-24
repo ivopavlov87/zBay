@@ -7,7 +7,7 @@ const MAP = gql`
   viewport @client
 }
 `
-
+//this is used for the map itself to read from state with hooks 
 export function withApolloHook(Component) {
   return function WrappedComponent(props) {
     const client = useApolloClient()
@@ -22,7 +22,7 @@ export function withApolloHook(Component) {
     }
   }
 }
-
+//this is used to write to state for the map with apollo hooks
 export function writeApolloHook(Component) {
   return function WrappedViewport(props){
     const client = useApolloClient()

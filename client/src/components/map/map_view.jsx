@@ -38,6 +38,7 @@ const token = process.env.REACT_APP_TOKEN
           },
           mounted: false,
           searchResultLayer: null,
+          //this is the layer for the map that renders and handles the icons displaying homes
           homeIconsLayer: new IconLayer({
             id: 'icon-layer',
             data: this.props.homes,
@@ -74,7 +75,7 @@ const token = process.env.REACT_APP_TOKEN
   };
 
   // query for the houses and store them somewhere or keep them on cache 
-  //then for every home they will 
+  // then for every home they will 
   // have an id pass that id to layer which will have the markers stored and each marker will kinda be
   // its own object or at least have some data referencing it so we can pull that data and use it where
   // needed to show house 
@@ -108,6 +109,7 @@ const token = process.env.REACT_APP_TOKEN
           mapboxApiAccessToken={token}
           attributionControl={false}
         >
+          {/* DeckGl is an uber pakage used to handle additional layers on top of maps  */}
           <DeckGL 
             viewState={{...viewport, controller: true }}
             layers={[homeIconsLayer]}

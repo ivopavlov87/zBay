@@ -28,6 +28,7 @@ class MapSearchBar extends React.Component {
   geocoderContainerRef = React.createRef();
 
    handleOnResult = event => {
+     // this function is for the geocoder result
     let cacheViewport = event.result;
     if(this){
       this.setState({
@@ -46,7 +47,10 @@ class MapSearchBar extends React.Component {
   }
 
   finished(viewport){
+    // setCache is using the appolo hooks through the HOC 
+    // We are adding Viewport to state because the map will referance it for the map info/location
     this.props.setCache(viewport)
+    // We are now redirecting to the route with the map which will use the viewport on state assigned above
     this.props.history.push("/home")
   }
 
@@ -62,6 +66,7 @@ class MapSearchBar extends React.Component {
               ref={this.geocoderContainerRef}
             />
           </div>
+          {/* this is a dummy map that NEEDS to exist for the geocoder to behave */}
           <MapGL className="the-display-none-map"
             ref={this.mapRef}
             {...viewport}
@@ -69,6 +74,7 @@ class MapSearchBar extends React.Component {
             visible={false}
             attributionControl={false}
             >
+            {/* The Geocoder is a serach bar that will translate the users input into its best guess of a location */}
             <Geocoder 
               options={{ flyTo: false }}
               mapRef={this.mapRef}
